@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/CSS/style.css" />
+    <title>Se connecter</title>
+</head>
+<body>
+    <header>
+       
+        <img class="logo" src="../static/IMAGES/map.png" alt="logo">
+        <h1>Identification</h1>
+       
+        <nav>
+            <ul class="nav_links" >
+                <li><a href="/"> Page principale</a></li>
+                <li><a href="incident"> Déclarer un incident</a></li>
+            </ul>
+        </nav>
+        <!--<input type="text" maxlength="100" placeholder="Rechercher" class="searchbar" />--> 
+        <a class="cta" href="login"><button><%= username%></button></a>
+    </header>
+    <button> <%= new Date().toDateString();%></button>
+    <div class="container">
+        <div class="form"></div>
+            <div class="form login">
+                <span class="title">Connexion</span>
+
+                <form action="/login" method="post">
+                    <div class="input-field">
+                        <input type="text" placeholder="E-mail ou nom d'utilisateur" required name="username" >
+                        <i class="uil uil-envelope"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" placeholder="Mot de passe" required minlength="8" name="password">
+                        <i class="uil uil-envelope"></i>
+                    </div>
+                    <div class="input-field button">
+                       <!--<input type="button" value="Se connecter">--> 
+                        <a class="cta" href="#"><button>Se connecter</button></a>
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Pas membre ?
+                        <a href="create" class="text signup-text">Créer un compte </a>
+                    </span>
+                </div>
+            </div>
+            
+            <!--
+            <div class="form login">
+                <span class="title">Créer un compte</span>
+
+                <form action="#" >
+                    <div class="input-field">
+                        <input type="password" placeholder="Nom complet" required>
+                        <i class="uil uil-envelope"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" placeholder="Nom d'utilisateur" required>
+                        <i class="uil uil-envelope"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" placeholder="E-mail" required>
+                        <i class="uil uil-envelope"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" placeholder="Mot de passe" required>
+                        <i class="uil uil-envelope"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" placeholder="Confirmer le mot de passe" required>
+                        <i class="uil uil-envelope"></i>
+                    </div>
+                    <div class="input-field button">
+                     
+                        <a class="cta" href="#"><button>Confirmer</button></a>
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Vous avez déjà un compte ?
+                        <a href="#" class="text signup-text">Se connecter </a>
+                    </span>
+                </div>
+            </div>
+             -->
+        </div>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/CSS/MainPage-css.css" />
+    <title>Page principale</title>
+
+    </head>
+<body>
+  <header>
+            
+    <h1>Louv-incident</h1>
+    <img class="logo" src="../static/IMAGES/map.png" alt="logo">
+    <h2>Page principale</h2>
+        
+        <nav>
+            <ul class="nav_links" >
+              <li><a href=""> Page principale</a></li>
+              <li><a href="incident"> Déclarer un incident</a></li>
+            </ul>
+        </nav>
+        
+       <input type="text" maxlength="100" placeholder="Rechercher" class="searchbar" /> 
+        <a class="cta" href="login"><button><%= username%></button></a>
+      
+</header>
+    <data>
+       <!--
+      
+      <nav>
+            <ul class="nav_links" >
+                <li><a href="#"> Déclarer un incident</a></li>
+            </ul>
+        </nav>
+
+        --> 
+        <button> <%= new Date().toDateString();%></button>
+        <table style="width:100%">
+            <tr>
+              <th>Description</th>
+              <th>Adresse</th>
+              <th>Rapporté par</th>
+              <th>Date</th>
+            </tr>
+            
+            
+             <% incidents.forEach(function(Incident){ %>
+              <tr>  
+                <td><%=Incident.description%></td>
+                <td><%=Incident.adresse%></td>
+                <td><%=Incident.user%></td>
+                <td><%=Incident.date%></td>
+            </tr>
+            <% });%>
+              
+            
+            
+          </table>
+          
+    </data>
+
+</body>
+</html>

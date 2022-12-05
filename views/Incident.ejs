@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/CSS/Incident-css.css" />
+    <title>Signaler un incident</title>
+</head>
+<body>
+    
+    <header>
+            
+        <img class="logo" src="../static/IMAGES/map.png" alt="logo">
+        <h1>Incident</h1>
+            
+            <nav>
+                <ul class="nav_links" >
+                    <li><a href="/"> Page principale</a></li>
+                    <li><a href="incident"> Déclarer un incident</a></li>
+                </ul>
+            </nav>
+           <!--<input type="text" maxlength="100" placeholder="Rechercher" class="searchbar" />--> 
+            <a class="cta" href="login"><button><%= username%></button></a>
+    </header>
+    <button> <%= new Date().toDateString();%></button>
+    <h2> Signaler un nouvel incident</h2>
+    <h3>Description</h3>
+    <form action="/incident" method="post">
+    <textarea name="Description" rows="10" cols="70" required placeholder="Ex: Nid de poule"></textarea>
+    <h3>Adresse</h3>
+    <textarea name="Adresse" rows="3" cols="70" required placeholder="Ex: Rue des Grands Oiseaux"></textarea>
+    <nav> 
+        <a href="#"><button>Soumettre</button></a>
+    </nav>
+</form>
+
+    
+    
+    
+
+</body>
+</html>
