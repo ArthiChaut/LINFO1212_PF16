@@ -1,53 +1,8 @@
-body{
-    background-color: rgb(222, 222, 222);
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-
-
-h2{
-    margin-left: 25px;
-    text-decoration: underline solid rgb(100, 39, 180);
-
-}
-
-textarea{
-    margin-left: 25px;
-    font-size: 1.5em;
-    padding-bottom: 50px;
-}
-
-h3{
-    margin-left: 25px;
-    padding-top: 25px;
-    font-size: 22px;
-}
-
-nav button{
-        margin-left: 25px;
-        margin-top: 20px;
-        margin-bottom: 15px;
-        color:rgb(0, 0, 0);
-        padding: 12px 40px;
-        background-color: rgb(255, 255, 255);
-        border : none;
-        border-radius: 50px;
-        cursor : pointer;
-        transition: all 0.3s ease 0s;
-}
-
-
-/*****HEADER-NAVBAR******/
-
-
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-header h1{
-    color: #0088a9;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 header{
@@ -64,6 +19,9 @@ header li,header  a, header button {
     text-decoration: none;
 }
 
+header h1{
+    color: #0088a9;
+}
 header{
     display: flex;
     justify-content: space-between;
@@ -116,3 +74,17 @@ header button{
 header button:hover{
     background-color: rgba(0, 136, 169,0.8);
 }
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2rem;    
+    margin-left: auto;  
+    margin-right: auto;      /* Footer height */
+  }
+
+  #panier {
+    height: 40px;
+    width:40px;/* Footer height */
+  }
