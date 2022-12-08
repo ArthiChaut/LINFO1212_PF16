@@ -34,6 +34,12 @@ User.init({
 class Clothes extends Model {}
 
 Clothes.init({
+    image: {
+        type:DataTypes.TEXT,
+        primaryKey:true,
+        allowNull: false,
+    },
+
     marque: {
         type: DataTypes.TEXT,
         primaryKey: false,
@@ -46,18 +52,18 @@ Clothes.init({
         allowNull: false,
       },
 
-
-
     matiere: {
         type: DataTypes.TEXT,
         primaryKey: false,
         allowNull: true,
       },
+
     couleur: {
         type: DataTypes.TEXT,
         primaryKey: false,
         allowNull: true,
     },
+    
     description: {
         type: DataTypes.TEXT,
         primaryKey: false,
@@ -74,7 +80,7 @@ Clothes.init({
     user:{
         type : DataTypes.TEXT,
         allowNull : false,
-        reference:{
+        references:{
             model:User,
             key:"username"
         }
@@ -90,9 +96,72 @@ class soldClothes extends Model {}
 
 soldClothes.init({
 
-    clothes:{
-        type: DataTypes.TEXT
-        
+    id:{
+        type:DataTypes.INTEGER,
+        references:{
+            model:Clothes,
+            key:"id"
+        }
+    },
+    marque: {
+        type: DataTypes.TEXT,
+        references:{
+            model:Clothes,
+            key:"marque"
+        }
+      },
+
+    prix: {
+        type: DataTypes.INTEGER,
+        references:{
+            model:Clothes,
+            key:"prix"
+        }
+      },
+
+
+
+    matiere: {
+        type: DataTypes.TEXT,
+        references:{
+            model:Clothes,
+            key:"matiere"
+        }
+      },
+
+    couleur: {
+        type: DataTypes.TEXT,
+        references:{
+            model:Clothes,
+            key:"couleur"
+        }
+    },
+
+    description: {
+        type: DataTypes.TEXT,
+        references:{
+            model:Clothes,
+            key:"description"
+        }
+    },
+
+    localisation: {
+        type: DataTypes.TEXT,
+        references:{
+            model:Clothes,
+            key:"localisation"
+        }
+    },
+  
+
+    user:{
+        type : DataTypes.TEXT,
+        allowNull : false,
+        references:{
+            model:User,
+            key:"username"
+        }
+    
     }
 
 
@@ -107,4 +176,4 @@ soldClothes.init({
 
 })
 
-module.exports = {User,Incident};
+module.exports = {User,Clothes,soldClothes};
