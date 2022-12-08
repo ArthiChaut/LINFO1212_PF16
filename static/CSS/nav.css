@@ -33,7 +33,9 @@ header{
 .logo{
     height: 100px;
     width: 100px;
+    border-radius: 30px;
 }
+
 
 .nav_links{
     list-style: none;

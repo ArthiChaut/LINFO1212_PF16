@@ -29,10 +29,7 @@ app.get('/profil', async function(req,res) {
   res.render('pages/profil')
 });
 
-app.get('/register',async function(req,res) {
-  res.render('pages/register')
-});
-  
+ 
 
 
 app.listen(PORT, () => {
