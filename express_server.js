@@ -11,6 +11,18 @@ app.set('view engine', 'ejs');
 app.get("/", (req, res) => {
   res.render("pages/main")
 });
+
+app.get('/login',async function(req,res) {
+  res.render('pages/login')
+});
+
+app.get('/register',async function(req,res) {
+  res.render('pages/register')
+});
+
+app.get('/panier',async function(req,res) {
+  res.render('pages/panier')
+});
   
 
 app.listen(PORT, () => {

@@ -2,19 +2,59 @@
 <html lang="fr">
 <head>
   <%- include('../partials/head'); %>
+<<<<<<< Updated upstream
   <title>Page principale</title>
   
+=======
+  <title>Se connecter</title>
+  <link rel="stylesheet" type="text/css" href="/static/CSS/accountForm.css" />
+>>>>>>> Stashed changes
 </head>
 <body>
   <header>         
     <%- include('../partials/header'); %>
   </header>
   <main>
+<<<<<<< Updated upstream
 
+=======
+    <div class="container">
+        <div class="form"></div>
+            <div class="form login">
+                <span class="title">Connexion</span>
+
+                <form action="/login" method="get">
+                    <div class="input-field">
+                        <input type="text" placeholder="E-mail ou nom d'utilisateur" required name="username" >
+                        <i class="uil uil-envelope"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" placeholder="Mot de passe" required minlength="8" name="password">
+                        <i class="uil uil-envelope"></i>
+                    </div>
+                    <div class="input-field button">
+                       <!--<input type="button" value="Se connecter">--> 
+                        <a class="cta" href="#"><button>Se connecter</button></a>
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Pas membre ?
+                        <a href="create" class="text signup-text">Créer un compte </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+>>>>>>> Stashed changes
   </main>
   <footer>
     <%- include('../partials/footer'); %>
   </footer>
 
 </body>
+<<<<<<< Updated upstream
 </html>
+=======
+</html>
+>>>>>>> Stashed changes
