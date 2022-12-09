@@ -13,13 +13,12 @@ User.init({
   
    username: {
         type: DataTypes.TEXT,
-        primaryKey: true,
-        allowNull:false
+        primaryKey: true,   
     },
 
     email: {
         type:DataTypes.TEXT,
-        primaryKey:true,
+        primaryKey:false,
         allowNull:false
     },
 
@@ -85,6 +84,14 @@ Clothes.init({
             key:"username"
         }
     
+    },
+
+    
+    sold:{
+        type:DataTypes.BOOLEAN,
+        allowNull:false,
+        primaryKey:false
+
     }
   
   },
@@ -92,88 +99,8 @@ Clothes.init({
   { sequelize });
 
 
-class soldClothes extends Model {}
-
-soldClothes.init({
-
-    id:{
-        type:DataTypes.INTEGER,
-        references:{
-            model:Clothes,
-            key:"id"
-        }
-    },
-    marque: {
-        type: DataTypes.TEXT,
-        references:{
-            model:Clothes,
-            key:"marque"
-        }
-      },
-
-    prix: {
-        type: DataTypes.INTEGER,
-        references:{
-            model:Clothes,
-            key:"prix"
-        }
-      },
-
-
-
-    matiere: {
-        type: DataTypes.TEXT,
-        references:{
-            model:Clothes,
-            key:"matiere"
-        }
-      },
-
-    couleur: {
-        type: DataTypes.TEXT,
-        references:{
-            model:Clothes,
-            key:"couleur"
-        }
-    },
-
-    description: {
-        type: DataTypes.TEXT,
-        references:{
-            model:Clothes,
-            key:"description"
-        }
-    },
-
-    localisation: {
-        type: DataTypes.TEXT,
-        references:{
-            model:Clothes,
-            key:"localisation"
-        }
-    },
-  
-
-    user:{
-        type : DataTypes.TEXT,
-        allowNull : false,
-        references:{
-            model:User,
-            key:"username"
-        }
-    
-    }
 
 
 
 
-
-
-
-
-
-
-
-})
-
-module.exports = {User,Clothes,soldClothes};
+module.exports = {User,Clothes};

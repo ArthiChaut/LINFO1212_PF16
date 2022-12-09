@@ -29,7 +29,9 @@ app.get('/profil', async function(req,res) {
   res.render('pages/profil')
 });
 
- 
+app.get('/vente', async function(req,res) {
+  res.render('pages/sellClothes')
+});
 
 
 app.listen(PORT, () => {
