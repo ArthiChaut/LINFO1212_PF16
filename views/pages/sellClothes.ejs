@@ -1,15 +1,37 @@
 <!doctype html>
 <html lang="fr">
+  <link rel="stylesheet" type="text/css" href="/static/CSS/vente-css.css" />
+  <link rel="stylesheet" type="text/css" href="/static/CSS/accountForm.css" />
 <head>
   <%- include('../partials/head'); %>
-  <title>Vendez vos habits</title>
+  <title>Vendre un vetement</title>
 </head>
 <body>
   <header>         
     <%- include('../partials/header'); %>
   </header>
   <main>
-mettre un article en vente: 
+  
+  <form action="/vente" method="post">
+    <div class=container>
+    <h3>Photo de l'article</h3>
+    <input type="file" id="myfile" name="myfile" multiple><br><br>
+    <h3>Marque</h3>
+    <textarea name="Description" rows="1" cols="30" required placeholder="marque de l'article"></textarea>
+    <h3>Prix</h3>
+    <textarea name="Prix" rows="1" cols="30" required placeholder="prix de vente de l'article"></textarea>
+    <h3>Couleur</h3>
+    <textarea name="Couleur" rows="1" cols="30" required placeholder="la couleur de l'article"></textarea>
+    <h3>Taille</h3>
+    <textarea name="Taille" rows="1" cols="30" required placeholder="la taille de l'article" ></textarea>
+    
+
+
+    <nav> 
+        <a href="#"><button>Soumettre</button></a>
+    </nav>
+  </div>
+</form>
 
   </main>
   <footer>

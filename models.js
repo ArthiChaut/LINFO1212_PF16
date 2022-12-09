@@ -5,12 +5,24 @@ const sequelize = require('./database')
 class User extends Model {}
 
 User.init({
-    
+    credits:{
+        type:DataTypes.INTEGER,
+        primaryKey:false,
+        allowNull:true
+       },     
+
+   image:{
+    type:DataTypes.TEXT,
+    primaryKey:false,
+    allowNull:true
+   }, 
+
   completeName: {
     type: DataTypes.TEXT,
     primaryKey: false
     },
   
+
    username: {
         type: DataTypes.TEXT,
         primaryKey: true,   
