@@ -1,0 +1,43 @@
+.photo_profil {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+}
+
+.containerInfo{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+    align-items:center;
+    justify-content: center;
+    background : whitesmoke;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 50px;
+}
+
+.alignement{
+    display:flex;
+}
+
+.info{
+    margin-left: 80px;
+    margin-top: 10px;
+}
+
+.data h2{
+    margin-bottom: 12px;
+}
+
+.width_data h2{
+    color:darkgoldenrod;
+}
