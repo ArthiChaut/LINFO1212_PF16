@@ -1,8 +1,24 @@
 const express = require("express");
+var session = require('express-session');
 const app = express();
 const PORT = 8080; // default port 8080
 const bodyParser = require("body-parser");
+var https = require('https');
+var fs = require('fs');
+
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({
+  secret: "propre123",
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    path: '/', 
+    httpOnly: true, 
+    maxAge: 3600000
+  }
+}));
+
+
 app.use('/static',express.static('static'));
 app.set('view engine', 'ejs');
 
@@ -38,6 +54,9 @@ app.get('/info', async function(req,res) {
 });
 
 
-app.listen(PORT, () => {
-  console.log(`Site lancé sur le port ${PORT}!`)
-});
+
+https.createServer({
+  key: fs.readFileSync('./key.pem'),
+  cert: fs.readFileSync('./cert.pem'),
+  passphrase: 'pf16'
+}, app).listen(8080);
