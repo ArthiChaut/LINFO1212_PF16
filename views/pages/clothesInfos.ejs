@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
   <%- include('../partials/head'); %>
+  <link rel="stylesheet" href="/static/css/clothesInfos.css">
   <title>Information</title>
 </head>
 <body>
@@ -9,7 +10,48 @@
     <%- include('../partials/header'); %>
   </header>
   <main>
+    <div class = "container">
+    <div class="container-left "> 
+      <div class = "box">
+        <img class = "photo-principale" src="/static/images/vetements.webp" alt="photo">
+        <div class = "photo-secondaire" >
+          <img src="/static/images/vetements.webp" alt="photo">
+          <img src="/static/images/vetements.webp" alt="photo">
 
+        </div>
+        </div>
+      </div>
+
+      <div class="container-right">
+        <h2> Informations sur le vêtement </h2>
+        <div class="box-right">
+          
+          <div class="box-right-1">
+              <p> Marque </p>
+              <p> Prix </p>
+              <p> Matière </p>
+              <p> Couleur </p>
+              <p> Taille </p>
+              <p> Date d'ajout </p>
+              <p> Description </p>
+              <p> Nom du vendeur </p>
+              <p> Localisation </p>
+            </div>
+            <div class="box-right-2">
+              <p> Marque </p>
+              <p> Prix </p>
+              <p> Matière </p>
+              <p> Couleur </p>
+              <p> Taille </p>
+              <p> Date d'ajout </p>
+              <p> Description </p>
+              <p> Nom du vendeur </p>
+              <p> Localisation </p>
+        </div>
+      </div>
+
+    </div>
+    </div>
   </main>
   <footer>
     <%- include('../partials/footer'); %>

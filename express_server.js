@@ -33,6 +33,10 @@ app.get('/vente', async function(req,res) {
   res.render('pages/sellClothes')
 });
 
+app.get('/info', async function(req,res) {
+  res.render('pages/clothesInfos')
+});
+
 
 app.listen(PORT, () => {
   console.log(`Site lancé sur le port ${PORT}!`)
