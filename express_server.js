@@ -8,7 +8,7 @@ var fs = require('fs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
-  secret: "propre123",
+  secret: "bumpbpf16",
   resave: false,
   saveUninitialized: true,
   cookie: { 
@@ -59,4 +59,6 @@ https.createServer({
   key: fs.readFileSync('./key.pem'),
   cert: fs.readFileSync('./cert.pem'),
   passphrase: 'pf16'
-}, app).listen(8080);
+}, app).listen(PORT, () => {
+  console.log(`Site lancé sur le port ${PORT}!`)
+});
