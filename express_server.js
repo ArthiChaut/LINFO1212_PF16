@@ -22,6 +22,19 @@ app.use(session({
 app.use('/static',express.static('static'));
 app.set('view engine', 'ejs');
 
+//post request
+app.post('/login', function(req, res) {
+  const {username, password} = req.body;
+  //console.log(function_extension.countExist(username));
+  function_extension.countExist(username).then(result => {
+    if( result ===  true){
+      console.log("Le compte existe");
+    }else{
+      console.log("Le compte n'existe pas encore");
+    }
+  })
+})
+
 
 
 //get request to the root path  
