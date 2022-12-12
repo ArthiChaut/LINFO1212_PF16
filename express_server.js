@@ -44,16 +44,34 @@ app.use('/static',express.static('static'));
 app.set('view engine', 'ejs');
 
 //post request
-app.post('/login', function(req, res) {
+app.post('/login', function(req,res) {
+ 
   const {username, password} = req.body;
-  //console.log(function_extension.countExist(username));
   function_extension.countExist(username).then(result => {
-    if( result ===  true){
-      console.log("Le compte existe");
-    }else{
+    if( result ===  false){
       console.log("Le compte n'existe pas encore");
+      res.redirect("/login");
+      
+    }else{
+      console.log("Le compte existe");
+      function_extension.passwordCorrect(username, password).then(result => {
+        if(result != false){
+          console.log("Mot de passe correct");
+          logornot = true;
+          req.session.username = result.username;
+          if(beforelog){
+            res.redirect("/incident");
+          } else {
+            res.redirect("/");
+          }
+        } else {
+          console.log("Mot de passe incorrect");
+          res.redirect("/login");
+        }
+      })
+
     }
-  })
+  });  
 })
 
 app.post('/register', function(req, res) {
@@ -97,16 +115,26 @@ app.get('/register', function(req,res) {
   res.render('pages/register')
 });
 
-app.get('/panier', function(req,res) {
-  res.render('pages/panier')
+app.get('/panier',async function(req,res) {
+  if(logornot){
+    res.render('pages/panier');
+  } else {
+    beforelog = "panier";
+    res.redirect('pages/login');
+  }
 });
 
 app.get('/profil', function(req,res) {
   res.render('pages/profil')
 });
 
-app.get('/vente', function(req,res) {
-  res.render('pages/sellClothes')
+app.get('/vente', async function(req,res) {
+  if(logornot){
+    res.render('pages/sellClothes')
+  } else {
+    beforelog = "vente";
+    res.redirect('pages/login');
+  }
 });
 
 app.get('/info', function(req,res) {
