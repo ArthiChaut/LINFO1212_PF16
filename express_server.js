@@ -10,6 +10,9 @@ const fs = require('fs');
 const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const { User,Clothes } = require("./models");
+const function_extension = require('./function_extention');
+let logornot = false;
+let beforelog = false;
 
 
 const storage = multer.diskStorage({
@@ -60,7 +63,7 @@ app.post('/login', function(req,res) {
           logornot = true;
           req.session.username = result.username;
           if(beforelog){
-            res.redirect("/incident");
+            res.redirect("/vente");
           } else {
             res.redirect("/");
           }
@@ -74,18 +77,34 @@ app.post('/login', function(req,res) {
   });  
 })
 
-app.post('/register', function(req, res) {
-  const {name,username,email,password} = req.body;
 
-  User.create({
-    completeName:req.body.name,
-    username:req.body.username,
-    email:req.body.email,
-    localisation:req.body.localisation,
-    password:bcrypt.hashSync(req.body.password,10)}).then(()=>
-    res.redirect('/login'));
-
-});
+app.post('/register', function(req,res) {
+  const {name, username,email, password, confirmedPassword} = req.body;
+  function_extension.countExistForCreate(username, email).then(result => {
+    if(result){
+      res.redirect('/register');
+    } else {
+      let result2 = function_extension.validate(email);
+      if(result2){
+        let goodConfirmPassword = function_extension.passwordConfirm(password, confirmedPassword);
+        if(goodConfirmPassword){
+          User.create({
+            completeName:req.body.name,
+            username:req.body.username,
+            email:req.body.email,
+            password:bcrypt.hashSync(req.body.password,10)}).then(()=>
+            res.redirect('/login'));
+        } else {
+          console.log("Mots de passe non similaire");
+          res.redirect('/register');
+        }
+      } else {
+        res.redirect('/register');
+      }
+      
+    }
+  });
+})
 
 app.post('/vente',upload.single('image'), function(req, res) {
   const {Marque,Prix,Matiere,Couleur,Etat,Localisation} = req.body;
@@ -96,7 +115,8 @@ app.post('/vente',upload.single('image'), function(req, res) {
     matiere:Matiere,
     couleur:Couleur,
     etat:Etat,
-    user:"velkiz",
+    localisation: Localisation,
+    user:req.session.username,
     sold:false
     }) 
   });
@@ -133,7 +153,7 @@ app.get('/vente', async function(req,res) {
     res.render('pages/sellClothes')
   } else {
     beforelog = "vente";
-    res.redirect('pages/login');
+    res.redirect('/login');
   }
 });
 

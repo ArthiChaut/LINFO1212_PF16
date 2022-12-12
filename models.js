@@ -35,10 +35,7 @@ User.init({
         primaryKey:false,
         allowNull:false
     },
-    localisation: {
-        type:DataTypes.TEXT,
-        allowNull:false
-    },
+    
 
     password: {
         type:DataTypes.TEXT,
@@ -97,7 +94,11 @@ Clothes.init({
     
     },
 
-    
+    localisation: {
+        type:DataTypes.TEXT,
+        allowNull:false
+    },
+
     sold:{
         type:DataTypes.BOOLEAN,
         allowNull:false,

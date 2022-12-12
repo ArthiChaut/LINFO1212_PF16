@@ -41,6 +41,67 @@ function splitSearchPassword(name, password){
     }
 }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+async function countExistForCreate(username, email){
+
+    let name1 = await User.findOne({where: {username: username}});
+    let name2 = await User.findOne({where: {email: email}});
+    if(name1 != null){
+        console.log("Nom d'utilisateur déjà pris");
+        return true;
+    } else if(name2 != null){
+        console.log("Email déjà utilisé");
+        return true;
+    } else {
+        return false;
+    }
+    
+    /*
+    let resultat = false;
+    countExist(username).then(resultuser => {
+        if(resultuser){
+          console.log("Nom d'utilisateur déjà pris");
+          resultat = true;
+        } else {
+            countExist(email).then(resultmail => {
+                if(resultmail){
+                  console.log("Adresse mail déjà utilisée");
+                  resultat = true;
+                }
+            })
+        }
+    })
+    return resultat;
+    */
+    
+}
+
+function checkEmail(email){
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+function validate(email){
+    var emailtocheck = email;
+    if(checkEmail(emailtocheck)) {
+        console.log("Adresse e-mail valide");
+        return true;
+    } else {
+        console.log("Adresse e-mail invalide");
+        return false;
+    }
+
+}
+
+function passwordConfirm(password1, password2){
+    if(password1 === password2){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
-    countExist, passwordCorrect,
+    countExist, passwordCorrect, countExistForCreate, validate, passwordConfirm,
 };
