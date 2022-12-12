@@ -15,7 +15,7 @@
             <div class="form login">
                 <span class="title">Créer un compte</span>
 
-                <form action="/register" method="get" >
+                <form action="/register" method="post" >
                     <div class="input-field">
                         <input type="text" name="name" placeholder="Nom complet" required>
                         <i class="uil uil-envelope"></i>
@@ -26,6 +26,11 @@
                     </div>
                     <div class="input-field">
                         <input type="text" name="email" placeholder="E-mail" required>
+                        <i class="uil uil-envelope"></i>
+                    </div>
+
+                    <div class="input-field">
+                        <input type="text" name="localisation" placeholder="Votre localisation (ville)" required>
                         <i class="uil uil-envelope"></i>
                     </div>
                     <div class="input-field">

@@ -5,6 +5,8 @@ const sequelize = require('./database')
 class User extends Model {}
 
 User.init({
+
+
     credits:{
         type:DataTypes.INTEGER,
         primaryKey:false,
@@ -33,11 +35,15 @@ User.init({
         primaryKey:false,
         allowNull:false
     },
+    localisation: {
+        type:DataTypes.TEXT,
+        allowNull:false
+    },
 
     password: {
         type:DataTypes.TEXT,
         allowNull:false
-    }
+    },
     },{ sequelize }
     
 )
@@ -75,18 +81,11 @@ Clothes.init({
         allowNull: true,
     },
     
-    description: {
+    etat: {
         type: DataTypes.TEXT,
         primaryKey: false,
         allowNull: true,
     },
-
-    localisation: {
-        type: DataTypes.TEXT,
-        primaryKey: false,
-        allowNull: true,
-    },
-  
 
     user:{
         type : DataTypes.TEXT,
