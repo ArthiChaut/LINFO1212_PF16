@@ -17,6 +17,7 @@
         "mysql3": "^0.6.0",
         "openssl": "^2.0.0",
         "sequelize": "^6.25.3",
+        "simplebar": "^5.3.9",
         "sqlite3": "^5.1.2"
     }
 }

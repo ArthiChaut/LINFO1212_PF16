@@ -18,7 +18,7 @@ app.use(session({
   }
 }));
 
-
+app.use('/script/scrollbar',express.static('static'));
 app.use('/static',express.static('static'));
 app.set('view engine', 'ejs');
 
@@ -64,6 +64,10 @@ app.get('/vente', async function(req,res) {
 
 app.get('/info', async function(req,res) {
   res.render('pages/clothesInfos')
+});
+
+app.get('/clothes', async function(req,res) {
+  res.render('pages/clothesAll')
 });
 
 

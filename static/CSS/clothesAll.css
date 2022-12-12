@@ -1,0 +1,35 @@
+
+
+.container{
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding-left:60px;
+}
+
+
+  .grid-object{
+    padding: 20px;
+    font-size: 30px;
+    
+    
+  }
+
+  .grid-object img{
+    width: 250px;
+    height: 250px;
+  }
+
+    .grid-object p{
+        font-size: 15px;
+    }
+
+    .grid-object h3{
+        font-size: 20px;
+        color: #0088a9;
+    }
+
+    .grid-object h2{
+        font-size: 20px;
+    
+    }
