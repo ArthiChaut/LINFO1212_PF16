@@ -11,7 +11,6 @@ const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const { User,Clothes } = require("./models");
 const function_extension = require('./function_extention');
-let logornot = false;
 let beforelog = false;
 
 
@@ -60,8 +59,11 @@ app.post('/login', function(req,res) {
       function_extension.passwordCorrect(username, password).then(result => {
         if(result != false){
           console.log("Mot de passe correct");
-          logornot = true;
           req.session.username = result.username;
+          req.session.completeName = result.completeName;
+          req.session.email = result.email;
+          req.session.credits = result.credits;
+          
           if(beforelog){
             res.redirect("/vente");
           } else {
@@ -89,6 +91,7 @@ app.post('/register', function(req,res) {
         let goodConfirmPassword = function_extension.passwordConfirm(password, confirmedPassword);
         if(goodConfirmPassword){
           User.create({
+            credits: 0,
             completeName:req.body.name,
             username:req.body.username,
             email:req.body.email,
@@ -124,41 +127,67 @@ app.post('/vente',upload.single('image'), function(req, res) {
 
 //get request to the root path  
 app.get("/", (req, res) => {
-  res.render("pages/main")
+  if(req.session.username){
+    res.render('pages/main', {username: req.session.username,
+      credits: "Crédits: " + req.session.credits});
+  } else {
+    res.render("pages/main", {username: "Se connecter", credits: ""});
+  }
+  
 });
 
 app.get('/login', function(req,res) {
-  res.render('pages/login')
+  if(req.session.username){
+    res.redirect('/profil');
+  } else {
+    res.render("pages/login", {username: "Se connecter", credits: ""});
+  }
 });
 
 app.get('/register', function(req,res) {
-  res.render('pages/register')
+  if(req.session.username){
+    res.render('pages/register', {username: req.session.username,
+      credits: "Crédits: " + req.session.credits});
+  } else {
+    res.render("pages/register", {username: "Se connecter", credits: ""});
+  }
 });
 
-app.get('/panier',async function(req,res) {
-  if(logornot){
-    res.render('pages/panier');
+app.get('/panier', function(req,res) {
+  if(req.session.username){
+    res.render('pages/panier', {username: req.session.username,
+      credits: "Crédits: " + req.session.credits});
   } else {
     beforelog = "panier";
-    res.redirect('pages/login');
+    res.redirect("/login");
   }
 });
 
 app.get('/profil', function(req,res) {
-  res.render('pages/profil')
+  
+  res.render('pages/profil', {username: req.session.username,
+  completeName: req.session.completeName,
+  email: req.session.email,
+  credits: "Crédits: " + req.session.credits});
 });
 
-app.get('/vente', async function(req,res) {
-  if(logornot){
-    res.render('pages/sellClothes')
+app.get('/vente',  function(req,res) {
+  if(req.session.username){
+    res.render('pages/sellClothes', {username: req.session.username,
+      credits: "Crédits: " + req.session.credits});
   } else {
     beforelog = "vente";
-    res.redirect('/login');
+    res.redirect("/login");
   }
 });
 
 app.get('/info', function(req,res) {
-  res.render('pages/clothesInfos')
+  if(req.session.username){
+    res.render('pages/clothesInfos', {username: req.session.username,
+      credits: "Crédits: " + req.session.credits});
+  } else {
+    res.render("pages/clothesInfos", {username: "Se connecter", credits: ""});
+  }
 });
 
 

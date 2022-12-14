@@ -10,61 +10,50 @@
     <%- include('../partials/header'); %>
   </header>
   <main>
-    <div class="containerInfo">
-      <div class="alignement">
-        <img class="photo_profil" src="/static/IMAGES/image femme.jpeg" alt="photo de profil"\>
-        <div class="info">
-          <div class="data">
-            <h2>Nom d'utilisateur:</h2>
-          </div>
-          <div class="data">
-            <h2>Prénom:</h2>
-          </div>
-          <div class="data">
-            <h2>Nom:</h2>
-          </div>
-          <div class="data">
-            <h2>Email:</h2>
-          </div>
-          <div class="data">
-            <h2>Localisation:</h2>
-          </div>
-          <div class="data">
-            <h2>Crédits:</h2>
-          </div>
-        </div>
-        <div class="info">
-          <div class="data">
-            <div class="width_data">
-              <h2>Tiranodub</h2>
+    <div class="alignement">
+      <div class="containerInfo">
+        <div class="alignement">
+          <img class="photo_profil" src="/static/IMAGES/image femme.jpeg" alt="photo de profil"\>
+          <div class="info">
+            <div class="data">
+              <h2>Nom d'utilisateur:</h2>
+            </div>
+            <div class="data">
+              <h2>Nom complet:</h2>
+            </div>
+            <div class="data">
+              <h2>Email:</h2>
+            </div>
+            <div class="data">
+              <h2>Crédits:</h2>
             </div>
           </div>
-          <div class="data">
-            <div class="width_data">
-              <h2>Mélanie</h2>
+          <div class="info">
+            <div class="data">
+              <div class="width_data">
+                <h2><%= username%></h2>
+              </div>
             </div>
-          </div>
-          <div class="data">
-            <div class="width_data">
-              <h2>Davidou</h2>
+            <div class="data">
+              <div class="width_data">
+                <h2><%= completeName%></h2>
+              </div>
             </div>
-          </div>
-          <div class="data">
-            <div class="width_data">
-              <h2>mel.dav@gmail.com</h2>
+            <div class="data">
+              <div class="width_data">
+                <h2><%= email%></h2>
+              </div>
             </div>
-          </div>
-          <div class="data">
-            <div class="width_data">
-              <h2>Rue des Grands Oiseaux</h2>
-            </div>
-          </div>
-          <div class="data">
-            <div class="width_data">
-              <h2>150</h2>
+            <div class="data">
+              <div class="width_data">
+                <h2><%= credits%></h2>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="containerModif">
         <div class="info">
           <button>Modifier le profil</button> 
         </div>
