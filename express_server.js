@@ -10,6 +10,8 @@ const fs = require('fs');
 const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const { User,Clothes } = require("./models");
+const cookieParser = require('cookie-parser')
+
 const function_extension = require('./function_extention');
 let beforelog = false;
 
@@ -41,7 +43,7 @@ app.use(session({
   }
 }));
 
-
+app.use(cookieParser());
 app.use('/static',express.static('static'));
 app.set('view engine', 'ejs');
 
