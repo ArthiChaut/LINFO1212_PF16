@@ -102,7 +102,12 @@ header button:hover{
    margin: 5px;
   }
 
-#credit{
+.container-profil p{
+    margin-top: 10px;
+    margin-left: 25px;
+}
+
+  #credit{
     color: white;
   }
 

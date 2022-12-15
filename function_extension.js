@@ -104,11 +104,12 @@ function passwordConfirm(password1, password2){
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-async function fiveLastInstances(table,array){
+async function fourLastInstances(table,array){
     table.findAll({
         order: [["createdAt","DESC"]],
         limit:4
     }).then(result => {
+        console.log(result);
         for(let i = 0; i < result.length;i++){
             if(array.length != result.length){
                 array.push(result[i]);
@@ -120,5 +121,5 @@ async function fiveLastInstances(table,array){
 }
 
 module.exports = {
-    countExist, passwordCorrect, countExistForCreate, validate, passwordConfirm,fiveLastInstances
+    countExist, passwordCorrect, countExistForCreate, validate, passwordConfirm,fourLastInstances
 };

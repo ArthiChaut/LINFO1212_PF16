@@ -13,7 +13,7 @@
     margin-left: 305px;
     margin-right: 10px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     position: relative;
     width: 1000px;
     align-items:center;
@@ -26,10 +26,10 @@
 
 
 .containerModif{
-    margin-left: 0px;
+    margin-left: 10px;
     margin-right: 305px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     position: relative;
     width: 300px;
     align-items:center;
@@ -40,6 +40,20 @@
     padding: 50px;
 }
 
+.containerMesVentes{
+    margin-left: 305px;
+    margin-right: 305px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    position: relative;
+    width: 1310px;
+    align-items:center;
+    justify-content: center;
+    background : whitesmoke;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 50px;
+}
 
 
 

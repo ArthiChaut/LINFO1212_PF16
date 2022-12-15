@@ -10,14 +10,9 @@ const fs = require('fs');
 const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const { User,Clothes } = require("./models");
-<<<<<<< HEAD
-const function_extension = require('./function_extension');
-let logornot = false;
-=======
 const cookieParser = require('cookie-parser')
 
-const function_extension = require('./function_extention');
->>>>>>> 55d3829cdb42c71fe60c7e5747b74e8bdb3598d4
+const function_extension = require('./function_extension');
 let beforelog = false;
 let clothes = [];
 
@@ -50,12 +45,7 @@ app.use(session({
   }
 }));
 
-<<<<<<< HEAD
-
-
-=======
 app.use(cookieParser());
->>>>>>> 55d3829cdb42c71fe60c7e5747b74e8bdb3598d4
 app.use('/static',express.static('static'));
 app.set('view engine', 'ejs');
 
@@ -78,11 +68,24 @@ app.post('/login', function(req,res) {
           req.session.email = result.email;
           req.session.credits = result.credits;
           
+          
+          switch(beforelog){
+            case 'vente':
+              res.redirect("/vente");
+              break;
+            case 'panier':
+              res.redirect("/panier");
+              break;
+            default:
+              res.redirect("/");
+          }
+          /*
           if(beforelog){
             res.redirect("/vente");
           } else {
             res.redirect("/");
           }
+          */
         } else {
           console.log("Mot de passe incorrect");
           res.render("pages/login", {error_message_password: "mot de passe incorrect", error_message_email: "", username: "Se connecter", credits: ""});
@@ -145,7 +148,7 @@ app.post('/vente',upload.single('image'), function(req, res) {
 
 //get request to the root path  
 app.get("/", function(req, res) {
-  function_extension.fiveLastInstances(Clothes,clothes);
+  function_extension.fourLastInstances(Clothes,clothes);
   
   
   if(req.session.username){
