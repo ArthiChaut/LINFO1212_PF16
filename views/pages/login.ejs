@@ -27,10 +27,12 @@
                     <div class="input-field">
                         <input type="text" placeholder="E-mail ou nom d'utilisateur" required name="username" >
                         <i class="uil uil-envelope"></i>
+                        <p id="error_message"> <%= error_message_email%></p>
                     </div>
                     <div class="input-field">
                         <input type="password" placeholder="Mot de passe" required name="password">
                         <i class="uil uil-envelope"></i>
+                        <p id="error_message"> <%= error_message_password%></p>
                     </div>
                     <div class="input-field button">
                        <!--<input type="button" value="Se connecter">--> 
@@ -39,13 +41,12 @@
                 </form>
 
                 <div class="login-signup">
-                    <span class="text">Pas membre ?
+                    <span class="text">Pas encore membre ?
                         <a href="register" class="text signup-text">Créer un compte </a>
                     </span>
                 </div>
             </div>
         </div>
-    </div>
   </main>
   <footer>
     <%- include('../partials/footer'); %>

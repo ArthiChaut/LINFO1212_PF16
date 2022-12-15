@@ -10,8 +10,14 @@ const fs = require('fs');
 const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const { User,Clothes } = require("./models");
+<<<<<<< HEAD
 const function_extension = require('./function_extension');
 let logornot = false;
+=======
+const cookieParser = require('cookie-parser')
+
+const function_extension = require('./function_extention');
+>>>>>>> 55d3829cdb42c71fe60c7e5747b74e8bdb3598d4
 let beforelog = false;
 let clothes = [];
 
@@ -44,8 +50,12 @@ app.use(session({
   }
 }));
 
+<<<<<<< HEAD
 
 
+=======
+app.use(cookieParser());
+>>>>>>> 55d3829cdb42c71fe60c7e5747b74e8bdb3598d4
 app.use('/static',express.static('static'));
 app.set('view engine', 'ejs');
 
@@ -56,7 +66,7 @@ app.post('/login', function(req,res) {
   function_extension.countExist(username).then(result => {
     if( result ===  false){
       console.log("Le compte n'existe pas encore");
-      res.redirect("/login");
+      res.render("pages/login",{error_message_email: "Nom d'utilisateur ou e-mail incorrect",error_message_password: "", username: "Se connecter", credits: ""});
       
     }else{
       console.log("Le compte existe");
@@ -75,7 +85,7 @@ app.post('/login', function(req,res) {
           }
         } else {
           console.log("Mot de passe incorrect");
-          res.redirect("/login");
+          res.render("pages/login", {error_message_password: "mot de passe incorrect", error_message_email: "", username: "Se connecter", credits: ""});
         }
       })
 
@@ -150,7 +160,7 @@ app.get('/login', function(req,res) {
   if(req.session.username){
     res.redirect('/profil');
   } else {
-    res.render("pages/login", {username: "Se connecter", credits: ""});
+    res.render("pages/login", {username: "Se connecter", credits: "", error_message_email: "", error_message_password: ""});
   }
 });
 
@@ -199,8 +209,6 @@ app.get('/info', function(req,res) {
     res.render("pages/clothesInfos", {username: "Se connecter", credits: ""});
   }
 });
-
-
 
 https.createServer({
   key: fs.readFileSync('./key.pem'),
