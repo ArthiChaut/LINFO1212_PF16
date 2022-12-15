@@ -83,16 +83,20 @@ header button:hover{
     justify-content: center;    /* Footer height */
   }
 
-  #panier {
+#panier {
     height: 40px;
     width:40px;/* Footer height */
   }
 
-  .container-profil{
+.container-profil{
    margin: 5px;
   }
 
-  #credit{
+#credit{
     color: white;
   }
 
+#error_message{
+    padding-top: 5px;
+    color: red;
+  }

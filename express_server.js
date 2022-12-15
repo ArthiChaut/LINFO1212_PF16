@@ -54,7 +54,7 @@ app.post('/login', function(req,res) {
   function_extension.countExist(username).then(result => {
     if( result ===  false){
       console.log("Le compte n'existe pas encore");
-      res.redirect("/login");
+      res.render("pages/login",{error_message_email: "Nom d'utilisateur ou e-mail incorrect",error_message_password: "", username: "Se connecter", credits: ""});
       
     }else{
       console.log("Le compte existe");
@@ -73,7 +73,7 @@ app.post('/login', function(req,res) {
           }
         } else {
           console.log("Mot de passe incorrect");
-          res.redirect("/login");
+          res.render("pages/login", {error_message_password: "mot de passe incorrect", error_message_email: "", username: "Se connecter", credits: ""});
         }
       })
 
@@ -142,7 +142,7 @@ app.get('/login', function(req,res) {
   if(req.session.username){
     res.redirect('/profil');
   } else {
-    res.render("pages/login", {username: "Se connecter", credits: ""});
+    res.render("pages/login", {username: "Se connecter", credits: "", error_message_email: "", error_message_password: ""});
   }
 });
 
@@ -191,8 +191,6 @@ app.get('/info', function(req,res) {
     res.render("pages/clothesInfos", {username: "Se connecter", credits: ""});
   }
 });
-
-
 
 https.createServer({
   key: fs.readFileSync('./key.pem'),
