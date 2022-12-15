@@ -17,7 +17,9 @@
         "multer": "^1.4.5-lts.1",
         "mysql3": "^0.6.0",
         "openssl": "^2.0.0",
-        "sequelize": "^6.26.0",
+        "sequelize": "^6.27.0"
+    },
+    "devDependencies": {
         "sqlite3": "^5.1.4"
     }
 }

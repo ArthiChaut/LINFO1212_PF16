@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <link rel="stylesheet" type="text/css" href="/static/CSS/mainPage.css" />
+<link rel="stylesheet" type="text/css" href="/static/CSS/nav.css" />
 <head>
   <%- include('../partials/head'); %>
   <title>Page principale</title>
@@ -11,14 +12,45 @@
     <%- include('../partials/header'); %>
   </header>
   <main>
-    <h2>Les derniers articles</h2>
+    <h2>Les dernières sorties</h2>
     <div class="aligner">
-    <div class="containerArticles">article</div>
+    <div class="containerArticles">
+      <div class="aligner">
+        
+       <%  for( let i = 0; i < clothes.length;i++){ %>
+       <%      let article = clothes[i]; %>
+       
+          <div class="miniContainer">
+          <img class="imageArticle" src=<%= article.image %>><br>
+          <a class ="button">Ajouter au panier</a>
+          <div class="aligner">
+          <div>
+            posté par: <%= article.user %><br>
+           prix: <%= article.prix %>$ <br>
+          </div>
+        </div>
+          </div>
+       <% } %>
+      
+      
+    </div>
+      </div>
+    </div>
+      
+      </div>
     <a href="vetements"><div class="arrow-right"></div></a>
     </div>
     <h2>Notifications</h2>
     <div class="aligner">
-    <div class="containerArticles">article</div>
+    <div class="containerArticles">
+      <div class="miniContainer">
+        <img class="imageArticle" src="/static/IMAGES/image femme.jpeg""><br>
+        Taille : XL<br>
+        Couleur : rouge<br>
+      </div>
+
+
+    </div>
     <a href="vetements"><div class="arrow-right"></div></a>
     </div>
   </main>

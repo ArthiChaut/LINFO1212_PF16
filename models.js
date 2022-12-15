@@ -11,7 +11,12 @@ User.init({
         type:DataTypes.INTEGER,
         primaryKey:false,
         allowNull:true
-       },     
+       },
+
+    localisation: {
+    type:DataTypes.TEXT,
+    allowNull:false
+    },    
 
    image:{
     type:DataTypes.TEXT,
@@ -53,6 +58,11 @@ Clothes.init({
         primaryKey:true,
         allowNull: false,
     },
+    type: {
+        type: DataTypes.TEXT,
+        primaryKey: false,
+        allowNull: false,
+      },
 
     marque: {
         type: DataTypes.TEXT,
@@ -66,16 +76,22 @@ Clothes.init({
         allowNull: false,
       },
 
-    matiere: {
-        type: DataTypes.TEXT,
-        primaryKey: false,
-        allowNull: true,
-      },
-
     couleur: {
         type: DataTypes.TEXT,
         primaryKey: false,
-        allowNull: true,
+        allowNull: false,
+    },
+
+    taille: {
+        type: DataTypes.TEXT,
+        primaryKey: false,
+        allowNull: false,
+    },
+
+    genre: {
+        type: DataTypes.TEXT,
+        primaryKey: false,
+        allowNull: false,
     },
     
     etat: {
@@ -92,11 +108,6 @@ Clothes.init({
             key:"username"
         }
     
-    },
-
-    localisation: {
-        type:DataTypes.TEXT,
-        allowNull:false
     },
 
     sold:{

@@ -16,22 +16,42 @@
     <div class=container>
     <h3>Photo de l'article:</h3>
     <input type="file" id="myfile" name="image" required>
+    <h3>Type d'article:</h3>
+    <form id="form1" >
+      <select name="Type" style="width: 200px">
+        <option value='pull'>Pull</option>
+        <option value='t-shirt'>T-shirt</option>
+        <option value='pantalon'>Pantalon</option>
+        <option value='accessoire'>Accessoire</option>
+        
+      </select>
+    </form>
     <h3>Marque:</h3>
     <textarea name="Marque" rows="1" cols="30" required placeholder="marque de l'article"></textarea>
     <h3>Prix:</h3>
     <textarea name="Prix" rows="1" cols="30" required placeholder="prix de vente de l'article"></textarea>
     <h3>Couleur:</h3>
     <textarea name="Couleur" rows="1" cols="30" required placeholder="la couleur de l'article"></textarea>
-    <h3>Matiere:</h3>
-    <textarea name="Matiere" rows="1" cols="30" required placeholder="la matière de l'article"></textarea>
     <h3>Taille:</h3>
-    <textarea name="Taille" rows="1" cols="30" required placeholder="la taille de l'article" ></textarea>
+    <select name="Taille" rows="1" cols="30" required placeholder="la taille de l'article" >
+      <option value='XXL'>XXL</option>
+      <option value='XL'>XL</option>
+      <option value='L'>L</option>
+      <option value='M'>M</option>
+      <option value='S'>S</option>
+      <option value='XS'>XS</option>
+      <option value='XXS'>XXS</option>
+    </select>
+
+    <h3>Genre:</h3>
+      <select name="Genre" style="width: 150px">
+        <option value='Homme'>Homme</option>
+        <option value='Femme'>Femme</option>  
+      </select>
     <h3>Etat de l'article:</h3>
     <textarea name="Etat" rows="2" cols="30" required placeholder="ex : neuf" ></textarea>
-    <h3>Votre localisation:</h3>
-    <textarea name="Localisation" rows="1" cols="30" required placeholder="ex : Louvain-la-neuve" ></textarea>
     <nav> 
-        <a href="#"><button>Soumettre</button></a>
+        <a href="#"><button>Publier</button></a>
     </nav>
   </div>
 </form>

@@ -1,4 +1,4 @@
-const { User } = require("./models");
+const { User, Clothes } = require("./models");
 const bcrypt = require('bcryptjs');
 
 
@@ -102,6 +102,23 @@ function passwordConfirm(password1, password2){
     }
 }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+async function fiveLastInstances(table,array){
+    table.findAll({
+        order: [["createdAt","DESC"]],
+        limit:4
+    }).then(result => {
+        for(let i = 0; i < result.length;i++){
+            if(array.length != result.length){
+                array.push(result[i]);
+                }  
+        }
+        
+    })
+    
+}
+
 module.exports = {
-    countExist, passwordCorrect, countExistForCreate, validate, passwordConfirm,
+    countExist, passwordCorrect, countExistForCreate, validate, passwordConfirm,fiveLastInstances
 };

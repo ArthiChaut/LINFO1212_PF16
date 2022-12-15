@@ -10,17 +10,20 @@ const fs = require('fs');
 const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const { User,Clothes } = require("./models");
-const function_extension = require('./function_extention');
+const function_extension = require('./function_extension');
+let logornot = false;
 let beforelog = false;
+let clothes = [];
+
 
 
 const storage = multer.diskStorage({
   destination: (req,file,cb) => {
-    cb(null,'Images')
+    cb(null,'static/IMAGES');
   },
   filename: (req,file,cb)=>{
     req.imagePath = Date.now() + path.extname(file.originalname);
-    cb(null,Date.now() + path.extname(file.originalname))
+    cb(null,Date.now() + path.extname(file.originalname));
   }
   
 })
@@ -40,6 +43,7 @@ app.use(session({
     maxAge: 3600000
   }
 }));
+
 
 
 app.use('/static',express.static('static'));
@@ -81,7 +85,7 @@ app.post('/login', function(req,res) {
 
 
 app.post('/register', function(req,res) {
-  const {name, username,email, password, confirmedPassword} = req.body;
+  const {name, username,email, password, confirmedPassword,Lo} = req.body;
   function_extension.countExistForCreate(username, email).then(result => {
     if(result){
       res.redirect('/register');
@@ -92,6 +96,7 @@ app.post('/register', function(req,res) {
         if(goodConfirmPassword){
           User.create({
             credits: 0,
+            localisation:req.body.localisation,
             completeName:req.body.name,
             username:req.body.username,
             email:req.body.email,
@@ -110,30 +115,35 @@ app.post('/register', function(req,res) {
 })
 
 app.post('/vente',upload.single('image'), function(req, res) {
-  const {Marque,Prix,Matiere,Couleur,Etat,Localisation} = req.body;
+  const {Type,Marque,Prix,Couleur,Taille,Genre,Etat} = req.body;
+
   Clothes.create({
-    image:req.imagePath,
+    image:"static/IMAGES/"+req.imagePath,
+    type:Type,
     marque:Marque,
     prix:Prix,
-    matiere:Matiere,
     couleur:Couleur,
+    taille:Taille,
+    genre:Genre,
     etat:Etat,
-    localisation: Localisation,
     user:req.session.username,
     sold:false
-    }) 
+    }).then(() => res.redirect('/')); 
+    
   });
   
 
 //get request to the root path  
-app.get("/", (req, res) => {
+app.get("/", function(req, res) {
+  function_extension.fiveLastInstances(Clothes,clothes);
+  
+  
   if(req.session.username){
     res.render('pages/main', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits});
+      credits: "Crédits: " + req.session.credits, clothes:clothes});
   } else {
-    res.render("pages/main", {username: "Se connecter", credits: ""});
+    res.render("pages/main", {username: "Se connecter", credits: "",clothes:clothes});
   }
-  
 });
 
 app.get('/login', function(req,res) {

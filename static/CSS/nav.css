@@ -36,6 +36,16 @@ header{
     border-radius: 30px;
 }
 
+.imageArticle{
+    position:relative;
+    height: 250px;
+    width: 250px;
+    border-radius: 10px;
+    margin-left:20px;
+    margin-top:0px;
+    transition: transform .2s;
+}
+
 
 .nav_links{
     list-style: none;
