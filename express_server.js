@@ -10,8 +10,7 @@ const fs = require('fs');
 const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const { User,Clothes } = require("./models");
-const cookieParser = require('cookie-parser')
-
+const cookieParser = require('cookie-parser');
 const function_extension = require('./function_extension');
 let beforelog = false;
 let clothes = [];
@@ -127,10 +126,10 @@ app.post('/register', function(req,res) {
   });
 })
 
-app.post('/vente',upload.single('image'), function(req, res) {
+app.post('/vente',upload.single('image'), async function(req, res) {
   const {Type,Marque,Prix,Couleur,Taille,Genre,Etat} = req.body;
 
-  Clothes.create({
+  await Clothes.create({
     image:"static/IMAGES/"+req.imagePath,
     type:Type,
     marque:Marque,
@@ -149,7 +148,6 @@ app.post('/vente',upload.single('image'), function(req, res) {
 //get request to the root path  
 app.get("/", function(req, res) {
   function_extension.fourLastInstances(Clothes,clothes);
-  
   
   if(req.session.username){
     res.render('pages/main', {username: req.session.username,

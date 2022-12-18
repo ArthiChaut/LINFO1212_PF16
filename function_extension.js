@@ -104,16 +104,15 @@ function passwordConfirm(password1, password2){
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-async function fourLastInstances(table,array){
-    table.findAll({
+function fourLastInstances(table,array){
+     table.findAll({
         order: [["createdAt","DESC"]],
-        limit:4
+        limit:5
     }).then(result => {
-        console.log(result);
-        for(let i = 0; i < result.length;i++){
-            if(array.length != result.length){
-                array.push(result[i]);
-                }  
+        
+        
+        for(let i = 0; i < result.length;i++){ 
+            array[i] = result[i]; 
         }
         
     })

@@ -21,13 +21,17 @@
        <%      let article = clothes[i]; %>
        
           <div class="miniContainer">
+          
+          
           <img class="imageArticle" src=<%= article.image %>><br>
-          <a class ="button">Ajouter au panier</a>
+        
           <div class="aligner">
-          <div>
-            posté par: <%= article.user %><br>
-           prix: <%= article.prix %>$ <br>
+          
+            <div class = "containerDescription">
+           <p> posté par: <%= article.user %><br>
+            prix: <%= article.prix %><br></p>
           </div>
+          <button class="button">Voir l'article</button>
         </div>
           </div>
        <% } %>

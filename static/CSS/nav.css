@@ -37,12 +37,11 @@ header{
 }
 
 .imageArticle{
-    position:relative;
+    border:2px solid black ;
     height: 250px;
-    width: 250px;
+    width: 70%;
     border-radius: 10px;
-    margin-left:20px;
-    margin-top:0px;
+    margin-left:15%;
     transition: transform .2s;
 }
 
