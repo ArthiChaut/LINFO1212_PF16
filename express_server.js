@@ -13,12 +13,12 @@ const { User,Clothes } = require("./models");
 const cookieParser = require('cookie-parser');
 const function_extension = require('./function_extension');
 let beforelog = false;
-
+let clothes = [];
 
 
 const storage = multer.diskStorage({
   destination: (req,file,cb) => {
-    cb(null,'Images')
+    cb(null,'static/IMAGES')
   },
   filename: (req,file,cb)=>{
     req.imagePath = Date.now() + path.extname(file.originalname);
@@ -149,9 +149,9 @@ app.get("/", function(req, res) {
   
   if(req.session.username){
     res.render('pages/main', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits});
+      credits: "Crédits: " + req.session.credits, clothes:clothes});
   } else {
-    res.render("pages/main", {username: "Se connecter", credits: ""});
+    res.render("pages/main", {username: "Se connecter", credits: "", clothes:clothes});
   }
   
 });
