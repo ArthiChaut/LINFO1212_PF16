@@ -119,6 +119,27 @@ function fourLastInstances(table,array){
     
 }
 
+function clothesByMe(table, array, username){
+    table.findAll({
+        where: {
+            user: username
+        }
+    }).then(result => {
+        
+        
+        for(let i = 0; i < result.length;i++){ 
+            array[i] = result[i]; 
+        }
+        
+        
+        
+        
+    })
+    
+    
+    
+}
+
 module.exports = {
-    countExist, passwordCorrect, countExistForCreate, validate, passwordConfirm,fourLastInstances
+    countExist, passwordCorrect, countExistForCreate, validate, passwordConfirm, fourLastInstances, clothesByMe
 };

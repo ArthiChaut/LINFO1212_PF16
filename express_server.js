@@ -14,6 +14,8 @@ const cookieParser = require('cookie-parser');
 const function_extension = require('./function_extension');
 let beforelog = false;
 let clothes = [];
+let listClothesByMe = [];
+
 
 
 const storage = multer.diskStorage({
@@ -179,11 +181,18 @@ app.get('/panier', function(req,res) {
 });
 
 app.get('/profil', function(req,res) {
+  function_extension.clothesByMe(Clothes, listClothesByMe, req.session.username).then( result => {
+    res.render('pages/profil', {username: req.session.username,
+      completeName: req.session.completeName,
+      email: req.session.email,
+      creditsProfil: req.session.credits,
+      credits: "Crédits: " + req.session.credits,
+      listClothesByMe:listClothesByMe});
+      console.log(listClothesByMe);
+  })
   
-  res.render('pages/profil', {username: req.session.username,
-  completeName: req.session.completeName,
-  email: req.session.email,
-  credits: "Crédits: " + req.session.credits});
+
+  
 });
 
 app.get('/vente',  function(req,res) {

@@ -66,10 +66,18 @@
     margin-top: 10px;
 }
 
-.data h2{
+.info2 .data .width_data h3{
+    margin-left: 20px;
+    margin-top: 10px;
+    color: #0088a9;
+}
+
+.data h3{
+    font-size: 20px;
     margin-bottom: 12px;
 }
 
-.width_data h2{
-    color: #0088a9;
-}
+
+
+
+

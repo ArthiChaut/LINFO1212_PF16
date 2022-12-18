@@ -2,10 +2,12 @@
     display:flex;
 }
 
+
 .aligner div{
     margin-right:50px;
     white-space: nowrap;
 }
+
 
 .containerArticles{
     margin-left:50px;

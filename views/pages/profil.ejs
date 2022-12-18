@@ -1,5 +1,6 @@
 <!doctype html>
 <link rel="stylesheet" type="text/css" href="/static/CSS/profil-css.css" />
+<link rel="stylesheet" type="text/css" href="/static/CSS/mainPage.css" />
 <html lang="fr">
 <head>
   <%- include('../partials/head'); %>
@@ -16,37 +17,37 @@
           <img class="photo_profil" src="/static/IMAGES/image femme.jpeg" alt="photo de profil"\>
           <div class="info">
             <div class="data">
-              <h2>Nom d'utilisateur:</h2>
+              <h3>Nom d'utilisateur:</h3>
             </div>
             <div class="data">
-              <h2>Nom complet:</h2>
+              <h3>Nom complet:</h3>
             </div>
             <div class="data">
-              <h2>Email:</h2>
+              <h3>Email:</h3>
             </div>
             <div class="data">
-              <h2>Crédits:</h2>
+              <h3>Crédits:</h3>
             </div>
           </div>
-          <div class="info">
+          <div class="info2">
             <div class="data">
               <div class="width_data">
-                <h2><%= username%></h2>
+                <h3><%= username%></h3>
               </div>
             </div>
             <div class="data">
               <div class="width_data">
-                <h2><%= completeName%></h2>
+                <h3><%= completeName%></h3>
               </div>
             </div>
             <div class="data">
               <div class="width_data">
-                <h2><%= email%></h2>
+                <h3><%= email%></h3>
               </div>
             </div>
             <div class="data">
               <div class="width_data">
-                <h2><%= credits%></h2>
+                <h3><%= creditsProfil%></h3>
               </div>
             </div>
           </div>
@@ -61,8 +62,25 @@
     </div>
     
     <div class="containerMesVentes">
-      <div class="allignement">
-        <p>Bonjour je suis entrepreneur</p>
+      <div class="alignement">
+        <%  for( let i = 0; i < listClothesByMe.length;i++){ %>
+          <%      let article = listClothesByMe[i]; %>
+          
+             <div class="miniContainer">
+             
+             
+             <img class="imageArticle" src=<%= article.image %>><br>
+           
+             <div class="alignement">
+             
+               <div class = "containerDescription">
+              <p> posté par: <%= article.user %><br>
+               prix: <%= article.prix %><br></p>
+             </div>
+             <button class="button">Voir l'article</button>
+           </div>
+             </div>
+          <% } %>
       </div>
     </div>
 
