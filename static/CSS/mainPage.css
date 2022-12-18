@@ -71,7 +71,7 @@
 
 
 
-.miniContainer a .button{
+.miniContainer .button{
     position: absolute;
     padding: 1% 2%;
     margin-left:55%;
