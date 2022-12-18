@@ -13,17 +13,16 @@ const { User,Clothes } = require("./models");
 const cookieParser = require('cookie-parser');
 const function_extension = require('./function_extension');
 let beforelog = false;
-let clothes = [];
 
 
 
 const storage = multer.diskStorage({
   destination: (req,file,cb) => {
-    cb(null,'static/IMAGES');
+    cb(null,'Images')
   },
   filename: (req,file,cb)=>{
     req.imagePath = Date.now() + path.extname(file.originalname);
-    cb(null,Date.now() + path.extname(file.originalname));
+    cb(null,Date.now() + path.extname(file.originalname))
   }
   
 })
@@ -55,7 +54,7 @@ app.post('/login', function(req,res) {
   function_extension.countExist(username).then(result => {
     if( result ===  false){
       console.log("Le compte n'existe pas encore");
-      res.render("pages/login",{error_message_email: "Nom d'utilisateur ou e-mail incorrect",error_message_password: "", username: "Se connecter", credits: ""});
+      res.render("pages/login",{error_message_email: "Nom d'utilisateur ou e-mail incorrect", error_message_password: "", username: "Se connecter", credits: "" });
       
     }else{
       console.log("Le compte existe");
@@ -87,7 +86,7 @@ app.post('/login', function(req,res) {
           */
         } else {
           console.log("Mot de passe incorrect");
-          res.render("pages/login", {error_message_password: "mot de passe incorrect", error_message_email: "", username: "Se connecter", credits: ""});
+          res.render("pages/login", {error_message_password: "Mot de passe incorrect", error_message_email: "", username: "Se connecter", credits: ""});
         }
       })
 
@@ -97,10 +96,10 @@ app.post('/login', function(req,res) {
 
 
 app.post('/register', function(req,res) {
-  const {name, username,email, password, confirmedPassword,Lo} = req.body;
+  const {name, username,email, password, confirmedPassword} = req.body;
   function_extension.countExistForCreate(username, email).then(result => {
     if(result){
-      res.redirect('/register');
+      res.render('pages/register', {username: "Se connecter", credits: "", error_message_password: "", error_message_email: "", error_message_account : "Nom d'utilisateur et/ou e-mail déjà utilisé(s)"});
     } else {
       let result2 = function_extension.validate(email);
       if(result2){
@@ -108,40 +107,39 @@ app.post('/register', function(req,res) {
         if(goodConfirmPassword){
           User.create({
             credits: 0,
-            localisation:req.body.localisation,
             completeName:req.body.name,
             username:req.body.username,
             email:req.body.email,
+            localisation:req.body.localisation,
             password:bcrypt.hashSync(req.body.password,10)}).then(()=>
             res.redirect('/login'));
         } else {
           console.log("Mots de passe non similaire");
-          res.redirect('/register');
+          res.render('pages/register', {username: "Se connecter", credits: "", error_message_account : "" ,error_message_password: "Les mots de passe ne sont pas similaires", error_message_email: ""});
         }
       } else {
-        res.redirect('/register');
+        res.render('pages/register', {username: "Se connecter", credits: "", error_message_account : "" , error_message_email: "L'adresse e-mail n'est pas valide", error_message_password: ""});
       }
       
     }
   });
 })
 
-app.post('/vente',upload.single('image'), async function(req, res) {
+app.post('/vente',upload.single('image'), function(req, res) {
   const {Type,Marque,Prix,Couleur,Taille,Genre,Etat} = req.body;
 
-  await Clothes.create({
+    Clothes.create({
     image:"static/IMAGES/"+req.imagePath,
     type:Type,
     marque:Marque,
     prix:Prix,
+    matiere:Matiere,
     couleur:Couleur,
-    taille:Taille,
-    genre:Genre,
     etat:Etat,
+    localisation: Localisation,
     user:req.session.username,
     sold:false
-    }).then(() => res.redirect('/')); 
-    
+    }) 
   });
   
 
@@ -151,10 +149,11 @@ app.get("/", function(req, res) {
   
   if(req.session.username){
     res.render('pages/main', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits, clothes:clothes});
+      credits: "Crédits: " + req.session.credits});
   } else {
-    res.render("pages/main", {username: "Se connecter", credits: "",clothes:clothes});
+    res.render("pages/main", {username: "Se connecter", credits: ""});
   }
+  
 });
 
 app.get('/login', function(req,res) {
@@ -166,12 +165,7 @@ app.get('/login', function(req,res) {
 });
 
 app.get('/register', function(req,res) {
-  if(req.session.username){
-    res.render('pages/register', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits});
-  } else {
-    res.render("pages/register", {username: "Se connecter", credits: ""});
-  }
+    res.render("pages/register", {username: "Se connecter", credits: "",error_message_account : "" , error_message_password: "", error_message_email: ""});
 });
 
 app.get('/panier', function(req,res) {
@@ -180,7 +174,7 @@ app.get('/panier', function(req,res) {
       credits: "Crédits: " + req.session.credits});
   } else {
     beforelog = "panier";
-    res.redirect("/login");
+    res.render("pages/login", {username: "Se connecter", credits: "", error_message_email: "", error_message_password: ""});
   }
 });
 
@@ -198,7 +192,7 @@ app.get('/vente',  function(req,res) {
       credits: "Crédits: " + req.session.credits});
   } else {
     beforelog = "vente";
-    res.redirect("/login");
+    res.render("pages/login", {username: "Se connecter", credits: "", error_message_email: "", error_message_password: ""});
   }
 });
 
