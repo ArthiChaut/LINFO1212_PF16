@@ -133,10 +133,10 @@ app.post('/vente',upload.single('image'), function(req, res) {
     type:Type,
     marque:Marque,
     prix:Prix,
-    matiere:Matiere,
     couleur:Couleur,
+    taille:Taille,
+    genre:Genre,
     etat:Etat,
-    localisation: Localisation,
     user:req.session.username,
     sold:false
     }) 

@@ -11,7 +11,7 @@
     margin-left:50px;
     margin-bottom:100px;
     position: relative;
-    width: 100%;
+    width: 90%;
     align-items: center;
     justify-content: center;
     background : rgb(59, 57, 57);
@@ -23,6 +23,7 @@
 }
 
 .miniContainer{
+    transition: transform .2s;
     position:relative;
     margin-left:1px;
     margin-bottom:1px;
@@ -37,6 +38,9 @@
     padding-bottom: 350px;
     margin-right:20px;
     
+}
+.miniContainer:hover{
+    transform:scale(1.15);
 }
 
 .containerDescription{
@@ -67,7 +71,7 @@
 
 
 
-.miniContainer .button{
+.miniContainer a .button{
     position: absolute;
     padding: 1% 2%;
     margin-left:55%;
@@ -96,13 +100,16 @@ h2{
 }
 
 .arrow-right {
-    height: 20px;
-    width: 40%;
+    height: 40px;
+    width: 60%;
     margin-right:50px;
-    margin-left:10px;
-    margin-top:80px;
-    margin-bottom:auto;
-    border-top: 16px solid transparent;
-    border-bottom: 16px solid transparent;
-    border-left: 30px solid #000000;
+    transition: transform .2s;
+    margin-top:210%;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 40px solid #000000;
+}
+
+.arrow-right:hover{
+    transform: scale(1.2);
 }
