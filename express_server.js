@@ -17,7 +17,6 @@ let clothes = [];
 let listClothesByMe = [];
 
 
-
 const storage = multer.diskStorage({
   destination: (req,file,cb) => {
     cb(null,'static/IMAGES')
@@ -147,14 +146,14 @@ app.post('/vente',upload.single('image'), function(req, res) {
 
 //get request to the root path  
 app.get("/", function(req, res) {
-  function_extension.fourLastInstances(Clothes,clothes);
-  
-  if(req.session.username){
-    res.render('pages/main', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits, clothes:clothes});
-  } else {
-    res.render("pages/main", {username: "Se connecter", credits: "", clothes:clothes});
-  }
+  function_extension.fourLastInstances(Clothes,clothes).then(clothes => {
+    if(req.session.username){
+      res.render('pages/main', {username: req.session.username,
+        credits: "Crédits: " + req.session.credits, clothes:clothes});
+    } else {
+      res.render("pages/main", {username: "Se connecter", credits: "", clothes:clothes});
+    }
+  })
   
 });
 
@@ -181,19 +180,23 @@ app.get('/panier', function(req,res) {
 });
 
 app.get('/profil', function(req,res) {
-  function_extension.clothesByMe(Clothes, listClothesByMe, req.session.username).then( result => {
-    res.render('pages/profil', {username: req.session.username,
-      completeName: req.session.completeName,
-      email: req.session.email,
-      creditsProfil: req.session.credits,
-      credits: "Crédits: " + req.session.credits,
-      listClothesByMe:listClothesByMe});
-      console.log(listClothesByMe);
-  })
+    function_extension.clothesByMe(Clothes,req.session.username).then(result =>{
+      res.render('pages/profil', {username: req.session.username,
+        completeName: req.session.completeName,
+        email: req.session.email,
+        creditsProfil: req.session.credits,
+        credits: "Crédits: " + req.session.credits,
+        listClothesByMe:result})
+
+    })
+  });
+    
+      
+  
   
 
   
-});
+
 
 app.get('/vente',  function(req,res) {
   if(req.session.username){
@@ -206,11 +209,12 @@ app.get('/vente',  function(req,res) {
 });
 
 app.get('/info', function(req,res) {
+  const {image,marque,prix,couleur,taille,genre,date,etat,user,localisation} = req.query;
   if(req.session.username){
     res.render('pages/clothesInfos', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits});
+      credits: "Crédits: " + req.session.credits,image:image,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation});
   } else {
-    res.render("pages/clothesInfos", {username: "Se connecter", credits: ""});
+    res.render("pages/clothesInfos", {username: "Se connecter", credits: "",image:image,marque:marque,prix:prix,couleur:couleur,taille:taille,date:date,etat:etat,user:user,localisation:localisation});
   }
 });
 

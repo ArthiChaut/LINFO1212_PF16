@@ -1,7 +1,8 @@
 .photo-principale{
-    width: 400px;
-    height: 400px;
-    margin: 10px;
+    border-radius:10px;
+    width: 500px;
+    height: 500px;
+    margin: 100px;
 }
 
 .photo-secondaire img{

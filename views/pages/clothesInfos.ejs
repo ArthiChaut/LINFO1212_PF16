@@ -13,7 +13,7 @@
     <div class = "container">
     <div class="container-left "> 
       <div class = "box">
-        <img class = "photo-principale" src="/static/IMAGES/vetements.webp" alt="photo">
+        <img class = "photo-principale" src="<%=image%>" alt="photo">
         
         </div>
       </div>
@@ -25,24 +25,24 @@
           <div class="box-right-1">
               <p> Marque </p>
               <p> Prix </p>
-              <p> Matière </p>
               <p> Couleur </p>
               <p> Taille </p>
+              <p> Genre </p>
               <p> Date d'ajout </p>
-              <p> Description </p>
+              <p> Etat de l'article </p>
               <p> Nom du vendeur </p>
               <p> Localisation </p>
             </div>
             <div class="box-right-2">
-              <p> Marque </p>
-              <p> Prix </p>
-              <p> Matière </p>
-              <p> Couleur </p>
-              <p> Taille </p>
-              <p> Date d'ajout </p>
-              <p> Description </p>
-              <p> Nom du vendeur </p>
-              <p> Localisation </p>
+              <p> <%= marque %> </p>
+              <p> <%= prix %> </p>
+              <p> <%= couleur %> </p>
+              <p> <%= taille %> </p>
+              <p> <%= genre %> </p>
+              <p> <%= date %> </p>
+              <p> <%= etat %> </p>
+              <p> <%= user %> </p>
+              <p> <%= localisation %> </p>
         </div>
       </div>
 

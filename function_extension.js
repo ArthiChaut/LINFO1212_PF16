@@ -104,37 +104,20 @@ function passwordConfirm(password1, password2){
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function fourLastInstances(table,array){
-     table.findAll({
+async function fourLastInstances(table){
+    let array = await table.findAll({
         order: [["createdAt","DESC"]],
         limit:5
-    }).then(result => {
-        
-        
-        for(let i = 0; i < result.length;i++){ 
-            array[i] = result[i]; 
-        }
-        
     })
-    
+    return array;
 }
 
-function clothesByMe(table, array, username){
-    table.findAll({
-        where: {
-            user: username
-        }
-    }).then(result => {
-        
-        
-        for(let i = 0; i < result.length;i++){ 
-            array[i] = result[i]; 
-        }
-        
-        
-        
-        
+async function clothesByMe(table, username){
+
+    let array = await table.findAll({
+        where:{user:username}
     })
+    return array;
     
     
     
