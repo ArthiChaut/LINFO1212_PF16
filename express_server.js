@@ -17,6 +17,7 @@ let clothes = [];
 let listClothesByMe = [];
 let clothesAllAffichage = [];
 let array = [];
+let filtre ="";
 
 const storage = multer.diskStorage({
   destination: (req,file,cb) => {
@@ -226,9 +227,9 @@ app.get('/profil', function(req,res) {
   })
 })
 
-app.get('/clothes', function(req,res) {
-    function_extension.displayClothes().then(result =>{
-      
+app.get('/clothes/homme', function(req,res) {
+    filtre = "Homme";
+    function_extension.displayClothes(filtre).then(result =>{
       res.render('pages/clothesAll', {
         username: req.session.username,
         credits: "Crédits: " + req.session.credits,
@@ -237,14 +238,36 @@ app.get('/clothes', function(req,res) {
         creditsProfil: req.session.credits,
         clothes:result
       })
-
     })
-    
-   
 });
-  
 
-  
+app.get('/clothes/femme', function(req,res) {
+  filtre = "Femme";
+  function_extension.displayClothes(filtre).then(result =>{
+    res.render('pages/clothesAll', {
+      username: req.session.username,
+      credits: "Crédits: " + req.session.credits,
+      completeName: req.session.completeName,
+      email: req.session.email,
+      creditsProfil: req.session.credits,
+      clothes:result
+    })
+  })
+});
+
+app.get('/clothes/enfants', function(req,res) {
+  filtre = "Enfants";
+  function_extension.displayClothes(filtre).then(result =>{
+    res.render('pages/clothesAll', {
+      username: req.session.username,
+      credits: "Crédits: " + req.session.credits,
+      completeName: req.session.completeName,
+      email: req.session.email,
+      creditsProfil: req.session.credits,
+      clothes:result
+    })
+  })
+});
 
 
 app.get('/vente',  function(req,res) {
