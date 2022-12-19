@@ -104,10 +104,11 @@ function passwordConfirm(password1, password2){
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-async function fourLastInstances(table){
+async function fiveLastInstances(table){
     let array = await table.findAll({
         order: [["createdAt","DESC"]],
-        limit:5
+        limit:5,
+        where:{sold:false}
     })
     return array;
 }
@@ -120,37 +121,20 @@ async function clothesByMe(table, username){
     return array;
 }
 
-async function rechercherProduits(sizeFilter, colorFilter, array) {
-    
-    // Construisez votre clause de filtre en utilisant l'opérateur "where" de Sequelize
-    const where = {};
-    if (sizeFilter) {
-        where.size = {
-        [Op.eq]: sizeFilter
-        };
-    }
-    if (colorFilter) {
-        where.color = {
-        [Op.eq]: colorFilter
-        };
-    }
-    
-    // Exécutez la recherche en utilisant la clause "where"
-    const products = await Clothes.findAll({ where });
-    for(let i = 0; i < products.length;i++){ 
-        array[i] = products[i]; 
-    }
+async function rechercherProduits(sizeFilter, colorFilter) {
+     
+    const products = await Clothes.findAll({ where:{
+        taille:sizeFilter,
+        couleur:colorFilter
+    } });
+    return products;
 }
 
-function displayClothes(array){
-    Clothes.findAll({
+async function displayClothes(){
+    let array = await Clothes.findAll({
         where: { genre: "Homme" }
-    }
-    ).then(result => {
-        for(let i = 0; i < result.length;i++){ 
-            array[i] = result[i]; 
-        }
     })
+    return array;
 }
 
 
@@ -161,15 +145,26 @@ async function getUserLocation(username){
     })
     return location.localisation;
 }
+
+async function getLatestSells(){
+
+    let result = await Clothes.findAll({
+        where:{sold: true},
+        limit:5,
+        order:[['createdAt','DESC']]
+    })
+    return result;
+}
 module.exports = {
     countExist, 
     passwordCorrect, 
     countExistForCreate, 
     validate, 
     passwordConfirm, 
-    fourLastInstances, 
+    fiveLastInstances, 
     clothesByMe,
     getUserLocation,
+    getLatestSells,
     displayClothes,
     rechercherProduits,
 };

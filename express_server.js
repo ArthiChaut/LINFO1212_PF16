@@ -146,32 +146,38 @@ app.post('/vente',upload.single('image'), function(req, res) {
     }) 
   });
 
-app.post('/clothes', async (req, res) =>{
-    const sizeFilter = req.body.sizeFilter;
-    const colorFilter = req.body.colorFilter;
-    const products = await function_extension.rechercherProduits(sizeFilter, colorFilter,array);
-    console.log(sizeFilter);
-    console.log(colorFilter);
-    console.log(products);
-    res.render('pages/clothesAll', { username: req.session.username,
+app.post('/clothes', function(req, res){
+    const {couleur,taille} = req.body;
+    
+    function_extension.rechercherProduits(couleur, taille).then(result => {
+      
+      res.render('pages/clothesAll', { username: req.session.username,
         completeName: req.session.completeName,
         email: req.session.email,
         creditsProfil: req.session.credits,
         credits: "Crédits: " + req.session.credits,
-        clothes: array,
+        clothes: result
       }); // render the page with the filtered clothes
+
+
+
+    })
+    
 });
   
-
 //get request to the root path  
 app.get("/", function(req, res) {
-  function_extension.fourLastInstances(Clothes,clothes).then(clothes => {
+  function_extension.fiveLastInstances(Clothes,clothes).then(clothes => {
+    function_extension.getLatestSells().then(sells => {
     if(req.session.username){
       res.render('pages/main', {username: req.session.username,
-        credits: "Crédits: " + req.session.credits, clothes:clothes});
+        credits: "Crédits: " + req.session.credits, clothes:clothes,sells:sells});
     } else {
-      res.render("pages/main", {username: "Se connecter", credits: "", clothes:clothes});
+      res.render("pages/main", {username: "Se connecter", credits: "", clothes:clothes,sells:sells});
     }
+
+    })
+    
   })
   
 });
@@ -188,6 +194,11 @@ app.get('/register', function(req,res) {
     res.render("pages/register", {username: "Se connecter", credits: "",error_message_account : "" , error_message_password: "", error_message_email: ""});
 });
 
+
+
+
+
+
 app.get('/panier', function(req,res) {
   if(req.session.username){
     res.render('pages/panier', {username: req.session.username,
@@ -198,6 +209,11 @@ app.get('/panier', function(req,res) {
   }
 });
 
+
+
+
+
+
 app.get('/profil', function(req,res) {
   function_extension.clothesByMe(Clothes, req.session.username).then( result => {
     res.render('pages/profil', {username: req.session.username,
@@ -207,24 +223,24 @@ app.get('/profil', function(req,res) {
       credits: "Crédits: " + req.session.credits,
       localisation: req.session.localisation,
       listClothesByMe:result});
-      //console.log(result);
   })
 })
 
 app.get('/clothes', function(req,res) {
-  if(req.session.username){
-    function_extension.displayClothes(clothesAllAffichage)
-    res.render('pages/clothesAll', {
-      username: req.session.username,
-      credits: "Crédits: " + req.session.credits,
-      completeName: req.session.completeName,
-      email: req.session.email,
-      creditsProfil: req.session.credits,
-      clothes:clothesAllAffichage
-    });
-  } else {
-    res.render("pages/login", {username: "Se connecter", credits: "",error_message_email: "", error_message_password: "" });
-    };
+    function_extension.displayClothes().then(result =>{
+      
+      res.render('pages/clothesAll', {
+        username: req.session.username,
+        credits: "Crédits: " + req.session.credits,
+        completeName: req.session.completeName,
+        email: req.session.email,
+        creditsProfil: req.session.credits,
+        clothes:result
+      })
+
+    })
+    
+   
 });
   
 

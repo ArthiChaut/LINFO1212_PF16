@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
   <%- include('../partials/head'); %>
-  <link rel="stylesheet" href="/static/css/clothesAll.css">
-  <script src="/function_extension.js"></script>
+  <link rel="stylesheet" href="/static/CSS/clothesAll.css">
+  
   <title>Acheter vos habits</title>
 </head>
 <body>
@@ -127,38 +127,6 @@
   <footer>
     <%- include('../partials/footer'); %>
   </footer>
-
-  <script>
-    var article = []
-    
-    function displayClothes() {
-      return false
-    }
-
-    function w_open() {
-      document.getElementById("mySidebar").style.display = "block";
-    }
-    
-    function close() {
-      document.getElementById("mySidebar").style.display = "none";
-    }
-
-    var isRotate = false;
-
-    function rotate() {
-      var x = document.getElementById("logo_sidebar");
-      var y = document.getElementById("filtre");
-      if (isRotate) {
-        x.style.transform = "rotate(90deg)";
-        y.style.display = "block";
-      } else {
-        y.style.display = "none";
-        x.style.transform = "rotate(0deg)";
-      }
-      isRotate =! isRotate;
-      
-    }
-    </script>
 
 </body>
 </html>
