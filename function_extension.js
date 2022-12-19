@@ -120,6 +120,39 @@ async function clothesByMe(table, username){
     return array;
 }
 
+async function rechercherProduits(sizeFilter, colorFilter, array) {
+    
+    // Construisez votre clause de filtre en utilisant l'opérateur "where" de Sequelize
+    const where = {};
+    if (sizeFilter) {
+        where.size = {
+        [Op.eq]: sizeFilter
+        };
+    }
+    if (colorFilter) {
+        where.color = {
+        [Op.eq]: colorFilter
+        };
+    }
+    
+    // Exécutez la recherche en utilisant la clause "where"
+    const products = await Clothes.findAll({ where });
+    for(let i = 0; i < products.length;i++){ 
+        array[i] = products[i]; 
+    }
+}
+
+function displayClothes(array){
+    Clothes.findAll({
+        where: { genre: "Homme" }
+    }
+    ).then(result => {
+        for(let i = 0; i < result.length;i++){ 
+            array[i] = result[i]; 
+        }
+    })
+}
+
 
 async function getUserLocation(username){
 
@@ -129,5 +162,14 @@ async function getUserLocation(username){
     return location.localisation;
 }
 module.exports = {
-    countExist, passwordCorrect, countExistForCreate, validate, passwordConfirm, fourLastInstances, clothesByMe,getUserLocation
+    countExist, 
+    passwordCorrect, 
+    countExistForCreate, 
+    validate, 
+    passwordConfirm, 
+    fourLastInstances, 
+    clothesByMe,
+    getUserLocation,
+    displayClothes,
+    rechercherProduits,
 };
