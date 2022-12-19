@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
   <%- include('../partials/head'); %>
+  <link rel="stylesheet" href="/static/css/clothesAll.css">
+  <script src="/function_extension.js"></script>
   <title>Acheter vos habits</title>
 </head>
 <body>
@@ -9,11 +11,155 @@
     <%- include('../partials/header'); %>
   </header>
   <main>
+    <!-- 
+    <div class="sidebar bar-block w3-border-right" style="display:none" id="mySidebar">
+        <button onclick="close()" class="bar-item large" id="close_sidebar">Fermé &times;</button>
+        
+        <ul class="bar-item"> 
+        Couleur <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
+          <div id="filtre" style="display:none">
+            <li class="bar-item">
+              <input type="checkbox" id="horns" name="horns">
+              <label for="horns">Colors</label>
+            </li>
+          </div>
+        </ul>
 
+        <ul class="bar-item"> 
+          Taille <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
+          <div id="filtre" style="display:none">
+            <li class="bar-item">
+              <input type="checkbox" id="horns" name="horns">
+              <label for="horns">Taille</label>
+            </li>
+            </div>
+        </ul>
+
+        <ul class="bar-item"> 
+          Marque <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
+          <div id="filtre" style="display:none">
+            <li class="bar-item">
+              <input type="checkbox" id="horns" name="horns">
+              <label for="horns">Marque</label>
+            </li>
+            </div>
+        </ul>
+
+        <ul class="bar-item"> 
+          Prix <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
+          <div id="filtre" style="display:none ">
+            <li class="bar-item">
+              <input type="checkbox" id="horns" name="horns">
+              <label for="horns">Prix</label>
+            </li>
+            </div>
+        </ul>
+
+        <ul class="bar-item"> 
+          Type <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
+          <div id="filtre" style="display:none">
+            <li class="bar-item">
+              <input type="checkbox" id="horns" name="horns">
+              <label for="horns">Types</label>
+            </li>
+            </div>
+        </ul>
+
+        <ul class="bar-item"> 
+          Genre <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
+          <div id="filtre" style="display:none">
+            <li class="bar-item">
+              <input type="checkbox" id="horns" name="horns">
+              <label for="horns">Genre</label>
+            </li>
+            </div>
+        </ul>
+
+        <ul class="bar-item"> 
+          Etat <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
+          <div id="filtre" style="display:none">
+            <li class="bar-item">
+              <input type="checkbox" id="horns" name="horns">
+              <label for="horns">Etat</label>
+            </li>
+            </div>
+        </ul>
+          
+        <div class="button-filtre">
+          <button class="button-filtre xlarge">Appliquer</button>
+        </div>
+    </div>
+    <div class="teal">
+      <button class="button-filtre teal xlarge" onclick="w_open()">☰ FILTRES</button>
+    </div>
+    -->
+    <form id="filter-form"  method="post" action="/clothes">
+      <label for="couleur">Color:</label>
+      <select id="colorFilter" name="couleur">
+        <option value="Noir">Noir</option>
+        <option value="rouge">rouge</option>
+        <option value="bleu">bleu</option>
+      </select>
+      <br>
+      <label for="taille">Size:</label>
+      <select id="sizeFilter" name="taille">
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+      </select>
+      <br>
+      <input type="submit" value="Filter">
+    </form>
+    
+
+    <div class="container" id="filtre-results">
+      <% for( let i = 0; i < clothes.length;i++){let article = clothes[i]; %>
+      <div class="grid-object">
+        <img src=<%= article.image %> alt="photo">
+        <h2><%= article.type %></h2>
+        <h3><%= article.user %></h3>
+        <p><%= article.prix %></p>
+        <a href="info">Voir l'article</a>
+      </div>
+      <% } %>
+    </div>
   </main>
   <footer>
     <%- include('../partials/footer'); %>
   </footer>
 
+  <script>
+    var article = []
+    
+    function displayClothes() {
+      return false
+    }
+
+    function w_open() {
+      document.getElementById("mySidebar").style.display = "block";
+    }
+    
+    function close() {
+      document.getElementById("mySidebar").style.display = "none";
+    }
+
+    var isRotate = false;
+
+    function rotate() {
+      var x = document.getElementById("logo_sidebar");
+      var y = document.getElementById("filtre");
+      if (isRotate) {
+        x.style.transform = "rotate(90deg)";
+        y.style.display = "block";
+      } else {
+        y.style.display = "none";
+        x.style.transform = "rotate(0deg)";
+      }
+      isRotate =! isRotate;
+      
+    }
+    </script>
+
 </body>
 </html>
+
