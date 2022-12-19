@@ -3,7 +3,6 @@
 <head>
   <%- include('../partials/head'); %>
   <link rel="stylesheet" href="/static/CSS/clothesAll.css">
-  
   <title>Acheter vos habits</title>
 </head>
 <body>
@@ -11,107 +10,74 @@
     <%- include('../partials/header'); %>
   </header>
   <main>
-    <!-- 
     <div class="sidebar bar-block w3-border-right" style="display:none" id="mySidebar">
-        <button onclick="close()" class="bar-item large" id="close_sidebar">Fermé &times;</button>
-        
-        <ul class="bar-item"> 
-        Couleur <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
-          <div id="filtre" style="display:none">
-            <li class="bar-item">
-              <input type="checkbox" id="horns" name="horns">
-              <label for="horns">Colors</label>
-            </li>
-          </div>
-        </ul>
-
-        <ul class="bar-item"> 
-          Taille <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
-          <div id="filtre" style="display:none">
-            <li class="bar-item">
-              <input type="checkbox" id="horns" name="horns">
-              <label for="horns">Taille</label>
-            </li>
-            </div>
-        </ul>
-
-        <ul class="bar-item"> 
-          Marque <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
-          <div id="filtre" style="display:none">
-            <li class="bar-item">
-              <input type="checkbox" id="horns" name="horns">
-              <label for="horns">Marque</label>
-            </li>
-            </div>
-        </ul>
-
-        <ul class="bar-item"> 
-          Prix <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
-          <div id="filtre" style="display:none ">
-            <li class="bar-item">
-              <input type="checkbox" id="horns" name="horns">
-              <label for="horns">Prix</label>
-            </li>
-            </div>
-        </ul>
-
-        <ul class="bar-item"> 
-          Type <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
-          <div id="filtre" style="display:none">
-            <li class="bar-item">
-              <input type="checkbox" id="horns" name="horns">
-              <label for="horns">Types</label>
-            </li>
-            </div>
-        </ul>
-
-        <ul class="bar-item"> 
-          Genre <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
-          <div id="filtre" style="display:none">
-            <li class="bar-item">
-              <input type="checkbox" id="horns" name="horns">
-              <label for="horns">Genre</label>
-            </li>
-            </div>
-        </ul>
-
-        <ul class="bar-item"> 
-          Etat <img id="logo_sidebar" onclick="rotate()" src="/static/IMAGES/prochain.png" alt="Logo">
-          <div id="filtre" style="display:none">
-            <li class="bar-item">
-              <input type="checkbox" id="horns" name="horns">
-              <label for="horns">Etat</label>
-            </li>
-            </div>
-        </ul>
-          
-        <div class="button-filtre">
-          <button class="button-filtre xlarge">Appliquer</button>
-        </div>
-    </div>
+        <button onclick="w_close()" class="bar-item large" id="close_sidebar">Fermé &times;</button>
+        <form id="filter-form"  method="post" action="/clothes">
+          <label for="couleur">Couleur:</label>
+          <select id="colorFilter" name="couleur">
+            <option value=""></option>
+            <option value='Rouge'>Rouge</option>
+            <option value='Bleu'>Bleu</option>
+            <option value='Vert'>Vert</option>
+            <option value='Jaune'>Jaune</option>
+            <option value='Orange'>Orange</option>
+            <option value='Rose'>Rose</option>
+            <option value='Blanc'>Blanc</option>
+            <option value='Noir'>Noir</option>
+            <option value='Gris'>Gris</option>
+            <option value='Marron'>Marron</option>
+            <option value='Violet'>Violet</option>
+            <option value='Beige'>Beige</option>
+            <option value='Autre'>Autre</option>
+          </select>
+          <label for="taille">Taille:</label>
+          <select id="sizeFilter" name="taille">
+            <option value=""></option>
+            <option value='XXL'>XXL</option>
+            <option value='XL'>XL</option>
+            <option value='L'>L</option>
+            <option value='M'>M</option>
+            <option value='S'>S</option>
+            <option value='XS'>XS</option>
+            <option value='XXS'>XXS</option>
+          </select>
+          <label for="genre">Genre:</label>
+          <select id="genreFilter" name="genre">
+            <option value=""></option>
+            <option value='Homme'>Homme</option>
+            <option value='Femme'>Femme</option> 
+            <option value='Enfant'>Enfant</option>
+            <option value="Unisex"> Unisex</option> 
+          </select>
+          <label for="type">Type:</label>
+          <select id="typeFilter" name="type">
+            <option value=""></option>
+            <option value="Pantalon">Pantalon</option>
+            <option value="T-shirt">T-shirt</option>
+            <option value="Pull">Pull</option>
+            <option value="Veste">Veste</option>
+            <option value="Sweat">Sweat</option>
+            <option value="Robe">Robe</option>
+            <option value="Jupe">Jupe</option>
+            <option value="Chemise">Chemise</option>
+            <option value="Autre">Autre</option>
+            <option value="Short">Short</option>
+            <option value="Underwear">Underwear</option>
+          </select>
+          <label for="etat">Etat:</label>
+          <select id=" etatFilter" name="etat">
+            <option value=""></option>
+            <option value='Neuf'>Neuf</option>
+            <option value='Très bon état'>Très bon état</option> 
+            <option value='Bon état'>Bon état</option>
+            <option value="Occasion"> Occasion</option>
+          </select>
+          <input type="submit" value="Valider">
+        </form>
+    </div>  
     <div class="teal">
       <button class="button-filtre teal xlarge" onclick="w_open()">☰ FILTRES</button>
     </div>
-    -->
-    <form id="filter-form"  method="post" action="/clothes">
-      <label for="couleur">Color:</label>
-      <select id="colorFilter" name="couleur">
-        <option value="Noir">Noir</option>
-        <option value="rouge">rouge</option>
-        <option value="bleu">bleu</option>
-      </select>
-      <br>
-      <label for="taille">Size:</label>
-      <select id="sizeFilter" name="taille">
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-      </select>
-      <br>
-      <input type="submit" value="Filter">
-    </form>
-    
-
     <div class="container" id="filtre-results">
       <% for( let i = 0; i < clothes.length;i++){let article = clothes[i]; %>
       <div class="grid-object">
@@ -127,6 +93,17 @@
   <footer>
     <%- include('../partials/footer'); %>
   </footer>
+  
+  <script>
+    function w_open() {
+      document.getElementById("mySidebar").style.display = "block";
+    }
+  
+    function w_close() {
+      document.getElementById("mySidebar").style.display = "none";
+    }
+  </script>
+
 
 </body>
 </html>

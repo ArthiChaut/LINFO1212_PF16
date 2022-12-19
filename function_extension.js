@@ -1,5 +1,6 @@
 const { User, Clothes } = require("./models");
 const bcrypt = require('bcryptjs');
+const { Op } = require("sequelize");
 
 
 
@@ -121,12 +122,38 @@ async function clothesByMe(table, username){
     return array;
 }
 
-async function rechercherProduits(sizeFilter, colorFilter) {
-     
-    const products = await Clothes.findAll({ where:{
-        taille:sizeFilter,
-        couleur:colorFilter
-    } });
+async function rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilter, etatFilter) {
+    
+    const where = {};
+    if (sizeFilter) {
+        where.taille = {
+        [Op.eq]: sizeFilter
+        };
+    }
+    if (colorFilter) {
+        where.couleur = {
+        [Op.eq]: colorFilter
+        };
+    }
+    if (genreFilter) { 
+        where.genre = {
+        [Op.eq]: genreFilter
+        };
+    }
+    if (typeFilter) {
+        where.type = {
+        [Op.eq]: typeFilter
+        };
+    }
+    if (etatFilter) {
+        where.etat = {
+        [Op.eq]: etatFilter
+        };
+    }
+
+    // Exécutez la recherche en utilisant la clause "where"
+    const products = await Clothes.findAll({ where });
+
     return products;
 }
 

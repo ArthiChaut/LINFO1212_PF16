@@ -19,11 +19,17 @@
     <h3>Type d'article:</h3>
     <form id="form1" >
       <select name="Type" style="width: 200px">
-        <option value='pull'>Pull</option>
-        <option value='t-shirt'>T-shirt</option>
-        <option value='pantalon'>Pantalon</option>
-        <option value='accessoire'>Accessoire</option>
-        
+        <option value="Pantalon">Pantalon</option>
+        <option value="T-shirt">T-shirt</option>
+        <option value="Pull">Pull</option>
+        <option value="Veste">Veste</option>
+        <option value="Sweat">Sweat</option>
+        <option value="Robe">Robe</option>
+        <option value="Jupe">Jupe</option>
+        <option value="Chemise">Chemise</option>
+        <option value="Autre">Autre</option>
+        <option value="Short">Short</option>
+        <option value="Underwear">Underwear</option>
       </select>
     </form>
     <h3>Marque:</h3>
@@ -31,9 +37,24 @@
     <h3>Prix:</h3>
     <textarea name="Prix" rows="1" cols="30" required placeholder="prix de vente de l'article"></textarea>
     <h3>Couleur:</h3>
-    <textarea name="Couleur" rows="1" cols="30" required placeholder="la couleur de l'article"></textarea>
+    <select name="Couleur" rows="1" cols="30" required placeholder="Couleur de l'article" >
+      <option value='Rouge'>Rouge</option>
+      <option value='Bleu'>Bleu</option>
+      <option value='Vert'>Vert</option>
+      <option value='Jaune'>Jaune</option>
+      <option value='Orange'>Orange</option>
+      <option value='Rose'>Rose</option>
+      <option value='Blanc'>Blanc</option>
+      <option value='Noir'>Noir</option>
+      <option value='Gris'>Gris</option>
+      <option value='Marron'>Marron</option>
+      <option value='Violet'>Violet</option>
+      <option value='Beige'>Beige</option>
+      <option value='Autre'>Autre</option>
+    </select>
     <h3>Taille:</h3>
     <select name="Taille" rows="1" cols="30" required placeholder="la taille de l'article" >
+      <option value=''></option>
       <option value='XXL'>XXL</option>
       <option value='XL'>XL</option>
       <option value='L'>L</option>
@@ -46,10 +67,17 @@
     <h3>Genre:</h3>
       <select name="Genre" style="width: 150px">
         <option value='Homme'>Homme</option>
-        <option value='Femme'>Femme</option>  
+        <option value='Femme'>Femme</option> 
+        <option value='Enfant'>Enfant</option>
+        <option value="Unisex"> Unisex</option> 
       </select>
     <h3>Etat de l'article:</h3>
-    <textarea name="Etat" rows="2" cols="30" required placeholder="ex : neuf" ></textarea>
+    <select name="Etat" style="width: 150px">
+      <option value='Neuf'>Neuf</option>
+      <option value='Très bon état'>Très bon état</option> 
+      <option value='Bon état'>Bon état</option>
+      <option value="Occasion"> Occasion</option>
+    </select>
     <nav> 
         <a href="#"><button>Publier</button></a>
     </nav>

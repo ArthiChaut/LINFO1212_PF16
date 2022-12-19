@@ -38,6 +38,35 @@
     font-size: 15px;
 }
 
+form{
+  padding: 20px;
+  font-size: 15px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+form input{
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #0088a9;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+form select{
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #0088a9;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+form label{
+  font-size: 18px;
+}
+
+
 /* SIDEBAR */
 
 .sidebar{

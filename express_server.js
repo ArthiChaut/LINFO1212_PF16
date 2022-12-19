@@ -147,9 +147,9 @@ app.post('/vente',upload.single('image'), function(req, res) {
   });
 
 app.post('/clothes', function(req, res){
-    const {couleur,taille} = req.body;
+    const {couleur,taille,genre, type,etat } = req.body;
     
-    function_extension.rechercherProduits(couleur, taille).then(result => {
+    function_extension.rechercherProduits(taille, couleur,genre,type,etat).then(result => {
       
       res.render('pages/clothesAll', { username: req.session.username,
         completeName: req.session.completeName,
