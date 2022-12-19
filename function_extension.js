@@ -118,11 +118,16 @@ async function clothesByMe(table, username){
         where:{user:username}
     })
     return array;
-    
-    
-    
 }
 
+
+async function getUserLocation(username){
+
+    let location = await User.findOne({
+        where:{username: username}
+    })
+    return location.localisation;
+}
 module.exports = {
-    countExist, passwordCorrect, countExistForCreate, validate, passwordConfirm, fourLastInstances, clothesByMe
+    countExist, passwordCorrect, countExistForCreate, validate, passwordConfirm, fourLastInstances, clothesByMe,getUserLocation
 };

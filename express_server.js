@@ -208,13 +208,17 @@ app.get('/vente',  function(req,res) {
 });
 
 app.get('/info', function(req,res) {
-  const {image,marque,prix,couleur,taille,genre,date,etat,user,localisation} = req.query;
-  if(req.session.username){
-    res.render('pages/clothesInfos', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits,image:image,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation});
-  } else {
-    res.render("pages/clothesInfos", {username: "Se connecter", credits: "",image:image,marque:marque,prix:prix,couleur:couleur,taille:taille,date:date,etat:etat,user:user,localisation:localisation});
-  }
+  const {image,marque,prix,couleur,taille,genre,date,etat,user} = req.query;
+  function_extension.getUserLocation(user).then(localisation => {
+    if(req.session.username){
+      res.render('pages/clothesInfos', {username: req.session.username,
+        credits: "Crédits: " + req.session.credits,image:image,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation});
+    } else {
+      res.render("pages/clothesInfos", {username: "Se connecter", credits: "",image:image,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation});
+    }
+
+  })
+  
 });
 
 https.createServer({
