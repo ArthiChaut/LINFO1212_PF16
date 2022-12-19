@@ -123,7 +123,8 @@ async function clothesByMe(table, username){
 }
 
 async function rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilter, etatFilter) {
-    
+    //Permet de rechercher des produits en fonctions de plusieurs critères
+    //Si le critère n'est pas renseigné, il n'est pas pris en compte dans la recherche
     const where = {};
     if (sizeFilter) {
         where.taille = {
@@ -157,9 +158,10 @@ async function rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilt
     return products;
 }
 
-async function displayClothes(){
+//Affiche tout les vêtements de la base de données
+async function displayClothes(filtre){
     let array = await Clothes.findAll({
-        where: { genre: "Homme" }
+        where: { genre: filtre }
     })
     return array;
 }
