@@ -15,7 +15,8 @@ const function_extension = require('./function_extension');
 let beforelog = false;
 let clothes = [];
 let listClothesByMe = [];
-
+let clothesAllAffichage = [];
+let array = [];
 
 const storage = multer.diskStorage({
   destination: (req,file,cb) => {
@@ -33,6 +34,7 @@ const upload = multer({storage: storage})
 
 sequelize.sync().then(() => console.log("Database ready!"))
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(session({
   secret: "bumpbpf16",
   resave: false,
@@ -143,6 +145,22 @@ app.post('/vente',upload.single('image'), function(req, res) {
     sold:false
     }) 
   });
+
+app.post('/clothes', async (req, res) =>{
+    const sizeFilter = req.body.sizeFilter;
+    const colorFilter = req.body.colorFilter;
+    const products = await function_extension.rechercherProduits(sizeFilter, colorFilter,array);
+    console.log(sizeFilter);
+    console.log(colorFilter);
+    console.log(products);
+    res.render('pages/clothesAll', { username: req.session.username,
+        completeName: req.session.completeName,
+        email: req.session.email,
+        creditsProfil: req.session.credits,
+        credits: "Crédits: " + req.session.credits,
+        clothes: array,
+      }); // render the page with the filtered clothes
+});
   
 
 //get request to the root path  
@@ -192,6 +210,22 @@ app.get('/profil', function(req,res) {
       //console.log(result);
   })
 })
+
+app.get('/clothes', function(req,res) {
+  if(req.session.username){
+    function_extension.displayClothes(clothesAllAffichage)
+    res.render('pages/clothesAll', {
+      username: req.session.username,
+      credits: "Crédits: " + req.session.credits,
+      completeName: req.session.completeName,
+      email: req.session.email,
+      creditsProfil: req.session.credits,
+      clothes:clothesAllAffichage
+    });
+  } else {
+    res.render("pages/login", {username: "Se connecter", credits: "",error_message_email: "", error_message_password: "" });
+    };
+});
   
 
   
