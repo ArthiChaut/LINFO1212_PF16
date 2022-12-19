@@ -66,6 +66,7 @@ app.post('/login', function(req,res) {
           req.session.completeName = result.completeName;
           req.session.email = result.email;
           req.session.credits = result.credits;
+          req.session.localisation = result.localisation;
           
           
           switch(beforelog){
@@ -180,19 +181,17 @@ app.get('/panier', function(req,res) {
 });
 
 app.get('/profil', function(req,res) {
-    function_extension.clothesByMe(Clothes,req.session.username).then(result =>{
-      res.render('pages/profil', {username: req.session.username,
-        completeName: req.session.completeName,
-        email: req.session.email,
-        creditsProfil: req.session.credits,
-        credits: "Crédits: " + req.session.credits,
-        listClothesByMe:result})
-
-    })
-  });
-    
-      
-  
+  function_extension.clothesByMe(Clothes, req.session.username).then( result => {
+    res.render('pages/profil', {username: req.session.username,
+      completeName: req.session.completeName,
+      email: req.session.email,
+      creditsProfil: req.session.credits,
+      credits: "Crédits: " + req.session.credits,
+      localisation: req.session.localisation,
+      listClothesByMe:result});
+      //console.log(result);
+  })
+})
   
 
   

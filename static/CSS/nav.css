@@ -40,6 +40,7 @@ header{
     border:2px solid black ;
     height: 250px;
     width: 70%;
+    object-fit: cover;
     border-radius: 10px;
     margin-left:15%;
     transition: transform .2s;
