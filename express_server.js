@@ -134,10 +134,10 @@ app.post('/vente',upload.single('image'), function(req, res) {
   type:Type,
   marque:Marque,
   prix:Prix,
-  couleur:Couleur.tolowerCase(),
+  couleur:Couleur,
   taille:Taille,
   genre:Genre,
-  etat:Etat.tolowerCase(),
+  etat:Etat,
   user:req.session.username,
   sold:false
   }) 
@@ -162,7 +162,7 @@ app.get('/vetements', function(req, res){
     
 });
 
-app.post('/profil', upload.single('image'), function(req, res) {
+app.post('/profil', upload.single('image'), function(req, res) {sells
     const {Crédits} = req.body;
     if(Crédits){
     username = req.session.username;
@@ -176,6 +176,22 @@ app.post('/profil', upload.single('image'), function(req, res) {
   
   
 })
+
+app.post('/clothes', function(req, res){
+  const {couleur,taille,genre, type,etat } = req.body;
+
+  function_extension.rechercherProduits(taille, couleur,genre,type,etat).then(result => {
+
+    res.render('pages/clothesAll', { username: req.session.username,
+      completeName: req.session.completeName,
+      email: req.session.email,
+      creditsProfil: req.session.credits,
+      credits: "Crédits: " + req.session.credits,
+      clothes: result
+    }); // render the page with the filtered clothes
+  })
+  
+});
 
 app.post('/')
   
