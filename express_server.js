@@ -143,30 +143,20 @@ app.post('/vente',upload.single('image'), function(req, res) {
   }).then(() => res.redirect('/'))
 });
 
-app.get('/vetements', function(req, res){
-    const {couleur,taille,genre, type,etat } = req.body;
-    
-    function_extension.rechercherProduits(taille, couleur,genre,type,etat).then(result => {
-      if(req.session.username){
-        res.render('pages/clothesAll', { username: req.session.username,
-          credits: "Crédits: " + req.session.credits,
-          clothes: result
-        }); // render the page with the filtered clothes
 
-      }else{
-        res.render('pages/clothesAll', { username: "Se connecter",
-          credits: "",
-          clothes: result
-        });
-      }
-      
-      
+app.post('/modifArticle', upload.single('image'), function(req, res) {
+
+  console.log(req.session.image);
+  const{Type, Marque, Prix, Couleur, Taille, Genre, Etat} = req.body;
+
+  console.log("static/IMAGES/" + req.imagePath);
+  let listModif = ["static/IMAGES/" + req.imagePath,Type, Marque, Prix, Couleur, Taille, Genre, Etat];
+  function_extension.changeVetement(listModif, req.session.image);
+  res.redirect('/profil');
+  
+})
 
 
-
-    })
-    
-});
 
 app.post('/profil', upload.single('image'), function(req, res) { 
     const{Crédits} = req.body;
@@ -266,6 +256,27 @@ app.get('/profil', function(req,res) {
   })
 })
 
+app.get('/vetements', function(req, res){
+  const {couleur,taille,genre, type,etat } = req.body;
+  
+  function_extension.rechercherProduits(taille, couleur,genre,type,etat).then(result => {
+    if(req.session.username){
+      res.render('pages/clothesAll', { username: req.session.username,
+        credits: "Crédits: " + req.session.credits,
+        clothes: result
+      }); // render the page with the filtered clothes
+
+    }else{
+      res.render('pages/clothesAll', { username: "Se connecter",
+        credits: "",
+        clothes: result
+      });
+    }
+
+  })
+  
+});
+
 app.get('/vetements/homme', function(req,res) {
     filtre = "Homme";
     function_extension.displayClothes(filtre).then(result =>{
@@ -335,13 +346,9 @@ app.get('/info', function(req,res) {
 
 
 
-
-
-
-
-
 app.get('/modifArticle', function(req, res) {
   const {image,marque,prix,type,couleur,taille,genre,etat} = req.query;
+  req.session.image = image;
   res.render('pages/modifArticle', {username: req.session.username,
     credits: "Crédits: " + req.session.credits, image:image, marque:marque, prix:prix, type: type, couleur:couleur, taille:taille, genre:genre, etat:etat})
 })

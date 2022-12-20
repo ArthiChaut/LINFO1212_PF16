@@ -195,6 +195,27 @@ async function changeCredit(credit, username){
     await name.save();
 }
 
+async function changeVetement(listModif, image){
+    let name = await Clothes.findOne({where: {image: image}});
+    let listActuel = [name.image, name.type, name.marque, name.prix, name.couleur, name.taille, name.genre, name.etat];
+    for(let i = 0; i < listModif.length; i++){
+        if(listModif[i] != "" && listModif[i] != "No change" && typeof listModif[i] != 'undefined'){
+            listActuel[i] = listModif[i];
+        }
+    }
+    name.set({
+        image: listActuel[0],
+        type: listActuel[1],
+        marque: listActuel[2],
+        prix: listActuel[3],
+        couleur: listActuel[4],
+        taille: listActuel[5],
+        genre: listActuel[6],
+        etat: listActuel[7]
+    });
+    await name.save();
+}
+
 function getPanierTotal(array){
     let sum = 0;
     for(let i = 0 ; i < array.length; i++){
@@ -202,6 +223,7 @@ function getPanierTotal(array){
     }
     return sum;
 }
+
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -218,5 +240,6 @@ module.exports = {
     displayClothes,
     rechercherProduits,
     changeCredit,
-    getPanierTotal
+    getPanierTotal,
+    changeVetement
 }
