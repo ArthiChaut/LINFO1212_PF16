@@ -168,8 +168,8 @@ app.get('/vetements', function(req, res){
     
 });
 
-app.post('/profil', upload.single('image'), function(req, res) {
-    const {Crédits} = req.body;
+app.post('/profil', upload.single('image'), function(req, res) { 
+    const{Crédits} = req.body;
     if(Crédits){
     username = req.session.username;
 
