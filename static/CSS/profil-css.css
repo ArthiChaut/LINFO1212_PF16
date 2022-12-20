@@ -1,5 +1,5 @@
 .containerInfo{
-    margin-left: 300px;
+    margin: 15px;
     width: 1000px;
     background : whitesmoke;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -94,6 +94,7 @@ form input, form button, form select{
 
 .alignement{
     display:flex;
+    justify-content: center;
 }
 
 .info{
@@ -159,3 +160,16 @@ form input, form button, form select{
         margin: 25px;
         font-size: 30px;
     }
+
+
+@media (1200px < width < 1620px){
+    .container{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (width < 1200px){
+    .container{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
