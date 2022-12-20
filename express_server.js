@@ -132,15 +132,15 @@ app.post('/vente',upload.single('image'), function(req, res) {
   Clothes.create({
   image:"static/IMAGES/"+req.imagePath,
   type:Type,
-  marque:Marque,
+  marque:Marque.toLowerCase(),
   prix:Prix,
-  couleur:Couleur.tolowerCase(),
+  couleur:Couleur,
   taille:Taille,
   genre:Genre,
-  etat:Etat.tolowerCase(),
+  etat:Etat,
   user:req.session.username,
   sold:false
-  }) 
+  }).then(() => res.redirect('/'))
 });
 
 app.get('/vetements', function(req, res){
