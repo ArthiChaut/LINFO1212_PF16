@@ -132,20 +132,20 @@ app.post('/register', function(req,res) {
 
 app.post('/vente',upload.single('image'), function(req, res) {
   const {Type,Marque,Prix,Couleur,Taille,Genre,Etat} = req.body;
-
-    Clothes.create({
-    image:"static/IMAGES/"+req.imagePath,
-    type:Type,
-    marque:Marque,
-    prix:Prix,
-    couleur:Couleur,
-    taille:Taille,
-    genre:Genre,
-    etat:Etat,
-    user:req.session.username,
-    sold:false
-    }) 
-  });
+  
+  Clothes.create({
+  image:"static/IMAGES/"+req.imagePath,
+  type:Type,
+  marque:Marque,
+  prix:Prix,
+  couleur:Couleur,
+  taille:Taille,
+  genre:Genre,
+  etat:Etat,
+  user:req.session.username,
+  sold:false
+  }) 
+});
 
 app.post('/clothes', function(req, res){
     const {couleur,taille,genre, type,etat } = req.body;
@@ -165,6 +165,23 @@ app.post('/clothes', function(req, res){
     })
     
 });
+
+app.post('/profil', upload.single('image'), function(req, res) {
+    const {Crédits} = req.body;
+    if(Crédits){
+    username = req.session.username;
+
+    function_extension.changeCredit(Crédits, username);
+      req.session.credits += parseInt(Crédits);
+      res.redirect('/profil');
+  } else {
+    console.log(req.imagePath);
+  }
+  
+  
+})
+
+app.post('/')
   
 //get request to the root path  
 app.get("/", function(req, res) {
@@ -293,6 +310,12 @@ app.get('/info', function(req,res) {
   })
   
 });
+
+app.get('/modifArticle', function(req, res) {
+  const {image,marque,prix,type,couleur,taille,genre,etat} = req.query;
+  res.render('pages/modifArticle', {username: req.session.username,
+    credits: "Crédits: " + req.session.credits, image:image, marque:marque, prix:prix, type: type, couleur:couleur, taille:taille, genre:genre, etat:etat})
+})
 
 https.createServer({
   key: fs.readFileSync('./key.pem'),

@@ -1,0 +1,19 @@
+.containerAvertissement{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    
+    width: 165px;
+    align-items:center;
+    justify-content: center;
+}
+
+.alignement{
+    display:flex;
+}
+
+.containerAvertissement p {
+    font-size: 10px;
+    color: brown;
+}

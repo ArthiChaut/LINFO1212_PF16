@@ -12,68 +12,70 @@
     <%- include('../partials/header'); %>
   </header>
   <main>
-    <form action="/profil" method="post">
-      <div class="alignement">
-        <div class="containerInfo">
-          <div class="alignement">
-            <img class="photo_profil" src="/static/IMAGES/image femme.jpeg" alt="photo de profil"\>
-            <div class="info">
-              <div class="data">
-                <h3>Nom d'utilisateur:</h3>
-              </div>
-              <div class="data">
-                <h3>Nom complet:</h3>
-              </div>
-              <div class="data">
-                <h3>Email:</h3>
-              </div>
-              <div class="data">
-                <h3>Crédits:</h3>
-              </div>
-              <div class="data">
-                <h3>Localisation:</h3>
+    
+    <div class="alignement">
+      <div class="containerInfo">
+        <div class="alignement">
+          <img class="photo_profil" src="/static/IMAGES/image femme.jpeg" alt="photo de profil"\>
+          <div class="info">
+            <div class="data">
+              <h3>Nom d'utilisateur:</h3>
+            </div>
+            <div class="data">
+              <h3>Nom complet:</h3>
+            </div>
+            <div class="data">
+              <h3>Email:</h3>
+            </div>
+            <div class="data">
+              <h3>Crédits:</h3>
+            </div>
+            <div class="data">
+              <h3>Localisation:</h3>
+            </div>
+          </div>
+          <div class="info2">
+            <div class="data">
+              <div class="width_data">
+                <h3><%= username%></h3>
               </div>
             </div>
-            <div class="info2">
-              <div class="data">
-                <div class="width_data">
-                  <h3><%= username%></h3>
-                </div>
+            <div class="data">
+              <div class="width_data">
+                <h3><%= completeName%></h3>
               </div>
-              <div class="data">
-                <div class="width_data">
-                  <h3><%= completeName%></h3>
-                </div>
+            </div>
+            <div class="data">
+              <div class="width_data">
+                <h3><%= email%></h3>
               </div>
-              <div class="data">
-                <div class="width_data">
-                  <h3><%= email%></h3>
-                </div>
+            </div>
+            <div class="data">
+              <div class="width_data">
+                <h3><%= creditsProfil%></h3>
               </div>
-              <div class="data">
-                <div class="width_data">
-                  <h3><%= creditsProfil%></h3>
-                </div>
-                <div class="width_data">
-                  <h3><%= localisation%></h3>
-                </div>
+              <div class="width_data">
+                <h3><%= localisation%></h3>
               </div>
             </div>
           </div>
         </div>
-      
+      </div>
+    
 
-        <div class="containerModif">
-          <div class="info2">
-            <h4>Changer de photo de profil:</h4>
+      <div class="containerModif">
+        <div class="info2">
+          <h4>Changer de photo de profil:</h4>
+          <form action="/profil" method="post">
             <input type="file" id="myfile" name="image" required>
-            
+          
             <a href="#"><button class="button">soumettre</button></a>
-            
-            <!-- <button>Ajouter une photo de profil</button> -->
-          </div>
-          <div class="info2">
-            <h4>Ajouter du crédti</h4>
+          </form>
+          <!-- <button>Ajouter une photo de profil</button> -->
+        </div>
+        <div class="info2">
+          <form action="/profil" method="post">
+            <h4>Ajouter du crédit</h4>
             <select name="Crédits" rows="1" cols="30" required placeholder="Nombre de crédits" >
               <option value='5'>5</option>
               <option value='10'>10</option>
@@ -83,33 +85,38 @@
               <option value='200'>200</option>
               <option value='500'>500</option>
             </select>
-          </div>
+            <a href="#"><button class="button">soumettre</button></a>
+          </form>
         </div>
       </div>
+    </div>
+    
       
+    
       <div class="containerMesVentes">
-        <div class="alignement">
+        <div class="aligner">
           <%  for( let i = 0; i < listClothesByMe.length;i++){ %>
             <%      let article = listClothesByMe[i]; %>
             
               <div class="miniContainer">
               
               
-              <img class="imageArticle" src=<%= article.image %>><br>
-            
-              <div class="alignement">
+                <img class="imageArticle" src=<%= article.image %>><br>
               
-                <div class = "containerDescription">
-                <p> posté par: <%= article.user %><br>
-                prix: <%= article.prix %><br></p>
-              </div>
-              <button class="button">Voir l'article</button>
-            </div>
+                <div class="aligner">
+                
+                  <div class = "containerDescription">
+                    <p> posté par: <%= article.user %><br>
+                    prix: <%= article.prix %><br></p>
+                  </div>
+                  <a  href ="info?image=<%=article.image%>&marque=<%=article.marque%>&type=<%=article.type%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>" >Voir l'article</a>
+                  <a  href ="modifArticle?image=<%=article.image%>&marque=<%=article.marque%>&type=<%=article.type%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&etat=<%=article.etat%>" class ="button">Modifier l'article</a>
+                </div>
               </div>
             <% } %>
         </div>
       </div>
-    </form>
+    
 
   </main>
   <footer>

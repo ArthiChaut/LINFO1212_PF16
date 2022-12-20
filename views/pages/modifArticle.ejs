@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+  <link rel="stylesheet" type="text/css" href="/static/CSS/vente-css.css" />
+  <link rel="stylesheet" type="text/css" href="/static/CSS/accountForm.css" />
+  <link rel="stylesheet" type="text/css" href="/static/CSS/modifArticle-css.css" />
+<head>
+  <%- include('../partials/head'); %>
+  <title>Vendre un vetement</title>
+</head>
+<body>
+  <header>         
+    <%- include('../partials/header'); %>
+  </header>
+  <main>
+  <div class="Modif">
+    <form action="/vente" method="post" enctype="multipart/form-data">
+        <div class=container>
+            <h3>Photo de l'article:</h3>
+            <input type="file" id="myfile" name="image" >
+            <h3>Type d'article:</h3>
+            <form id="form1" >
+            <select name="Type" style="width: 200px">
+                <option value='No change'>No change</option>
+                <option value='pull'>Pull</option>
+                <option value='t-shirt'>T-shirt</option>
+                <option value='pantalon'>Pantalon</option>
+                <option value='accessoire'>Accessoire</option>
+                
+            </select>
+            <p>actuel: <%= type %> </p>
+            </form>
+            <h3>Marque:</h3>
+            <textarea name="Marque" rows="1" cols="30" placeholder="actuel: <%= marque %>"></textarea>
+            <h3>Prix:</h3>
+            <textarea name="Prix" rows="1" cols="30" placeholder="actuel: <%= prix %>"></textarea>
+            <h3>Couleur:</h3>
+            <textarea name="Couleur" rows="1" cols="30" placeholder="actuel: <%= couleur %>"></textarea>
+            <h3>Taille:</h3>
+            <select name="Taille" rows="1" cols="30" placeholder="la taille de l'article" >
+            <option value='No change'>No change</option>  
+            <option value='none'>none</option>
+            <option value='XXL'>XXL</option>
+            <option value='XL'>XL</option>
+            <option value='L'>L</option>
+            <option value='M'>M</option>
+            <option value='S'>S</option>
+            <option value='XS'>XS</option>
+            <option value='XXS'>XXS</option>
+            </select>
+            <p>actuel: <%= taille %> </p>
+
+            <h3>Genre:</h3>
+            <select name="Genre" style="width: 150px">
+                <option value='No change'>No change</option>
+                <option value='Homme'>Homme</option>
+                <option value='Femme'>Femme</option>  
+            </select>
+            <p>actuel: <%= genre %> </p>
+            <h3>Etat de l'article:</h3>
+            <textarea name="Etat" rows="2" cols="30" placeholder="actuel: <%= etat %>" ></textarea>
+            <div class="alignement">
+                <div class="containerAvertissement">
+                    <nav> 
+                        <a href="#"><button>Modifier</button></a>
+                    </nav>
+                </div>
+                <div class="containerAvertissement">
+                    <nav> 
+                        <p>ne remplissez que les champs que vous souhaitez modifier</p>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </form>
+  </div>
+  </main>
+  <footer>
+    <%- include('../partials/footer'); %>
+  </footer>
+
+</body>
+</html>

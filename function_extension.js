@@ -117,6 +117,7 @@ async function fiveLastInstances(table){
 async function clothesByMe(table, username){
 
     let array = await table.findAll({
+        order: [["createdAt","DESC"]],
         where:{user:username}
     })
     return array;
@@ -184,6 +185,17 @@ async function getLatestSells(){
     })
     return result;
 }
+
+async function changeCredit(credit, username){
+    let name = await User.findOne({where: {username: username}});
+    name.set({
+        credits: name.credits + parseInt(credit)
+    });
+    await name.save();
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 module.exports = {
     countExist, 
     passwordCorrect, 
@@ -196,4 +208,5 @@ module.exports = {
     getLatestSells,
     displayClothes,
     rechercherProduits,
-};
+    changeCredit
+}

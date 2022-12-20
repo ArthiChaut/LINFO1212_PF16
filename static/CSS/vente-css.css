@@ -20,3 +20,10 @@ button{
     transition: all 0.3s ease 0s;
     font-size: 23px;
 }
+
+.Modif select {
+    margin-bottom: 2px;
+}
+.Modif p {
+    margin-bottom: 18px;
+}
