@@ -195,14 +195,16 @@ async function changeCredit(credit, username){
     await name.save();
 }
 
-async function changeVetement(listModif, image){
-    let name = await Clothes.findOne({where: {image: image}});
+async function changeVetement(listModif, id){
+    
+    let name = await Clothes.findOne({where: {id: id}});
     let listActuel = [name.image, name.type, name.marque, name.prix, name.couleur, name.taille, name.genre, name.etat];
     for(let i = 0; i < listModif.length; i++){
-        if(listModif[i] != "" && listModif[i] != "No change" && typeof listModif[i] != 'undefined'){
+        if(listModif[i] != "" && listModif[i] != "No change" && listModif[i] != 'static/IMAGES/undefined'){
             listActuel[i] = listModif[i];
         }
     }
+    
     name.set({
         image: listActuel[0],
         type: listActuel[1],

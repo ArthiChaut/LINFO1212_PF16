@@ -40,7 +40,7 @@ app.use(session({
   cookie: { 
     path: '/', 
     httpOnly: true,
-    maxAge:36000
+    maxAge:36000000
   }
 }));
 
@@ -146,12 +146,11 @@ app.post('/vente',upload.single('image'), function(req, res) {
 
 app.post('/modifArticle', upload.single('image'), function(req, res) {
 
-  console.log(req.session.image);
+  //console.log(req.session.image);
   const{Type, Marque, Prix, Couleur, Taille, Genre, Etat} = req.body;
-
-  console.log("static/IMAGES/" + req.imagePath);
+  //console.log("static/IMAGES/" + req.imagePath);
   let listModif = ["static/IMAGES/" + req.imagePath,Type, Marque, Prix, Couleur, Taille, Genre, Etat];
-  function_extension.changeVetement(listModif, req.session.image);
+  function_extension.changeVetement(listModif, req.session.idClothes);
   res.redirect('/profil');
   
 })
@@ -347,10 +346,10 @@ app.get('/info', function(req,res) {
 
 
 app.get('/modifArticle', function(req, res) {
-  const {image,marque,prix,type,couleur,taille,genre,etat} = req.query;
-  req.session.image = image;
+  const {id,image,marque,prix,type,couleur,taille,genre,etat} = req.query;
+  req.session.idClothes = id;
   res.render('pages/modifArticle', {username: req.session.username,
-    credits: "Crédits: " + req.session.credits, image:image, marque:marque, prix:prix, type: type, couleur:couleur, taille:taille, genre:genre, etat:etat})
+    credits: "Crédits: " + req.session.credits, id:id, image:image, marque:marque, prix:prix, type: type, couleur:couleur, taille:taille, genre:genre, etat:etat})
 })
 
 https.createServer({

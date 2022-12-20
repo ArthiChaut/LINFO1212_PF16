@@ -55,7 +55,7 @@ class Clothes extends Model {}
 Clothes.init({
     image: {
         type:DataTypes.TEXT,
-        primaryKey:true,
+        primaryKey:false,
         allowNull: false,
     },
     type: {

@@ -74,7 +74,7 @@
         <h3><%= article.user %></h3>
         <p><%= article.prix %></p>
         <a id="voir" href="../info?image=<%=article.image%>&type=<%=article.type%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>">Voir l'article</a>
-        <a id="modif" href="modifArticle?image=<%=article.image%>&marque=<%=article.marque%>&type=<%=article.type%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&etat=<%=article.etat%>" class ="button">Modifier l'article</a>
+        <a id="modif" href="modifArticle?id=<%=article.id%>&image=<%=article.image%>&marque=<%=article.marque%>&type=<%=article.type%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&etat=<%=article.etat%>" class ="button">Modifier l'article</a>
       </div>
       <% } %>
     </div>
