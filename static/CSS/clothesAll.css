@@ -125,3 +125,15 @@ form label{
   transition: transform 0.5s;
 
 }
+
+@media (1200px < width < 1620px){
+  .container{
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (width < 1200px){
+  .container{
+      grid-template-columns: 1fr 1fr 1fr;
+  }
+}
