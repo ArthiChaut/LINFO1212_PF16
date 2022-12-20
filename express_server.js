@@ -132,7 +132,7 @@ app.post('/vente',upload.single('image'), function(req, res) {
   Clothes.create({
   image:"static/IMAGES/"+req.imagePath,
   type:Type,
-  marque:Marque,
+  marque:Marque.toLowerCase(),
   prix:Prix,
   couleur:Couleur,
   taille:Taille,
