@@ -12,18 +12,19 @@
   <main>
     <div class = "container">
     <div class="container-left "> 
+      <%  for( let i = 0; i < clothes.length;i++){ %>
+        <%      let article = clothes[i];            %>
       <div class = "box">
-        <img class = "photo" src="static/IMAGES/vetements.webp" alt="photo">
+        <img class = "photo" src="<%= article.Image %>" alt="photo">
         <div class = "description">
-          <h2> Nike Air Max année 90's (nom du produit)</h2>
-          <p>Chaussures (catégorie)</p>
-          <p>Noir / Beige (catégorie)</p>
-          <p>42 (catégorie)</p>
-          <p>212€ (prix)</p>
-          <img id= "poubelle" src="static/IMAGES/poubelle.png" alt="photo">
+          <p> Marque: <%= article.Marque %></p>
+          <p>Couleur: <%= article.Couleur %></p>
+          <p>Prix: <%= article.Prix %></p>
+          <p>Vendeur: <%= article.User%></p>
+          <img href='/panier' id= "poubelle" src="static/IMAGES/poubelle.png" alt="photo">
         </div>
       </div>
-
+      <% } %>
         
 
         
@@ -33,9 +34,9 @@
     <div class="container-right">
       <div class="box-right">
         <h2> Récapitulatif de la commande </h2>
-        <p> Sous-total (3 articles) : 636€ </p>
-        <p> Frais de port : 0€ </p>
-        <p> Total : 636€ </p>
+        <p> Sous-total (<%= nombreArticles %> articles) : <%= totalPanier %> </p>
+        <p> Frais de port : 0 </p>
+        <p> Total : <%= totalPanier %> </p>
         <button class="button"> Valider la commande </button>
       </div>
       </div>

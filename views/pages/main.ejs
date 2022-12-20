@@ -28,10 +28,10 @@
           <div class="aligner">
           
             <div class = "containerDescription">
-           <p> posté par: <%= article.user %><br>
-            prix: <%= article.prix %><br></p>
+           <p><%= article.user %><br>
+            <%= article.prix %><br></p>
           </div>
-          <a  href ="info?image=<%=article.image%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>" class ="button">Voir l'article</a>
+          <a  href ="info?image=<%=article.image%>&type=<%=article.type%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>" class ="button">Voir l'article</a>
         </div>
           </div>
        <% } %>
@@ -59,10 +59,10 @@
            <div class="aligner">
            
              <div class = "containerDescription">
-            <p> posté par: <%= article.user %><br>
-             prix: <%= article.prix %><br></p>
+            <p><%= article.user %><br>
+             <%= article.prix %><br></p>  
            </div>
-           <a  href ="info?image=<%=article.image%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>" class ="button">Voir l'article</a>
+           <a  href ="info?image=<%=article.image%>&type=<%=article.type%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>" class ="button">Voir l'article</a>
          </div>
            </div>
         <% } %>

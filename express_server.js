@@ -14,9 +14,6 @@ const cookieParser = require('cookie-parser');
 const function_extension = require('./function_extension');
 let beforelog = false;
 let clothes = [];
-let listClothesByMe = [];
-let clothesAllAffichage = [];
-let array = [];
 let filtre ="";
 
 const storage = multer.diskStorage({
@@ -70,8 +67,7 @@ app.post('/login', function(req,res) {
           req.session.email = result.email;
           req.session.credits = result.credits;
           req.session.localisation = result.localisation;
-          
-          
+          req.session.panier = [];
           switch(beforelog){
             case 'vente':
               res.redirect("/vente");
@@ -138,16 +134,16 @@ app.post('/vente',upload.single('image'), function(req, res) {
   type:Type,
   marque:Marque,
   prix:Prix,
-  couleur:Couleur,
+  couleur:Couleur.tolowerCase(),
   taille:Taille,
   genre:Genre,
-  etat:Etat,
+  etat:Etat.tolowerCase(),
   user:req.session.username,
   sold:false
   }) 
 });
 
-app.post('/clothes', function(req, res){
+app.get('/vetements', function(req, res){
     const {couleur,taille,genre, type,etat } = req.body;
     
     function_extension.rechercherProduits(taille, couleur,genre,type,etat).then(result => {
@@ -213,14 +209,22 @@ app.get('/register', function(req,res) {
 });
 
 
-
-
-
-
 app.get('/panier', function(req,res) {
   if(req.session.username){
+  const{image,marque,prix,couleur,user}=req.query;
+  if(req.session.panier.length == 0 && image || image && req.session.panier[req.session.panier.length-1].Image != image){
+  req.session.panier.push({
+    Image:image,
+    Marque:marque,
+    Prix: parseInt(prix),
+    Couleur:couleur,
+    User:user,
+  });
+}
+  let totalPanier = function_extension.getPanierTotal(req.session.panier);
+
     res.render('pages/panier', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits});
+      credits: "Crédits: " + req.session.credits,image:image,marque:marque,prix:prix,couleur:couleur,user:user,clothes:req.session.panier,nombreArticles:req.session.panier.length,totalPanier:totalPanier});
   } else {
     beforelog = "panier";
     res.render("pages/login", {username: "Se connecter", credits: "", error_message_email: "", error_message_password: ""});
@@ -228,12 +232,8 @@ app.get('/panier', function(req,res) {
 });
 
 
-
-
-
-
 app.get('/profil', function(req,res) {
-  function_extension.clothesByMe(Clothes, req.session.username).then( result => {
+  function_extension.clothesByMe(Clothes, req.session.username).then(result => {
     res.render('pages/profil', {username: req.session.username,
       completeName: req.session.completeName,
       email: req.session.email,
@@ -244,7 +244,7 @@ app.get('/profil', function(req,res) {
   })
 })
 
-app.get('/clothes/homme', function(req,res) {
+app.get('/vetements/homme', function(req,res) {
     filtre = "Homme";
     function_extension.displayClothes(filtre).then(result =>{
       res.render('pages/clothesAll', {
@@ -258,7 +258,7 @@ app.get('/clothes/homme', function(req,res) {
     })
 });
 
-app.get('/clothes/femme', function(req,res) {
+app.get('/vetements/femme', function(req,res) {
   filtre = "Femme";
   function_extension.displayClothes(filtre).then(result =>{
     res.render('pages/clothesAll', {
@@ -272,7 +272,7 @@ app.get('/clothes/femme', function(req,res) {
   })
 });
 
-app.get('/clothes/enfants', function(req,res) {
+app.get('/vetements/enfants', function(req,res) {
   filtre = "Enfants";
   function_extension.displayClothes(filtre).then(result =>{
     res.render('pages/clothesAll', {
@@ -298,18 +298,25 @@ app.get('/vente',  function(req,res) {
 });
 
 app.get('/info', function(req,res) {
-  const {image,marque,prix,couleur,taille,genre,date,etat,user} = req.query;
+  const {image,type,marque,prix,couleur,taille,genre,date,etat,user} = req.query;
   function_extension.getUserLocation(user).then(localisation => {
     if(req.session.username){
       res.render('pages/clothesInfos', {username: req.session.username,
-        credits: "Crédits: " + req.session.credits,image:image,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation});
+        credits: "Crédits: " + req.session.credits,image:image,type:type,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation});
     } else {
-      res.render("pages/clothesInfos", {username: "Se connecter", credits: "",image:image,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation});
+      res.render("pages/clothesInfos", {username: "Se connecter", credits: "",image:image,type:type,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation});
     }
 
   })
   
 });
+
+
+
+
+
+
+
 
 app.get('/modifArticle', function(req, res) {
   const {image,marque,prix,type,couleur,taille,genre,etat} = req.query;

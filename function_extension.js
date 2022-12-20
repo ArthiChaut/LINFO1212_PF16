@@ -154,7 +154,7 @@ async function rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilt
     }
 
     // Exécutez la recherche en utilisant la clause "where"
-    const products = await Clothes.findAll({ where });
+    const products = await Clothes.findAll({order: [["createdAt","DESC"]], where });
 
     return products;
 }
@@ -162,6 +162,7 @@ async function rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilt
 //Affiche tout les vêtements de la base de données
 async function displayClothes(filtre){
     let array = await Clothes.findAll({
+        order: [["createdAt","DESC"]],
         where: { genre: filtre }
     })
     return array;
@@ -194,6 +195,14 @@ async function changeCredit(credit, username){
     await name.save();
 }
 
+function getPanierTotal(array){
+    let sum = 0;
+    for(let i = 0 ; i < array.length; i++){
+        sum += array[i].Prix;
+    }
+    return sum;
+}
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
@@ -208,5 +217,6 @@ module.exports = {
     getLatestSells,
     displayClothes,
     rechercherProduits,
-    changeCredit
+    changeCredit,
+    getPanierTotal
 }

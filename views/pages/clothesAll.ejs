@@ -16,19 +16,19 @@
           <label for="couleur">Couleur:</label>
           <select id="colorFilter" name="couleur">
             <option value=""></option>
-            <option value='Rouge'>Rouge</option>
-            <option value='Bleu'>Bleu</option>
-            <option value='Vert'>Vert</option>
-            <option value='Jaune'>Jaune</option>
-            <option value='Orange'>Orange</option>
-            <option value='Rose'>Rose</option>
-            <option value='Blanc'>Blanc</option>
-            <option value='Noir'>Noir</option>
-            <option value='Gris'>Gris</option>
-            <option value='Marron'>Marron</option>
-            <option value='Violet'>Violet</option>
-            <option value='Beige'>Beige</option>
-            <option value='Autre'>Autre</option>
+            <option value='rouge'>Rouge</option>
+            <option value='bleu'>Bleu</option>
+            <option value='vert'>Vert</option>
+            <option value='jaune'>Jaune</option>
+            <option value='orange'>Orange</option>
+            <option value='rose'>Rose</option>
+            <option value='blanc'>Blanc</option>
+            <option value='noir'>Noir</option>
+            <option value='gris'>Gris</option>
+            <option value='marron'>Marron</option>
+            <option value='violet'>Violet</option>
+            <option value='beige'>Beige</option>
+            <option value='autre'>Autre</option>
           </select>
           <label for="taille">Taille:</label>
           <select id="sizeFilter" name="taille">
@@ -52,17 +52,17 @@
           <label for="type">Type:</label>
           <select id="typeFilter" name="type">
             <option value=""></option>
-            <option value="Pantalon">Pantalon</option>
-            <option value="T-shirt">T-shirt</option>
-            <option value="Pull">Pull</option>
-            <option value="Veste">Veste</option>
-            <option value="Sweat">Sweat</option>
-            <option value="Robe">Robe</option>
-            <option value="Jupe">Jupe</option>
-            <option value="Chemise">Chemise</option>
-            <option value="Autre">Autre</option>
-            <option value="Short">Short</option>
-            <option value="Underwear">Underwear</option>
+            <option value="pantalon">Pantalon</option>
+            <option value="t-shirt">T-shirt</option>
+            <option value="pull">Pull</option>
+            <option value="veste">Veste</option>
+            <option value="sweat">Sweat</option>
+            <option value="robe">Robe</option>
+            <option value="jupe">Jupe</option>
+            <option value="chemise">Chemise</option>
+            <option value="autre">Autre</option>
+            <option value="short">Short</option>
+            <option value="underwear">Underwear</option>
           </select>
           <label for="etat">Etat:</label>
           <select id=" etatFilter" name="etat">
@@ -81,11 +81,12 @@
     <div class="container" id="filtre-results">
       <% for( let i = 0; i < clothes.length;i++){let article = clothes[i]; %>
       <div class="grid-object">
-        <img src=<%= article.image %> alt="photo">
+        <img src="<%= article.image %>" alt="photo">
         <h2><%= article.type %></h2>
         <h3><%= article.user %></h3>
         <p><%= article.prix %></p>
-        <a href="info">Voir l'article</a>
+        <a href="../info?image=<%=article.image%>&type=<%=article.type%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>">Voir l'article</a>
+        
       </div>
       <% } %>
     </div>
