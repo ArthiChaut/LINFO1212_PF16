@@ -1,7 +1,5 @@
 <!doctype html>
 <link rel="stylesheet" type="text/css" href="/static/CSS/profil-css.css" />
-<link rel="stylesheet" type="text/css" href="/static/CSS/mainPage.css" />
-<link rel="stylesheet" type="text/css" href="/static/CSS/vente-css.css" />
 <html lang="fr">
 <head>
   <%- include('../partials/head'); %>
@@ -12,111 +10,74 @@
     <%- include('../partials/header'); %>
   </header>
   <main>
-    
     <div class="alignement">
       <div class="containerInfo">
-        <div class="alignement">
-          <img class="photo_profil" src="/static/IMAGES/image femme.jpeg" alt="photo de profil"\>
-          <div class="info">
-            <div class="data">
-              <h3>Nom d'utilisateur:</h3>
+          <div class="boxInfo">
+            <img class="photo_profil" src="/static/IMAGES/image femme.jpeg" alt="photo de profil"\>
+            <div class="boxVariable">
+              <ul>
+                <li>Nom d'utilisateur</li>
+                <li>Nom complet</li>
+                <li>Email</li>
+                <li>Crédits</li>
+                <li>Localisation</li>
+              </ul>
             </div>
-            <div class="data">
-              <h3>Nom complet:</h3>
-            </div>
-            <div class="data">
-              <h3>Email:</h3>
-            </div>
-            <div class="data">
-              <h3>Crédits:</h3>
-            </div>
-            <div class="data">
-              <h3>Localisation:</h3>
-            </div>
-          </div>
-          <div class="info2">
-            <div class="data">
-              <div class="width_data">
-                <h3><%= username%></h3>
-              </div>
-            </div>
-            <div class="data">
-              <div class="width_data">
-                <h3><%= completeName%></h3>
-              </div>
-            </div>
-            <div class="data">
-              <div class="width_data">
-                <h3><%= email%></h3>
-              </div>
-            </div>
-            <div class="data">
-              <div class="width_data">
-                <h3><%= creditsProfil%></h3>
-              </div>
-              <div class="width_data">
-                <h3><%= localisation%></h3>
-              </div>
+            <div class="boxVariable" >
+              <ul class="li-right">
+                <li id="li-right"><%= username%></li>
+                <li id="li-right"><%= completeName%></li>
+                <li id="li-right"><%= email%></li>
+                <li id="li-right"><%= creditsProfil%></li>
+                <li id="li-right"><%= localisation%></li>
+              </ul>
             </div>
           </div>
-        </div>
       </div>
-    
-
       <div class="containerModif">
-        <div class="info2">
-          <h4>Changer de photo de profil:</h4>
-          <form action="/profil" method="post">
-            <input type="file" id="myfile" name="image" required>
-          
-            <a href="#"><button class="button">soumettre</button></a>
-          </form>
+        <div class="info-modif-container">
+          <div class="info-modif-container-box">
+            <h4>Changer de photo de profil:</h4>
+            <form action="/profil" method="post">
+              <input type="file" id="myfile" name="image" required>
+              <a href="#"><button class="button-modif-profile">soumettre</button></a>
+            </form>
+          </div>
+          <div class="info-modif-container-box">
+            <form action="/profil" method="post">
+              <h4>Ajouter du crédit</h4>
+              <select name="Crédits" rows="1" cols="30" required placeholder="Nombre de crédits" >
+                <option value='5'>5</option>
+                <option value='10'>10</option>
+                <option value='20'>20</option>
+                <option value='50'>50</option>
+                <option value='100'>100</option>
+                <option value='200'>200</option>
+                <option value='500'>500</option>
+              </select>
+              <a href="#"><button class="button-modif-profile">soumettre</button></a>
+            </form>
+          </div>
           <!-- <button>Ajouter une photo de profil</button> -->
-        </div>
-        <div class="info2">
-          <form action="/profil" method="post">
-            <h4>Ajouter du crédit</h4>
-            <select name="Crédits" rows="1" cols="30" required placeholder="Nombre de crédits" >
-              <option value='5'>5</option>
-              <option value='10'>10</option>
-              <option value='20'>20</option>
-              <option value='50'>50</option>
-              <option value='100'>100</option>
-              <option value='200'>200</option>
-              <option value='500'>500</option>
-            </select>
-            <a href="#"><button class="button">soumettre</button></a>
-          </form>
         </div>
       </div>
     </div>
-    
-      
-    
-      <div class="containerMesVentes">
-        <div class="aligner">
-          <%  for( let i = 0; i < listClothesByMe.length;i++){ %>
-            <%      let article = listClothesByMe[i]; %>
-            
-              <div class="miniContainer">
-              
-              
-                <img class="imageArticle" src=<%= article.image %>><br>
-              
-                <div class="aligner">
-                
-                  <div class = "containerDescription">
-                    <p> posté par: <%= article.user %><br>
-                    prix: <%= article.prix %><br></p>
-                  </div>
-                  <a  href ="info?image=<%=article.image%>&marque=<%=article.marque%>&type=<%=article.type%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>" >Voir l'article</a>
-                  <a  href ="modifArticle?image=<%=article.image%>&marque=<%=article.marque%>&type=<%=article.type%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&etat=<%=article.etat%>" class ="button">Modifier l'article</a>
-                </div>
-              </div>
-            <% } %>
-        </div>
+    <div class="nav">
+      <h2>Mes articles</h2>
+    </div>
+    <div class="container" id="filtre-results">
+ 
+      <% for( let i = 0; i < listClothesByMe.length;i++){let article = listClothesByMe[i]; %>
+      <div class="grid-object">
+        <img src="<%= article.image %>" alt="photo">
+        <h2><%= article.type %></h2>
+        <h3><%= article.user %></h3>
+        <p><%= article.prix %></p>
+        <a id="voir" href="../info?image=<%=article.image%>&type=<%=article.type%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>">Voir l'article</a>
+        <a id="modif" href="modifArticle?image=<%=article.image%>&marque=<%=article.marque%>&type=<%=article.type%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&etat=<%=article.etat%>" class ="button">Modifier l'article</a>
       </div>
-    
+      <% } %>
+    </div>
 
   </main>
   <footer>
