@@ -74,7 +74,6 @@ form label{
   width:200px;
   background-color:#fff;
   position:fixed;
-  z-index:1;
   border-right: thick solid #0088a9;
   overflow:auto}
 
@@ -86,7 +85,6 @@ form label{
   text-align:left;
   border:none;
   white-space:normal;
-  float:none;
   outline:0;
   font-size: 16px;
 }
@@ -98,7 +96,6 @@ form label{
   text-align:left;
   border:none;
   white-space:normal;
-  float:none;
 }
 
 .xlarge{font-size:20px
