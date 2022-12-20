@@ -1,61 +1,96 @@
-.photo_profil {
-    width: 250px;
-    height: 250px;
+.containerInfo{
+    margin-left: 300px;
+    width: 1000px;
+    background : whitesmoke;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.boxInfo{
+    margin: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center ;
+    
+}
+
+ul{
+    list-style: none;
+    padding: 30px;
+    font-size: 20px;
+}
+
+li{
+    margin-bottom:20px
+}
+
+#li-right{
+    color: #0088a9;
+}
+
+.boxVariable{
+    margin: 5px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items:left;
+}
+
+.boxInfo img{
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
-    margin-left: 20px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-
 }
-
-.containerInfo{
-    margin-left: 305px;
-    margin-right: 10px;
-    margin-top: 20px;
-    margin-bottom: 15px;
-    position: relative;
-    width: 1000px;
-    align-items:center;
-    justify-content: center;
-    background : whitesmoke;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 30px;
-    padding: 50px;
-}
-
 
 .containerModif{
-    margin-left: 10px;
-    margin-right: 305px;
-    margin-top: 20px;
-    margin-bottom: 15px;
-    position: relative;
-    width: 300px;
-    align-items:center;
-    justify-content: center;
+    margin: 15px;
+    width: 400px;
     background : whitesmoke;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
-    padding: 50px;
+    padding: 10px;
+}
+.boxVaraible{
+    margin: 200px;
+    flex-direction: column;
+    display: flex;
 }
 
-.containerMesVentes{
-    margin-left: 305px;
-    margin-right: 305px;
-    margin-top: 0px;
-    margin-bottom: 20px;
-    position: relative;
-    width: 1290px;
-    align-items:center;
+.info-modif-container{
+    margin: 20px;
+    flex-direction: column;
+    display: flex;
     justify-content: center;
-    background : whitesmoke;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 30px;
-    padding: 50px;
+    align-items:left;
 }
 
+.button-modif-profile{
+    background-color: rgb(0, 136, 169,1);
+    border-radius: 50px;
+    color: white;
+    cursor : pointer;
+    border : none;
+    padding: 9px 25px;
+}
 
+.info-modif-container-box{
+    padding : 20px;
+    margin: 10px;
+    flex-direction: column;
+    display: flex;
+}
+
+form input, form button, form select{
+    
+    margin : 12px 0;
+    display: block;
+}
+
+.info-modif-container-box h4{
+    font-size: larger;
+}
 
 .alignement{
     display:flex;
@@ -66,39 +101,61 @@
     margin-top: 10px;
 }
 
-.info2 .data .width_data h3{
-    margin-left: 20px;
-    margin-top: 10px;
-    color: #0088a9;
-}
-
 .data h3{
     font-size: 20px;
     margin-bottom: 12px;
 }
 
-.info2 h4{
-    margin-bottom: 2px;
-    
-    
-}
+/* MES ARTICLES */
 
-.info2 button{
-    font-size: 12px;
-    margin-top: 2px;
-    margin-left: 50px;
-    margin-bottom: 20px;
-}
-
-
-.containerMesVentes .miniContainer {
+.container{
+    margin: 50px;
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding-left:60px;
+  }
+  
+  
+  .grid-object{
+    padding: 20px;
+    font-size: 30px;
+  }
+  
+  .grid-object img{
     width: 250px;
-    height: 100px;
-}
+    height: 250px;
+  }
+  
+  .grid-object p{
+      font-size: 15px;
+  }
+  
+  .grid-object h3{
+      font-size: 20px;
+      color: #0088a9;
+  }
+  
+  .grid-object h2{
+      font-size: 20px;
+  
+  }
+  
+  .grid-object a {
+      color: #0088a9;
+      text-decoration: none;
+      font-size: 15px;
+      display: flex;
+  }
+  
+  .grid-object a#modif{
+      color: rgb(0, 102, 255);
+      padding-left: 0;
+  }
 
-.containerMesVentes .containerDescription p {
-    font-size: 15px;
-    margin-left: 2px;
-}
-
-
+.nav{
+        display: flex;
+        justify-content: center;
+        margin: 25px;
+        font-size: 30px;
+    }
