@@ -147,14 +147,20 @@ app.get('/vetements', function(req, res){
     const {couleur,taille,genre, type,etat } = req.body;
     
     function_extension.rechercherProduits(taille, couleur,genre,type,etat).then(result => {
+      if(req.session.username){
+        res.render('pages/clothesAll', { username: req.session.username,
+          credits: "Crédits: " + req.session.credits,
+          clothes: result
+        }); // render the page with the filtered clothes
+
+      }else{
+        res.render('pages/clothesAll', { username: "Se connecter",
+          credits: "",
+          clothes: result
+        });
+      }
       
-      res.render('pages/clothesAll', { username: req.session.username,
-        completeName: req.session.completeName,
-        email: req.session.email,
-        creditsProfil: req.session.credits,
-        credits: "Crédits: " + req.session.credits,
-        clothes: result
-      }); // render the page with the filtered clothes
+      
 
 
 
@@ -162,7 +168,7 @@ app.get('/vetements', function(req, res){
     
 });
 
-app.post('/profil', upload.single('image'), function(req, res) {sells
+app.post('/profil', upload.single('image'), function(req, res) {
     const {Crédits} = req.body;
     if(Crédits){
     username = req.session.username;
