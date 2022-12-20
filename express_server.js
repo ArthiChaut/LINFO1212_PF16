@@ -39,8 +39,8 @@ app.use(session({
   saveUninitialized: true,
   cookie: { 
     path: '/', 
-    httpOnly: true, 
-    maxAge: 3600000
+    httpOnly: true,
+    maxAge:36000
   }
 }));
 
@@ -233,12 +233,13 @@ app.get('/register', function(req,res) {
 
 app.get('/panier', function(req,res) {
   if(req.session.username){
-  const{image,marque,prix,couleur,user}=req.query;
+  const{image,marque,prix,etat,couleur,user}=req.query;
   if(req.session.panier.length == 0 && image || image && req.session.panier[req.session.panier.length-1].Image != image){
   req.session.panier.push({
     Image:image,
     Marque:marque,
     Prix: parseInt(prix),
+    Etat: etat,
     Couleur:couleur,
     User:user,
   });
@@ -246,10 +247,10 @@ app.get('/panier', function(req,res) {
   let totalPanier = function_extension.getPanierTotal(req.session.panier);
 
     res.render('pages/panier', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits,image:image,marque:marque,prix:prix,couleur:couleur,user:user,clothes:req.session.panier,nombreArticles:req.session.panier.length,totalPanier:totalPanier});
+      credits: "Crédits: " + req.session.credits,image:image,marque:marque,prix:prix,etat:etat,couleur:couleur,user:user,clothes:req.session.panier,nombreArticles:req.session.panier.length,totalPanier:totalPanier});
   } else {
-    beforelog = "panier";
-    res.render("pages/login", {username: "Se connecter", credits: "", error_message_email: "", error_message_password: ""});
+    beforelog = "";
+    res.redirect('/login');
   }
 });
 
@@ -315,7 +316,7 @@ app.get('/vente',  function(req,res) {
       credits: "Crédits: " + req.session.credits});
   } else {
     beforelog = "vente";
-    res.render("pages/login", {username: "Se connecter", credits: "", error_message_email: "", error_message_password: ""});
+    res.redirect('/login');
   }
 });
 
