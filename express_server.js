@@ -183,7 +183,7 @@ app.post('/profil', upload.single('image'), function(req, res) {
   
 })
 
-app.post('/clothes', function(req, res){
+app.post('/vetements', function(req, res){
   const {couleur,taille,genre, type,etat } = req.body;
 
   function_extension.rechercherProduits(taille, couleur,genre,type,etat).then(result => {
@@ -199,7 +199,6 @@ app.post('/clothes', function(req, res){
   
 });
 
-app.post('/')
   
 //get request to the root path  
 app.get("/", function(req, res) {
