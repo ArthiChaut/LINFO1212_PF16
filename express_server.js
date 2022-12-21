@@ -349,8 +349,10 @@ app.get('/info', function(req,res) {
     if(req.session.username === user){
       res.render('pages/clothesInfos', {username: req.session.username,
         credits: "Crédits: " + req.session.credits,image:image,type:type,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation,showButton:false});
-    } else {
+    } if(!req.session.username) {
       res.render("pages/clothesInfos", {username: "Se connecter", credits: "",image:image,type:type,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation,showButton:true});
+    }else{
+      res.render("pages/clothesInfos", {username: req.session.username, credits: "",image:image,type:type,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation,showButton:true});
     }
 
   })
