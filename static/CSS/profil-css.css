@@ -77,8 +77,9 @@ li{
 }
 
 .info-modif-container-box{
-    padding : 20px;
+    padding : 5px;
     margin: 10px;
+    margin-bottom: 0px;
     flex-direction: column;
     display: flex;
 }

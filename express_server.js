@@ -40,7 +40,7 @@ app.use(session({
   cookie: { 
     path: '/', 
     httpOnly: true,
-    maxAge:360000
+    maxAge:36000000000
   }
 }));
 
@@ -99,6 +99,7 @@ app.post('/register', function(req,res) {
         if(goodConfirmPassword){
           User.create({
             credits: 0,
+            
             completeName:req.body.name,
             username:req.body.username,
             email:req.body.email,
@@ -167,14 +168,17 @@ app.post('/modifArticle', upload.single('image'), function(req, res) {
 
 app.post('/profil', upload.single('image'), function(req, res) { 
     const{Crédits} = req.body;
-    if(Crédits){
     username = req.session.username;
-
+    if(Crédits){
     function_extension.changeCredit(Crédits, username);
       req.session.credits += parseInt(Crédits);
       res.redirect('/profil');
   } else {
-    console.log(req.imagePath);
+    function_extension.changePP(req.imagePath, username).then( result => {
+      req.session.image = result;
+      res.redirect('/profil');
+    })
+    
   }
   
   
@@ -199,6 +203,11 @@ app.post('/vetements', function(req, res){
   })
   
 });
+
+app.post("/disconnect", function(req, res){
+  req.session.destroy();
+  res.redirect("/");
+})
 
 //get request to the root path  
 app.get("/", function(req, res) {
@@ -257,7 +266,9 @@ app.get('/panier', function(req,res) {
 
 app.get('/profil', function(req,res) {
   function_extension.clothesByMe(Clothes, req.session.username).then(result => {
+    console.log(req.session.image);
     res.render('pages/profil', {username: req.session.username,
+      image: req.session.image,
       completeName: req.session.completeName,
       email: req.session.email,
       creditsProfil: req.session.credits,

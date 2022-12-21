@@ -13,7 +13,7 @@
     <div class="alignement">
       <div class="containerInfo">
           <div class="boxInfo">
-            <img class="photo_profil" src="/static/IMAGES/image femme.jpeg" alt="photo de profil"\>
+            <img class="photo_profil" src= "../<%= image%>" alt="photo de profil"\>
             <div class="boxVariable">
               <ul>
                 <li>Nom d'utilisateur</li>
@@ -38,7 +38,7 @@
         <div class="info-modif-container">
           <div class="info-modif-container-box">
             <h4>Changer de photo de profil:</h4>
-            <form action="/profil" method="post">
+            <form action="/profil" method="post" enctype="multipart/form-data">
               <input type="file" id="myfile" name="image" required>
               <a href="#"><button class="button-modif-profile">soumettre</button></a>
             </form>
@@ -56,6 +56,14 @@
                 <option value='500'>500</option>
               </select>
               <a href="#"><button class="button-modif-profile">soumettre</button></a>
+            </form>
+          </div>
+          
+          <div class="info-modif-container-box">
+            <form action="/disconnect" method="post">
+              <h4>Déconnexion:</h4>
+              <a href="#"><button class="button-modif-profile">Se déconnecter</button></a>
+
             </form>
           </div>
           <!-- <button>Ajouter une photo de profil</button> -->

@@ -108,6 +108,7 @@ function passwordConfirm(password1, password2){
 }
 
 function setupSession(array,session){
+    session.image = array.image;
     session.username = array.username;
     session.completeName = array.completeName;
     session.email = array.email;
@@ -213,6 +214,16 @@ async function changeCredit(credit, username){
     await name.save();
 }
 
+async function changePP(newPP, username){
+    let name = await User.findOne({where: {username: username}});
+    name.set({
+        image: "static/IMAGES/" + newPP
+    });
+    await name.save();
+    return name.image;
+    
+}
+
 async function changeVetement(listModif, id){
     
     let name = await Clothes.findOne({where: {id: id}});
@@ -284,5 +295,6 @@ module.exports = {
     changeVetement,
     removeArticles,
     updateAllCredits,
-    setupSession
+    setupSession,
+    changePP
 }
