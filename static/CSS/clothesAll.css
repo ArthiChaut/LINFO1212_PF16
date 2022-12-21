@@ -14,8 +14,9 @@
 }
 
 .grid-object img{
-  width: 250px;
-  height: 250px;
+  border:1px solid black;
+  width: 300px;
+  height: 300px;
 }
 
 .grid-object p{
