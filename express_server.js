@@ -143,6 +143,21 @@ app.post('/vente',upload.single('image'), function(req, res) {
   }).then(() => res.redirect('/'))
 });
 
+app.post('/panier', function(req, res) {
+  let totalPanier = function_extension.getPanierTotal(req.session.panier);
+  if(totalPanier <= req.session.credits){
+    function_extension.removeArticles(req.session.panier).then(() => {
+      req.session.credits -= totalPanier;
+      function_extension.changeCredit(0 - totalPanier,req.session.username)
+      req.session.panier = [];
+      setTimeout(function() {res.redirect('/')},5000);
+    })
+  }else{
+    res.redirect('/panier')
+  }
+  
+  
+});
 
 app.post('/modifArticle', upload.single('image'), function(req, res) {
 
@@ -154,8 +169,6 @@ app.post('/modifArticle', upload.single('image'), function(req, res) {
   res.redirect('/profil');
   
 })
-
-
 
 app.post('/profil', upload.single('image'), function(req, res) { 
     const{Crédits} = req.body;
@@ -188,11 +201,10 @@ app.post('/vetements', function(req, res){
   
 });
 
-  
 //get request to the root path  
 app.get("/", function(req, res) {
   function_extension.fiveLastInstances(Clothes,clothes).then(clothes => {
-    function_extension.getLatestSells().then(sells => {
+    function_extension.getLatestSells(req.session.username).then(sells => {
     if(req.session.username){
       res.render('pages/main', {username: req.session.username,
         credits: "Crédits: " + req.session.credits, clothes:clothes,sells:sells});
@@ -222,6 +234,7 @@ app.get('/register', function(req,res) {
 app.get('/panier', function(req,res) {
   if(req.session.username){
   const{image,marque,prix,etat,couleur,user}=req.query;
+
   if(req.session.panier.length == 0 && image || image && req.session.panier[req.session.panier.length-1].Image != image){
   req.session.panier.push({
     Image:image,
@@ -232,10 +245,10 @@ app.get('/panier', function(req,res) {
     User:user,
   });
 }
-  let totalPanier = function_extension.getPanierTotal(req.session.panier);
 
+  let totalPanier = function_extension.getPanierTotal(req.session.panier);
     res.render('pages/panier', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits,image:image,marque:marque,prix:prix,etat:etat,couleur:couleur,user:user,clothes:req.session.panier,nombreArticles:req.session.panier.length,totalPanier:totalPanier});
+      credits: "Crédits: " + req.session.credits,image:image,marque:marque,prix:prix,etat:etat,couleur:couleur,user:user,clothes:req.session.panier,nombreArticles:req.session.panier.length,totalPanier:totalPanier,creditsForm:req.session.credits});
   } else {
     beforelog = "";
     res.redirect('/login');
@@ -245,6 +258,7 @@ app.get('/panier', function(req,res) {
 
 app.get('/profil', function(req,res) {
   function_extension.clothesByMe(Clothes, req.session.username).then(result => {
+    console.log(result);
     res.render('pages/profil', {username: req.session.username,
       completeName: req.session.completeName,
       email: req.session.email,
@@ -332,16 +346,21 @@ app.get('/vente',  function(req,res) {
 app.get('/info', function(req,res) {
   const {image,type,marque,prix,couleur,taille,genre,date,etat,user} = req.query;
   function_extension.getUserLocation(user).then(localisation => {
-    if(req.session.username){
+    if(req.session.username === user){
       res.render('pages/clothesInfos', {username: req.session.username,
-        credits: "Crédits: " + req.session.credits,image:image,type:type,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation});
+        credits: "Crédits: " + req.session.credits,image:image,type:type,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation,showButton:false});
     } else {
-      res.render("pages/clothesInfos", {username: "Se connecter", credits: "",image:image,type:type,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation});
+      res.render("pages/clothesInfos", {username: "Se connecter", credits: "",image:image,type:type,marque:marque,prix:prix,couleur:couleur,taille:taille,genre:genre,date:date,etat:etat,user:user,localisation:localisation,showButton:true});
     }
 
   })
   
 });
+
+
+
+
+
 
 
 

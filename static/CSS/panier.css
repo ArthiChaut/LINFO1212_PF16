@@ -56,6 +56,16 @@ p{
     font-size: larger;
 }
 
+#textContainerVert{
+    font-size: 20px;
+    color:rgb(76, 174, 54);
+}
+
+#textContainerRouge{
+    font-size: 20px;
+    color:rgb(169, 12, 12);
+}
+
 #poubelle{
     width: 30px;
     height: 30px;

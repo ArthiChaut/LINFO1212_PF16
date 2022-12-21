@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="static/CSS/panier.css" />
   </header>
   <main>
+    <form action="/panier" method="post">
     <div class = "container">
     <div class="container-left "> 
       <%  for( let i = 0; i < clothes.length;i++){ %>
@@ -35,17 +36,33 @@
     <div class="container-right">
       <div class="box-right">
         <h2> Récapitulatif de la commande </h2>
-        <p> Sous-total (<%= nombreArticles %> articles) : <%= totalPanier %> </p>
+        <p> Sous-total (<%= nombreArticles %> article(s) ) : <%= totalPanier %> </p>
         <p> Frais de port : 0 </p>
         <p> Total : <%= totalPanier %> </p>
-        <button class="button"> Valider la commande </button>
+        <% if(nombreArticles > 0 && creditsForm >= totalPanier) {%>
+        <button id="buttonPanier" class="button"> Valider la commande </button>
+        <%}%> 
+        <% if(creditsForm < totalPanier) {%>
+          <div id="textContainerRouge"> Vous n'avez pas assez de crédits pour ce panier!</div>
+          <%}%>  
+        <div id="textContainerVert"></div>
       </div>
       </div>
       </div>
-  </main>
+    </form>
+    <script > 
+      document.getElementById('buttonPanier').addEventListener('click', function() {
+      document.getElementById('textContainerVert').innerHTML = "Merci pour votre commande!<br>Redirection automatique vers la page principale dans quelques secondes"})
+    </script>
+      </main>
   <footer>
     <%- include('../partials/footer'); %>
   </footer>
-
+  
+  
+  
+  
+  
+  
 </body>
 </html>

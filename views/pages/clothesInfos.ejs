@@ -48,8 +48,11 @@
               <p> <%= etat %> </p>
               <p> <%= user %> </p>
               <p> <%= localisation %> </p><br> 
-              <a href="/panier?image=<%= image %>&marque=<%= marque %>&prix=<%= prix %>&etat=<%= etat %>&couleur=<%= couleur %>&user=<%= user %>"><button class = "button"> Ajouter au panier</button></a>
-            
+
+              <% if(showButton) { %>
+              <a href="/panier?image=<%= image %>&marque=<%= marque %>&prix=<%= prix %>&etat=<%= etat %>&couleur=<%= couleur %>&user=<%= user %>"><button class = "button">Ajouter au panier</button></a>
+              
+              <% } %>
         </div>
       </div>
 
@@ -59,6 +62,6 @@
   <footer>
     <%- include('../partials/footer'); %>
   </footer>
-
+  
 </body>
 </html>

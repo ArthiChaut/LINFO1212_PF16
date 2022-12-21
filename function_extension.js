@@ -153,13 +153,11 @@ async function rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilt
         };
     }
 
-    // Exécutez la recherche en utilisant la clause "where"
     const products = await Clothes.findAll({order: [["createdAt","DESC"]], where });
 
     return products;
 }
 
-//Affiche tout les vêtements de la base de données
 async function displayClothes(filtre){
     let array = await Clothes.findAll({
         order: [["createdAt","DESC"]],
@@ -177,14 +175,19 @@ async function getUserLocation(username){
     return location.localisation;
 }
 
-async function getLatestSells(){
-
-    let result = await Clothes.findAll({
-        where:{sold: true},
-        limit:5,
-        order:[['createdAt','DESC']]
-    })
-    return result;
+async function getLatestSells(username){
+    if(username){
+        let result = await Clothes.findAll({
+            where:{
+                sold: true,
+                user: username
+            },
+            limit:5,
+            order:[['updatedAt','DESC']]
+        })
+        return result;        
+    }
+    return [];
 }
 
 async function changeCredit(credit, username){
@@ -227,6 +230,19 @@ function getPanierTotal(array){
 }
 
 
+async function removeArticles(array){
+    for(let i = 0 ; i < array.length;i++){
+
+        let name = await Clothes.findOne({where: {image: array[i].Image}});
+    name.set({
+        sold:true
+    });
+    await name.save();
+
+    }
+    
+}
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
@@ -243,5 +259,6 @@ module.exports = {
     rechercherProduits,
     changeCredit,
     getPanierTotal,
-    changeVetement
+    changeVetement,
+    removeArticles
 }
