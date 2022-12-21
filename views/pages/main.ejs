@@ -29,20 +29,20 @@
           <% } %>
         </div>
       </div>
-    </div>
-    <div class="containerBox">
-      <div class="containerBoxNav">
-        <h2>Vos ventes</h2>
-        <a href="/profil"><img src="/static/IMAGES/fleche-droite.png" alt="logo"></a>
-      </div>
-      <div class="containerBoxClothes">
-        <% for( let i = 0; i < sells.length;i++){let article = sells[i]; %>
-          <div class="grid-object">
-            <img src="<%= article.image %>" alt="photo">
-            <p id="sold">Cet article a été vendu!</p>
-            <a href="../info?image=<%=article.image%>&type=<%=article.type%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>">Voir l'article</a>
-          </div>
-        <% } %>
+      <div class="containerBox">
+        <div class="containerBoxNav">
+          <h2>Vos ventes</h2>
+          <a href="/profil"><img src="/static/IMAGES/fleche-droite.png" alt="logo"></a>
+        </div>
+        <div class="containerBoxClothes">
+          <% for( let i = 0; i < sells.length;i++){let article = sells[i]; %>
+            <div class="grid-object">
+              <img src="<%= article.image %>" alt="photo">
+              <p id="sold">Cet article a été vendu!</p>
+              <a href="../info?image=<%=article.image%>&type=<%=article.type%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>">Voir l'article</a>
+            </div>
+          <% } %>
+        </div>
       </div>
     </div>
   </main>
