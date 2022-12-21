@@ -33,12 +33,13 @@
                 <option value="Short">Short</option>
                 <option value="Underwear">Underwear</option>
             </select>
-            <p>Actuel: <%= type %> </p>
+            <p> <%= type %> </p>
             
             <h3>Marque:</h3>
-            <textarea name="Marque" rows="1" cols="30" placeholder="actuel: <%= marque %>"></textarea>
+            <textarea name="Marque" rows="1" cols="30" placeholder="<%= marque %>"></textarea>
             <h3>Prix:</h3>
-            <textarea name="Prix" rows="1" cols="30" placeholder="actuel: <%= prix %>"></textarea>
+            <textarea name="Prix" rows="1" cols="30" placeholder="<%= prix %>"></textarea>
+            <p id="error_message"> <%= error_message_prix %></p>
             <h3>Couleur:</h3>
             <select name="Couleur" rows="1" cols="30" required placeholder="Couleur de l'article" >
               <option value='No change'>No change</option>
@@ -56,7 +57,7 @@
               <option value='Beige'>Beige</option>
               <option value='Autre'>Autre</option>
             </select>
-            <p>Actuel: <%= couleur %></p>
+            <p><%= couleur %></p>
             <h3>Taille:</h3>
             <select name="Taille" rows="1" cols="30" placeholder="la taille de l'article" >
             <option value='No change'>No change</option>  
@@ -69,7 +70,7 @@
             <option value='XS'>XS</option>
             <option value='XXS'>XXS</option>
             </select>
-            <p>Actuel: <%= taille %> </p>
+            <p><%= taille %> </p>
 
             <h3>Genre:</h3>
             <select name="Genre" style="width: 150px">
@@ -79,7 +80,7 @@
                 <option value='Enfant'>Enfant</option>
                 <option value="Unisex"> Unisex</option> 
             </select>
-            <p>Actuel: <%= genre %> </p>
+            <p><%= genre %> </p>
             <h3>Etat de l'article:</h3>
             <select name="Etat" style="width: 150px">
               <option value='No change'>No change</option>
@@ -88,7 +89,7 @@
               <option value='Bon état'>Bon état</option>
               <option value="Occasion"> Occasion</option>
             </select>
-            <p>Actuel: <%= etat%></p>
+            <p><%= etat%></p>
             <div class="alignement">
                 <div class="containerAvertissement">
                     <nav> 
