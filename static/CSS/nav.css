@@ -46,6 +46,11 @@ header{
     transition: transform .2s;
 }
 
+img {
+    border-radius: 10px;
+    object-fit: cover;
+}
+
 
 .nav_links{
     list-style: none;
