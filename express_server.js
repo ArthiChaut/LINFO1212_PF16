@@ -328,8 +328,8 @@ app.get('/vetements/femme', function(req,res) {
   })
 });
 
-app.get('/vetements/enfants', function(req,res) {
-  filtre = "Enfants";
+app.get('/vetements/enfant', function(req,res) {
+  filtre = "Enfant";
   function_extension.displayClothes(filtre).then(result =>{
     if(req.session.username){
       res.render('pages/clothesAll', {
