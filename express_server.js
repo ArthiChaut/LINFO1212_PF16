@@ -50,7 +50,7 @@ app.set('view engine', 'ejs');
 
 //post request
 app.post('/login', function(req,res) {
- 
+
   const {username, password} = req.body;
   function_extension.countExist(username).then(result => {
     if( result ===  false){
@@ -99,7 +99,7 @@ app.post('/register', function(req,res) {
         if(goodConfirmPassword){
           User.create({
             credits: 0,
-            
+            image: "static/IMAGES/Photo_de_profil.jpg",
             completeName:req.body.name,
             username:req.body.username,
             email:req.body.email,
@@ -158,7 +158,7 @@ app.post('/panier', function(req, res) {
 app.post('/modifArticle', upload.single('image'), function(req, res) {
   const{Type, Marque, Prix, Couleur, Taille, Genre, Etat} = req.body;
   
-  if(function_extension.checkPrice(Prix)){
+  if(function_extension.checkPrice(Prix) || !Prix){
     let listModif = ["static/IMAGES/" + req.imagePath,Type, Marque, Prix, Couleur, Taille, Genre, Etat];
     function_extension.changeVetement(listModif, req.session.idClothes);
     res.redirect('/profil');
@@ -268,17 +268,20 @@ app.get('/panier', function(req,res) {
 
 
 app.get('/profil', function(req,res) {
-  function_extension.clothesByMe(Clothes, req.session.username).then(result => {
-    console.log(req.session.image);
-    res.render('pages/profil', {username: req.session.username,
-      image: req.session.image,
-      completeName: req.session.completeName,
-      email: req.session.email,
-      creditsProfil: req.session.credits,
-      credits: "Crédits: " + req.session.credits,
-      localisation: req.session.localisation,
-      listClothesByMe:result});
-  })
+  if(req.session.username){
+    function_extension.clothesByMe(Clothes, req.session.username).then(result => {
+      res.render('pages/profil', {username: req.session.username,
+        image: req.session.image,
+        completeName: req.session.completeName,
+        email: req.session.email,
+        creditsProfil: req.session.credits,
+        credits: "Crédits: " + req.session.credits,
+        localisation: req.session.localisation,
+        listClothesByMe:result});
+    })
+  } else {
+    res.redirect('/login');
+  }
 })
 
 app.get('/vetements', function(req, res){
