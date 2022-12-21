@@ -83,6 +83,10 @@ li{
     display: flex;
 }
 
+.info-modif-container-box a{
+    text-decoration: none;
+}
+
 form input, form button, form select{
     
     margin : 12px 0;
