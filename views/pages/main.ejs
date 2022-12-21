@@ -32,7 +32,9 @@
       <div class="containerBox">
         <div class="containerBoxNav">
           <h2>Vos ventes</h2>
+          <% if(username != "Se connecter"){ %>
           <a href="/profil"><img src="/static/IMAGES/fleche-droite.png" alt="logo"></a>
+          <%}%>
         </div>
         <div class="containerBoxClothes">
           <% for( let i = 0; i < sells.length;i++){let article = sells[i]; %>

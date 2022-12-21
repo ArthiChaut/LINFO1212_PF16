@@ -40,7 +40,7 @@ app.use(session({
   cookie: { 
     path: '/', 
     httpOnly: true,
-    maxAge:36000
+    maxAge:360000
   }
 }));
 
@@ -54,20 +54,12 @@ app.post('/login', function(req,res) {
   const {username, password} = req.body;
   function_extension.countExist(username).then(result => {
     if( result ===  false){
-      console.log("Le compte n'existe pas encore");
       res.render("pages/login",{error_message_email: "Nom d'utilisateur ou e-mail incorrect", error_message_password: "", username: "Se connecter", credits: "" });
       
     }else{
-      console.log("Le compte existe");
       function_extension.passwordCorrect(username, password).then(result => {
         if(result != false){
-          console.log("Mot de passe correct");
-          req.session.username = result.username;
-          req.session.completeName = result.completeName;
-          req.session.email = result.email;
-          req.session.credits = result.credits;
-          req.session.localisation = result.localisation;
-          req.session.panier = [];
+          function_extension.setupSession(result,req.session);
           switch(beforelog){
             case 'vente':
               res.redirect("/vente");
@@ -102,8 +94,7 @@ app.post('/register', function(req,res) {
     if(result){
       res.render('pages/register', {username: "Se connecter", credits: "", error_message_password: "", error_message_email: "", error_message_account : "Nom d'utilisateur et/ou e-mail déjà utilisé(s)"});
     } else {
-      let result2 = function_extension.validate(email);
-      if(result2){
+      if(function_extension.validate(email)){
         let goodConfirmPassword = function_extension.passwordConfirm(password, confirmedPassword);
         if(goodConfirmPassword){
           User.create({
@@ -115,7 +106,6 @@ app.post('/register', function(req,res) {
             password:bcrypt.hashSync(req.body.password,10)}).then(()=>
             res.redirect('/login'));
         } else {
-          console.log("Mots de passe non similaire");
           res.render('pages/register', {username: "Se connecter", credits: "", error_message_account : "" ,error_message_password: "Les mots de passe ne sont pas similaires", error_message_email: ""});
         }
       } else {
@@ -128,27 +118,32 @@ app.post('/register', function(req,res) {
 
 app.post('/vente',upload.single('image'), function(req, res) {
   const {Type,Marque,Prix,Couleur,Taille,Genre,Etat} = req.body;
+  if(function_extension.checkPrice(Prix)){
+    Clothes.create({
+      image:"static/IMAGES/"+req.imagePath,
+      type:Type,
+      marque:Marque.toLowerCase(),
+      prix:Prix,
+      couleur:Couleur,
+      taille:Taille,
+      genre:Genre,
+      etat:Etat,
+      user:req.session.username,
+      sold:false
+      }).then(() => res.redirect('/'))
+  }else{
+    res.render('pages/sellClothes',{username:req.session.username,credits:"Crédits:" + req.session.credits,error_message_prix:"prix non valide"})
+  }
   
-  Clothes.create({
-  image:"static/IMAGES/"+req.imagePath,
-  type:Type,
-  marque:Marque.toLowerCase(),
-  prix:Prix,
-  couleur:Couleur,
-  taille:Taille,
-  genre:Genre,
-  etat:Etat,
-  user:req.session.username,
-  sold:false
-  }).then(() => res.redirect('/'))
+  
 });
-
 app.post('/panier', function(req, res) {
   let totalPanier = function_extension.getPanierTotal(req.session.panier);
   if(totalPanier <= req.session.credits){
     function_extension.removeArticles(req.session.panier).then(() => {
       req.session.credits -= totalPanier;
       function_extension.changeCredit(0 - totalPanier,req.session.username)
+      function_extension.updateAllCredits(req.session.panier);
       req.session.panier = [];
       setTimeout(function() {res.redirect('/')},4000);
     })
@@ -189,14 +184,18 @@ app.post('/vetements', function(req, res){
   const {couleur,taille,genre, type,etat } = req.body;
 
   function_extension.rechercherProduits(taille, couleur,genre,type,etat).then(result => {
-
-    res.render('pages/clothesAll', { username: req.session.username,
-      completeName: req.session.completeName,
-      email: req.session.email,
-      creditsProfil: req.session.credits,
-      credits: "Crédits: " + req.session.credits,
-      clothes: result
-    }); // render the page with the filtered clothes
+    if(req.session.username){
+      res.render('pages/clothesAll', { username: req.session.username,
+                                       credits: "Crédits: " + req.session.credits,
+                                       clothes: result
+      }); // render the page with the filtered clothes
+    }else{
+      res.render('pages/clothesAll', { username: "Se connecter",
+                                       credits: "",
+                                       clothes: result
+                                      });
+    }
+    
   })
   
 });
@@ -242,7 +241,7 @@ app.get('/panier', function(req,res) {
     Prix: parseInt(prix),
     Etat: etat,
     Couleur:couleur,
-    User:user,
+    User:user
   });
 }
 
@@ -351,7 +350,7 @@ app.get('/vetements/enfant', function(req,res) {
 app.get('/vente',  function(req,res) {
   if(req.session.username){
     res.render('pages/sellClothes', {username: req.session.username,
-      credits: "Crédits: " + req.session.credits});
+      credits: "Crédits: " + req.session.credits,error_message_prix:""});
   } else {
     beforelog = "vente";
     res.redirect('/login');

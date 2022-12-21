@@ -1,14 +1,15 @@
 textarea{
     font-size: 23px;
     border-radius: 10px;
-    margin-bottom:15px;
+    margin-bottom:0px;
 }
 
 select{
-    margin-bottom:20px;
+    margin-bottom:10px;
+    font-size:20px
 }
 input{
-    margin-bottom:20px;
+    margin-bottom:10px;
 }
 
 button{

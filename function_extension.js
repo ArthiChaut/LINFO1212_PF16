@@ -78,6 +78,12 @@ async function countExistForCreate(username, email){
     
 }
 
+
+function checkPrice(prix){
+    let isnum = /^\d+$/.test(prix);
+    return isnum;
+}
+
 function checkEmail(email){
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -86,10 +92,8 @@ function checkEmail(email){
 function validate(email){
     var emailtocheck = email;
     if(checkEmail(emailtocheck)) {
-        console.log("Adresse e-mail valide");
         return true;
     } else {
-        console.log("Adresse e-mail invalide");
         return false;
     }
 
@@ -101,6 +105,15 @@ function passwordConfirm(password1, password2){
     } else {
         return false;
     }
+}
+
+function setupSession(array,session){
+    session.username = array.username;
+    session.completeName = array.completeName;
+    session.email = array.email;
+    session.credits = array.credits;
+    session.localisation = array.localisation;
+    session.panier = [];
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -118,7 +131,9 @@ async function clothesByMe(table, username){
 
     let array = await table.findAll({
         order: [["createdAt","DESC"]],
-        where:{user:username}
+        where:{user:username,
+                sold:false
+            }
     })
     return array;
 }
@@ -243,13 +258,20 @@ async function removeArticles(array){
     
 }
 
+function updateAllCredits(array){
+    for(let i = 0 ; i < array.length;i++){
+        changeCredit(array[i].Prix,array[i].User)
+
+        }
+}
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
     countExist, 
     passwordCorrect, 
     countExistForCreate, 
-    validate, 
+    validate,
+    checkPrice, 
     passwordConfirm, 
     fiveLastInstances, 
     clothesByMe,
@@ -260,5 +282,7 @@ module.exports = {
     changeCredit,
     getPanierTotal,
     changeVetement,
-    removeArticles
+    removeArticles,
+    updateAllCredits,
+    setupSession
 }
