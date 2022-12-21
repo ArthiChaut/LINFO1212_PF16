@@ -81,11 +81,11 @@
     <div class="container" id="filtre-results">
       <% for( let i = 0; i < clothes.length;i++){let article = clothes[i]; %>
       <div class="grid-object">
-        <img src= <%= article.image %> alt="photo">
+        <img src= "../<%= article.image %>" alt="photo">
         <h2><%= article.type %></h2>
         <h3><%= article.user %></h3>
         <p><%= article.prix %></p>
-        <a href="../info?image=<%=article.image%>&type=<%=article.type%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>">Voir l'article</a>
+        <a href="/info?image=<%=article.image%>&type=<%=article.type%>&marque=<%=article.marque%>&prix=<%=article.prix%>&couleur=<%=article.couleur%>&taille=<%=article.taille%>&genre=<%=article.genre%>&date=<%=article.createdAt.toDateString()%>&etat=<%=article.etat%>&user=<%=article.user%>&localisation=<%=article.localisation%>">Voir l'article</a>
         
       </div>
       <% } %>

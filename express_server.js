@@ -40,7 +40,7 @@ app.use(session({
   cookie: { 
     path: '/', 
     httpOnly: true,
-    maxAge:36000000
+    maxAge:36000
   }
 }));
 
@@ -150,7 +150,7 @@ app.post('/panier', function(req, res) {
       req.session.credits -= totalPanier;
       function_extension.changeCredit(0 - totalPanier,req.session.username)
       req.session.panier = [];
-      setTimeout(function() {res.redirect('/')},5000);
+      setTimeout(function() {res.redirect('/')},4000);
     })
   }else{
     res.redirect('/panier')
@@ -292,42 +292,58 @@ app.get('/vetements', function(req, res){
 app.get('/vetements/homme', function(req,res) {
     filtre = "Homme";
     function_extension.displayClothes(filtre).then(result =>{
-      res.render('pages/clothesAll', {
-        username: req.session.username,
-        credits: "Crédits: " + req.session.credits,
-        completeName: req.session.completeName,
-        email: req.session.email,
-        creditsProfil: req.session.credits,
-        clothes:result
-      })
+      if(req.session.username){
+        res.render('pages/clothesAll', {
+          username: req.session.username,
+          credits: "Crédits: " + req.session.credits,
+          clothes:result
+        })
+      }else{
+        res.render('pages/clothesAll', {
+          username: "Se connecter",
+          credits: "",  
+          clothes:result
+        })
+      }
     })
 });
 
 app.get('/vetements/femme', function(req,res) {
   filtre = "Femme";
   function_extension.displayClothes(filtre).then(result =>{
-    res.render('pages/clothesAll', {
-      username: req.session.username,
-      credits: "Crédits: " + req.session.credits,
-      completeName: req.session.completeName,
-      email: req.session.email,
-      creditsProfil: req.session.credits,
-      clothes:result
-    })
+    if(req.session.username){
+      res.render('pages/clothesAll', {
+        username: req.session.username,
+        credits: "Crédits: " + req.session.credits,
+        clothes:result
+      })
+    }else{
+      res.render('pages/clothesAll', {
+        username: "Se connecter",
+        credits: "",  
+        clothes:result
+      })
+    }
+    
   })
 });
 
 app.get('/vetements/enfants', function(req,res) {
   filtre = "Enfants";
   function_extension.displayClothes(filtre).then(result =>{
-    res.render('pages/clothesAll', {
-      username: req.session.username,
-      credits: "Crédits: " + req.session.credits,
-      completeName: req.session.completeName,
-      email: req.session.email,
-      creditsProfil: req.session.credits,
-      clothes:result
-    })
+    if(req.session.username){
+      res.render('pages/clothesAll', {
+        username: req.session.username,
+        credits: "Crédits: " + req.session.credits,
+        clothes:result
+      })
+    }else{
+      res.render('pages/clothesAll', {
+        username: "Se connecter",
+        credits: "",  
+        clothes:result
+      })
+    }
   })
 });
 
