@@ -155,7 +155,7 @@ app.post('/panier', function(req, res) {
   
 });
 
-app.post('/modifArticle', upload.single('image'),function(req, res) {
+app.post('/modifArticle', upload.single('image'), function(req, res) {
   const{Type, Marque, Prix, Couleur, Taille, Genre, Etat} = req.body;
   
   if(function_extension.checkPrice(Prix) || !Prix){
