@@ -170,7 +170,7 @@ async function rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilt
     }
 
     const products = await Clothes.findAll({order: [["createdAt","DESC"]], where });
-
+    console.log(products)
     return products;
 }
 
