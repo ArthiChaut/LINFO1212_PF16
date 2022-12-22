@@ -76,6 +76,8 @@ describe("Check si les filtres de produits fonctionne correctement (pour les hab
         const result = await function_extension.rechercherProduits();
         expect(result.length).toBe(6); // on s'attend à ce que la fonction retourne 5 produits
       });
+
+
       
 })
 
@@ -184,5 +186,19 @@ describe("Check si les habits sont bien lier à l'utilisateur qui les a mis en v
       });
 })
 
-
-  
+//////////////changePP////////////////
+describe("Check si le changement de photo de profil de l'utilisateur se fait bien", () => {
+    test("Check si l'image se change bien chez pat", async () => {
+        const newPP = 'map.png';
+        const username = 'pat';
+        const result = await function_extension.changePP(newPP, username);
+        expect(result).toBe('static/IMAGES/map.png');
+      });
+      
+      test("Check si la fonction lance une erreur lorsque l'utilisateur n'existe pas ", async () => {
+        const newPP = 'map.png';
+        const username = 'InvalidUser';
+        await expect(function_extension.changePP(newPP, username)).rejects.toThrow();
+      });
+      
+})
