@@ -88,7 +88,7 @@ app.post('/login', function(req,res) {
 })
 
 
-app.post('/register', function(req,res) {
+app.post('/register',function(req,res) {
   const {name, username,email, password, confirmedPassword} = req.body;
   function_extension.accountExistForCreate(username, email).then(result => {
     if(result){
