@@ -401,7 +401,7 @@ app.get('/modifArticle', function(req, res) {
   const {id,image,marque,prix,type,couleur,taille,genre,etat} = req.query;
   req.session.idClothes = id;
   res.render('pages/modifArticle', {username: req.session.username,
-    credits: "Crédits: " + req.session.credits, id:id, image:image, marque:"Actuel:" +marque, prix:"Actuel:" +prix, type: "Actuel:" +type, couleur:"Actuel:" +couleur, taille:taille, genre:"Actuel:" +genre, etat:"Actuel:" +etat,error_message_prix:""})
+    credits: "Crédits: " + req.session.credits, id:id, image:image, marque:"Actuel:" +marque, prix:"Actuel:" +prix, type: "Actuel:" +type, couleur:"Actuel:" +couleur, taille:"Actuel:"+taille, genre:"Actuel:" +genre, etat:"Actuel:" +etat,error_message_prix:""})
 })
 
 https.createServer({

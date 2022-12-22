@@ -202,3 +202,176 @@ describe("Check si le changement de photo de profil de l'utilisateur se fait bie
       });
       
 })
+describe("Sum the products prices of the basket", () => {
+    test("three products who respectively cost 10,15 and 45 credits should result 70", () => {
+    result = [
+            {
+            Image: 'static/IMAGES/1671652403467.jpg',
+            Marque: "levi's",
+            Prix: 10,
+            Etat: 'Neuf',
+            Couleur: 'Bleu',
+            User: 'patoche'
+            },
+            {
+                Image: 'static/IMAGES/1671652403445.jpg',
+                Marque: "new balance",
+                Prix: 15,
+                Etat: 'Neuf',
+                Couleur: 'Noir',
+                User: 'patoche'
+            },
+            {
+                Image: 'static/IMAGES/1671652403624.jpg',
+                Marque: "nike",
+                Prix: 45,
+                Etat: 'Neuf',
+                Couleur: 'Rouge',
+                User: 'patoche'
+            }  
+      ]
+     expect(function_extension.getPanierTotal(result)).toBe(70);
+    });
+})
+
+describe("Modify an article", () => {
+    test("Modification of the image of the article",async () => {
+        id = 3;
+        let article = await Clothes.findOne({where:{id:id}})
+        change = [
+        'static/IMAGES/1671114477979.jpg',
+        'No change',
+        '',
+        '',
+        'No change',
+        'No change',
+        'No change',
+        'No change'
+      ];
+     await function_extension.changeVetement(change,id);
+     expect(article.image).toBe(change[0]);
+    });
+
+
+    test("Modification of the image of the article",async () => {
+        id = 3;
+        let article = await Clothes.findOne({where:{id:id}})
+        let initial = [article.image,article.type,article.marque,article.prix,article.couleur,article.taille,article.genre,article.etat]
+        let change = [
+        'static/IMAGES/1671114477979.jpg',
+        'No change',
+        '',
+        '',
+        'No change',
+        'No change',
+        'No change',
+        'No change'
+      ];
+     await function_extension.changeVetement(change,id);
+     let article2 = await Clothes.findOne({where:{id:id}})
+     let final = [article2.image,article2.type,article2.marque,article2.prix,article2.couleur,article2.taille,article2.genre,article2.etat]
+     expect(final[0]).toBe(change[0]) // image has been modified
+     for(let i = 1; i < final.length;i++){
+        expect(final[i]).toBe(initial[i]); // ONLY the image has been modified
+     }
+     
+     
+    });
+
+    test("Modification of the image of the article + brand + price at the same time",async () => {
+        id = 5;
+        let article = await Clothes.findOne({where:{id:id}})
+        let initial = [article.image,article.type,article.marque,article.prix,article.couleur,article.taille,article.genre,article.etat]
+        let change = [
+        'static/IMAGES/1671638368208.jpg',
+        'No change',
+        'Adidas',
+         30,
+        'No change',
+        'No change',
+        'No change',
+        'No change'
+      ];
+
+     await function_extension.changeVetement(change,id);
+     let article2 = await Clothes.findOne({where:{id:id}})
+     let final = [article2.image,article2.type,article2.marque,article2.prix,article2.couleur,article2.taille,article2.genre,article2.etat]
+     expect(final[0]).toBe(change[0]) // image has been modified
+     expect(final[2]).toBe(change[2]) // brand has been modified
+     expect(final[3]).toBe(change[3]) // price has been modified
+    });
+})
+
+describe("Remove a list of articles from the store", () => {
+    test('remove three articles from the store',async () =>{
+        result = [
+            {
+            Image: 'static/IMAGES/1671590408293.jpg',
+            Marque: "faith",
+            Prix: 20,
+            Etat: 'Neuf',
+            Couleur: 'Noir',
+            User: 'gogo22'
+            },
+            {
+                Image: 'static/IMAGES/1671581655078.jpg',
+                Marque: "Levi's",
+                Prix: 50,
+                Etat: 'Très bon état',
+                Couleur: 'Bleu',
+                User: 'velkiz'
+            },
+            {
+                Image: 'static/IMAGES/1671660890853.jpg',
+                Marque: "jedi",
+                Prix: 40,
+                Etat: 'Neuf',
+                Couleur: 'Beige',
+                User: 'Dubois'
+            }    
+      ]
+
+      await function_extension.removeArticles(result);
+      for(let i = 0; i < result.length; i ++){
+        let article = await Clothes.findOne({where:{image:result[i].Image}})
+        expect(article.sold).toBe(true);
+      }
+      
+
+
+    })
+})
+
+/*describe("update multiple accounts balance ", () => {
+    test('update balance of two accounts', async () =>{
+        result = [
+            {
+            Image: 'static/IMAGES/1671590408293.jpg',
+            Marque: "faith",
+            Prix: 20,
+            Etat: 'Neuf',
+            Couleur: 'Noir',
+            User: 'gogo22'
+            },
+            {
+                Image: 'static/IMAGES/1671638368208.jpg',
+                Marque: "martaman",
+                Prix: 33,
+                Etat: 'Neuf',
+                Couleur: 'Jaune',
+                User: 'velkiz'
+                }      
+      ]
+      let first = await User.findOne({where:{username:result[0].User}})
+      let second = await User.findOne({where:{username:result[1].User}})
+      expected1 = first.credits + 20;
+      expected2 = second.credits + 33;
+      function_extension.updateAllCredits(result);
+      let firstAfter = await User.findOne({where:{username:result[0].User}})
+      let secondAfter = await User.findOne({where:{username:result[1].User}})
+      expect(expected1).toBe(firstAfter.credits);
+      expect(expected2).toBe(secondAfter.credits);
+    })
+})
+
+
