@@ -6,13 +6,13 @@ const function_extension = require('./function_extension')
 describe("Check if account already exists in database", () => {
     test("account exists", async () => {
         const resultUsername = await function_extension.accountExist('velkiz')
-        const resultEmail = await function_extension.accountExist('velkiz')
+        const resultEmail = await function_extension.accountExist('max@gmail.com')
      expect(resultUsername).toBe(true);
      expect(resultEmail).toBe(true);
     });
     test("account doesnt exist", async () => {
         const resultUsername = await function_extension.accountExist('natshara')
-        const resultEmail = await function_extension.accountExist('natshara')
+        const resultEmail = await function_extension.accountExist('natshara@outlook.com')
      expect(resultUsername).toBe(false);
      expect(resultEmail).toBe(false);
     })
