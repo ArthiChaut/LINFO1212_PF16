@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 
 
 
-async function countExist(username){
+async function accountExist(username){
     
     let name1 = await User.findOne({where: {username: username}});
     let name2 = await User.findOne({where: {email: username}});
@@ -44,7 +44,7 @@ function splitSearchPassword(name, password){
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-async function countExistForCreate(username, email){
+async function accountExistForCreate(username, email){
 
     let name1 = await User.findOne({where: {username: username}});
     let name2 = await User.findOne({where: {email: email}});
@@ -278,9 +278,9 @@ function updateAllCredits(array){
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
-    countExist, 
+    accountExist, 
     passwordCorrect, 
-    countExistForCreate, 
+    accountExistForCreate, 
     validate,
     checkPrice, 
     passwordConfirm, 

@@ -52,7 +52,7 @@ app.set('view engine', 'ejs');
 app.post('/login', function(req,res) {
  
   const {username, password} = req.body;
-  function_extension.countExist(username).then(result => {
+  function_extension.accountExist(username).then(result => {
     if( result ===  false){
       res.render("pages/login",{error_message_email: "Nom d'utilisateur ou e-mail incorrect", error_message_password: "", username: "Se connecter", credits: "" });
       
@@ -90,7 +90,7 @@ app.post('/login', function(req,res) {
 
 app.post('/register', function(req,res) {
   const {name, username,email, password, confirmedPassword} = req.body;
-  function_extension.countExistForCreate(username, email).then(result => {
+  function_extension.accountExistForCreate(username, email).then(result => {
     if(result){
       res.render('pages/register', {username: "Se connecter", credits: "", error_message_password: "", error_message_email: "", error_message_account : "Nom d'utilisateur et/ou e-mail déjà utilisé(s)"});
     } else {
