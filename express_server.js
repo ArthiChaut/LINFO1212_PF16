@@ -208,6 +208,7 @@ app.post('/vetements', function(req, res){
 });
 
 app.post("/disconnect", function(req, res){
+  beforelog = false;
   req.session.destroy();
   res.redirect("/");
 })
