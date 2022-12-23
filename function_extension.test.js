@@ -43,7 +43,7 @@ describe("Check si les filtres de produits fonctionne correctement (pour les hab
         const etatFilter = 'Neuf';
       
         const result = await function_extension.rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilter, etatFilter);
-        expect(result.length).toBe(6); // on s'attend à ce que la fonction retourne 6 produits
+        expect(result.length).toBe(5); // on s'attend à ce que la fonction retourne 6 produits
       });
 
       test('Retourne le bon produit avec tout les filtres appliqués', async () => {
@@ -75,7 +75,7 @@ describe("Check si les filtres de produits fonctionne correctement (pour les hab
       
       test("Retourne le bon nombre de produits lorsqu'aucun filtre est appliqué", async () => {
         const result = await function_extension.rechercherProduits();
-        expect(result.length).toBe(6); // on s'attend à ce que la fonction retourne 5 produits
+        expect(result.length).toBe(5); // on s'attend à ce que la fonction retourne 5 produits
       });
 
 
@@ -99,7 +99,7 @@ describe("Check si les pré-filtres de produits fonctionne correctement (pour le
       test("Retourne le bon nombre de produits lorsque le filtre homme est appliqué", async () => {
         const filtre = 'Enfant';
         const result = await function_extension.displayClothes(filtre);
-        expect(result.length).toBe(2); // on s'attend à ce que la fonction retourne 2 produits
+        expect(result.length).toBe(1); // on s'attend à ce que la fonction retourne 2 produits
       });
 
 })
@@ -343,7 +343,7 @@ describe("Remove a list of articles from the store", () => {
     })
 })
 
-/*describe("update multiple accounts balance ", () => {
+describe("update multiple accounts balance ", () => {
     test('update balance of two accounts', async () =>{
         result = [
             {
@@ -365,15 +365,19 @@ describe("Remove a list of articles from the store", () => {
       ]
       let first = await User.findOne({where:{username:result[0].User}})
       let second = await User.findOne({where:{username:result[1].User}})
+      console.log(first)
       expected1 = first.credits + 20;
       expected2 = second.credits + 33;
       function_extension.updateAllCredits(result);
       let firstAfter = await User.findOne({where:{username:result[0].User}})
+      console.log(firstAfter)
+      console.log(firstAfter.credits)
       let secondAfter = await User.findOne({where:{username:result[1].User}})
       expect(expected1).toBe(firstAfter.credits);
       expect(expected2).toBe(secondAfter.credits);
     })
 })
+<<<<<<< Updated upstream
 */
 
 
@@ -493,3 +497,5 @@ describe("Change the profil picture of a user", () => {
   })
 
 })
+=======
+>>>>>>> Stashed changes
