@@ -94,7 +94,7 @@ app.post('/register',function(req,res) {
     if(result){
       res.render('pages/register', {username: "Se connecter", credits: "", error_message_password: "", error_message_email: "", error_message_account : "Nom d'utilisateur et/ou e-mail déjà utilisé(s)"});
     } else {
-      if(function_extension.validate(email)){
+      if(function_extension.checkEmail(email)){
         let goodConfirmPassword = function_extension.passwordConfirm(password, confirmedPassword);
         if(goodConfirmPassword){
           User.create({
@@ -214,7 +214,9 @@ app.post("/disconnect", function(req, res){
 
 //get request to the root path  
 app.get("/", function(req, res) {
-  function_extension.fiveLastInstances(Clothes,clothes).then(clothes => {
+  
+  function_extension.fiveLastInstances(Clothes).then(clothes => {
+    
     function_extension.getLatestSells(req.session.username).then(sells => {
     if(req.session.username){
       res.render('pages/main', {username: req.session.username,

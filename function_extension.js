@@ -89,6 +89,7 @@ function checkEmail(email){
     return re.test(email);
   }
 
+  /*
 function validate(email){
     var emailtocheck = email;
     if(checkEmail(emailtocheck)) {
@@ -98,6 +99,7 @@ function validate(email){
     }
 
 }
+*/
 
 function passwordConfirm(password1, password2){
     if(password1 === password2){
@@ -281,7 +283,6 @@ module.exports = {
     accountExist, 
     passwordCorrect, 
     accountExistForCreate, 
-    validate,
     checkPrice, 
     passwordConfirm, 
     fiveLastInstances, 
@@ -296,5 +297,7 @@ module.exports = {
     removeArticles,
     updateAllCredits,
     setupSession,
-    changePP
+    changePP,
+    splitSearchPassword,
+    checkEmail
 }

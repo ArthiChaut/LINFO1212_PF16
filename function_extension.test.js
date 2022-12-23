@@ -1,15 +1,16 @@
-const { User, Clothes } = require("./models");
-const bcrypt = require('bcryptjs');
-const { Op } = require("sequelize");
-const function_extension = require('./function_extension')
+
+const function_extension = require('./function_extension');
+const { User, Clothes } = require('./models');
 
 describe("Check if account already exists in database", () => {
+
     test("account exists", async () => {
         const resultUsername = await function_extension.accountExist('velkiz')
         const resultEmail = await function_extension.accountExist('max@gmail.com')
      expect(resultUsername).toBe(true);
      expect(resultEmail).toBe(true);
     });
+
     test("account doesnt exist", async () => {
         const resultUsername = await function_extension.accountExist('natshara')
         const resultEmail = await function_extension.accountExist('natshara@outlook.com')
@@ -373,5 +374,122 @@ describe("Remove a list of articles from the store", () => {
       expect(expected2).toBe(secondAfter.credits);
     })
 })
+*/
 
 
+
+describe("Check if password is correct for a username", () => {
+
+    test("Password is correct with email or username", async () => {
+        const result1 = await function_extension.passwordCorrect('Dubois', 'azerty')
+        const result2 = await function_extension.passwordCorrect('arnaudubois16@gmail.com', 'azerty')
+        expect(result1.username).toBe('Dubois')
+        expect(result2.email).toBe('arnaudubois16@gmail.com')
+    })
+
+    test("Password isn't correct with email or username", async () => {
+        const result1 = await function_extension.passwordCorrect('Dubois', 'vivivo')
+        const result2 = await function_extension.passwordCorrect('arnaudubois16@gmail.com', '§§§54hhh')
+        expect(result1).toBe(false)
+        expect(result2).toBe(false)
+    })
+
+    test("Password décryptage", async () => {
+        let name = await User.findOne({where: {username: 'Dubois'}});
+        const result1 = function_extension.splitSearchPassword(name, 'azerty');
+        const result2 = function_extension.splitSearchPassword(name, '55fffggggg');
+        const result3 = function_extension.splitSearchPassword(null, 'azerty');
+        expect(result1).toBe(true)
+        expect(result2).toBe(false)
+        expect(result3).toBe(null)
+    })
+})
+
+describe("Check if username or email already take", () => {
+
+  test("Username or email already take", async () => {
+    const result1 = await function_extension.accountExistForCreate('Dubois', 'arnaudubois16@gmail.com');
+    const result2 = await function_extension.accountExistForCreate('Dubois', 'nono@gmail.com');
+    const result3 = await function_extension.accountExistForCreate('Tira20', 'arnaudubois16@gmail.com');
+    expect(result1).toBe(true)
+    expect(result2).toBe(true)
+    expect(result3).toBe(true)
+})
+
+test("Username or email available", async () => {
+    const result1 = await function_extension.accountExistForCreate('Tira20', 'nono@gmail.com');
+    expect(result1).toBe(false)
+    })
+    
+})
+
+describe("Check price is a number", () => {
+
+    test("Price is a number", () => {
+        expect(function_extension.checkPrice('6')).toBe(true);
+        expect(function_extension.checkPrice('0')).toBe(true);
+        expect(function_extension.checkPrice('1513535322')).toBe(true);
+    })
+
+    test("Price isn't a number", () => {
+        expect(function_extension.checkPrice('oui')).toBe(false);
+        expect(function_extension.checkPrice(User)).toBe(false);
+    })
+})
+
+describe("Check if email has correct form", () => {
+
+    test("email is in correct form", () => {
+        expect(function_extension.checkEmail("arnaudubois16@gmail.com")).toBe(true);
+        expect(function_extension.checkEmail("a@a.com")).toBe(true);
+        expect(function_extension.checkEmail("jim@hotmail.be")).toBe(true);
+    })
+
+    test("email is in correct form", () => {
+        expect(function_extension.checkEmail(56)).toBe(false);
+        expect(function_extension.checkEmail("a@a")).toBe(false);
+        expect(function_extension.checkEmail("jimhotmail.be")).toBe(false);
+    })
+    
+})
+
+describe("Check if two password are same", () => {
+
+    test("two password are same", () => {
+        expect(function_extension.passwordConfirm("azerty", "azerty")).toBe(true);
+        expect(function_extension.passwordConfirm("AZerty", "AZerty")).toBe(true);
+        expect(function_extension.passwordConfirm("bou12()", "bou12()")).toBe(true);
+    })
+
+    test("two password aren't same", () => {
+        expect(function_extension.passwordConfirm("azerty", "boulanger")).toBe(false);
+        expect(function_extension.passwordConfirm("AZerty", "azerty")).toBe(false);
+        expect(function_extension.passwordConfirm("Maxbil.", "Maxbil")).toBe(false);
+    })
+    
+})
+
+describe("Find the last five clothes put on the site", () => {
+  
+    test("For any database", async () => {
+      let array = await Clothes.findAll({where: {sold: false}});
+      if(array.length === 0){
+        let articles = await function_extension.fiveLastInstances(Clothes)
+        expect(article).toBe([])
+      }
+      
+      let articles = await function_extension.fiveLastInstances(Clothes)
+      for(let i = 0; i < articles.length; i++){
+          expect(articles[i].id).toBe(array[array.length-1-i].id);
+      }
+    })
+})
+
+describe("Change the profil picture of a user", () => {
+
+  test("the picture chosen is correct", async () => {
+    const val = 'Photo_de_profil.jpg'
+    expect(await function_extension.changePP(val, 'Dubois')).toBe("static/IMAGES/" + val);
+  })
+
+})
