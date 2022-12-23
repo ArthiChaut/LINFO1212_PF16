@@ -19,8 +19,6 @@ describe("Check if account already exists in database", () => {
     })
 })
 
-//clothesbyme.test.js
-
 //////////////rechercherProduits////////////////
 describe("Check si les filtres de produits fonctionne correctement (pour les habits non-vendu)", () => {
     test('Retourne les bons produits avec le filtre appliqué (Taille : L)', async () => {
@@ -377,10 +375,6 @@ describe("update multiple accounts balance ", () => {
       expect(expected2).toBe(secondAfter.credits);
     })
 })
-<<<<<<< Updated upstream
-*/
-
-
 
 describe("Check if password is correct for a username", () => {
 
@@ -497,5 +491,3 @@ describe("Change the profil picture of a user", () => {
   })
 
 })
-=======
->>>>>>> Stashed changes
