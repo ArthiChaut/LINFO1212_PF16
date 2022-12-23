@@ -3,7 +3,7 @@ Site de vente en ligne BUMP créer par le groupe 16.
 
 ##COMMENT LANCER NOTRE SITE
 
-Tout d'abord, cloner note github via ce lien dans votre terminal ```git clone ```
+Tout d'abord, cloner note github via ce lien dans votre terminal ```git clone https://github.com/ArthiChaut/LINFO1212_PF16.git ```
 
 Pout installer tous les exécutables faites ```npm install```
 
