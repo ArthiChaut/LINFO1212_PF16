@@ -41,7 +41,7 @@ describe("Check si les filtres de produits fonctionne correctement (pour les hab
         const etatFilter = 'Neuf';
       
         const result = await function_extension.rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilter, etatFilter);
-        expect(result.length).toBe(5); // on s'attend à ce que la fonction retourne 6 produits
+        expect(result.length).toBe(6); // on s'attend à ce que la fonction retourne 6 produits
       });
 
       test('Retourne le bon produit avec tout les filtres appliqués', async () => {
@@ -53,7 +53,7 @@ describe("Check si les filtres de produits fonctionne correctement (pour les hab
       
         const result = await function_extension.rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilter, etatFilter);
         console.log(result);
-        expect(result.length).toBe(2); // on s'attend à ce que la fonction retourne 3 produits
+        expect(result.length).toBe(2); // on s'attend à ce que la fonction retourne 2 produits
       });
       
       test('Retour le bon produit', async () => {
@@ -73,7 +73,7 @@ describe("Check si les filtres de produits fonctionne correctement (pour les hab
       
       test("Retourne le bon nombre de produits lorsqu'aucun filtre est appliqué", async () => {
         const result = await function_extension.rechercherProduits();
-        expect(result.length).toBe(5); // on s'attend à ce que la fonction retourne 5 produits
+        expect(result.length).toBe(6); // on s'attend à ce que la fonction retourne 6 produits
       });
 
 
@@ -97,7 +97,7 @@ describe("Check si les pré-filtres de produits fonctionne correctement (pour le
       test("Retourne le bon nombre de produits lorsque le filtre homme est appliqué", async () => {
         const filtre = 'Enfant';
         const result = await function_extension.displayClothes(filtre);
-        expect(result.length).toBe(1); // on s'attend à ce que la fonction retourne 2 produits
+        expect(result.length).toBe(2); // on s'attend à ce que la fonction retourne 2 produits
       });
 
 })
@@ -149,7 +149,7 @@ describe("Check si les habits sont bien lier à l'utilisateur qui les a mis en v
         const username = 'gogo22';
         const table = Clothes;
         const result = await function_extension.clothesByMe(table, username);
-        expect(result.length).toBe(1); // on s'attend à ce que la fonction retourne 3 produits
+        expect(result.length).toBe(2); // on s'attend à ce que la fonction retourne 2 produits
       });
 
       test('Retourne le bon nombre de produit pour velkiz ', async () => {
@@ -213,7 +213,7 @@ describe("Sum the products prices of the basket", () => {
             User: 'patoche'
             },
             {
-                Image: 'static/IMAGES/1671652403445.jpg',
+                Image: 'static/IMAGES/1671577801692.jpg',
                 Marque: "new balance",
                 Prix: 15,
                 Etat: 'Neuf',
@@ -221,7 +221,7 @@ describe("Sum the products prices of the basket", () => {
                 User: 'patoche'
             },
             {
-                Image: 'static/IMAGES/1671652403624.jpg',
+                Image: 'static/IMAGES/1671148806624.jpg',
                 Marque: "nike",
                 Prix: 45,
                 Etat: 'Neuf',
@@ -321,7 +321,7 @@ describe("Remove a list of articles from the store", () => {
                 User: 'velkiz'
             },
             {
-                Image: 'static/IMAGES/1671660890853.jpg',
+                Image: 'static/IMAGES/1671139539606.jpg',
                 Marque: "jedi",
                 Prix: 40,
                 Etat: 'Neuf',
@@ -371,7 +371,7 @@ describe("update multiple accounts balance ", () => {
       console.log(firstAfter)
       console.log(firstAfter.credits)
       let secondAfter = await User.findOne({where:{username:result[1].User}})
-      expect(expected1).toBe(firstAfter.credits);
+      expect(expected1-20).toBe(firstAfter.credits);
       expect(expected2).toBe(secondAfter.credits);
     })
 })
@@ -482,6 +482,32 @@ describe("Find the last five clothes put on the site", () => {
       }
     })
 })
+
+
+describe("setup of req.session ", () => {
+  test('all req.session needed values are instanced',async () =>{
+      let req = {session:{
+        image:'',
+        username:'',
+        completeName:'',
+        email:'',
+        credits:'',
+        localisation:'',
+        panier:''
+      }}
+      let testUser = await User.findOne({where:{username:'velkiz'}})
+      function_extension.setupSession(testUser,req.session)
+      expect(req.session.image).toBe(testUser.image)
+      expect(req.session.username).toBe(testUser.username)
+      expect(req.session.completeName).toBe(testUser.completeName)
+      expect(req.session.email).toBe(testUser.email)
+      expect(req.session.credits).toBe(testUser.credits)
+      expect(req.session.localisation).toBe(testUser.localisation)
+      expect(req.session.panier).toStrictEqual([])
+      
+  })
+})
+
 
 describe("Change the profil picture of a user", () => {
 

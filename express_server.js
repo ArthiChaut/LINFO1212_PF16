@@ -29,8 +29,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage})
 
-
-sequelize.sync().then(() => console.log("Database ready!"))
+sequelize.sync().then(()=>console.log('database ready!'))
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(session({
@@ -407,12 +406,22 @@ app.get('/modifArticle', function(req, res) {
     credits: "Crédits: " + req.session.credits, id:id, image:image, marque:"Actuel:" +marque, prix:"Actuel:" +prix, type: "Actuel:" +type, couleur:"Actuel:" +couleur, taille:"Actuel:"+taille, genre:"Actuel:" +genre, etat:"Actuel:" +etat,error_message_prix:""})
 })
 
-https.createServer({
+
+
+app.post("/testing",(req, res) => {
+  res.sendStatus(201);
+  return;
+})
+
+
+
+/*https.createServer({
   key: fs.readFileSync('./key.pem'),
   cert: fs.readFileSync('./cert.pem'),
   passphrase: 'pf16'
 }, app).listen(PORT, () => {
   console.log(`Site lancé sur le port ${PORT}!`)
 });
-
+*/
+module.exports = app;
 
