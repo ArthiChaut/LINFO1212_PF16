@@ -4,8 +4,14 @@ const { Op } = require("sequelize");
 
 
 
+
 async function accountExist(username){
-    
+
+/*
+pre condition: username is a string
+post condition: return true if the username is already taken, false otherwise
+*/
+
     let name1 = await User.findOne({where: {username: username}});
     let name2 = await User.findOne({where: {email: username}});
     if(name1 === null && name2 === null){
@@ -16,6 +22,12 @@ async function accountExist(username){
 }
 
 async function passwordCorrect(username, password){
+
+    /*
+        pre condition: username and password are strings
+        post condition: return true if the password is correct, false otherwise
+    */
+
     let name1 = await User.findOne({where: {username: username}});
     let name2 = await User.findOne({where: {email: username}});
     let res1 = splitSearchPassword(name1, password);
@@ -80,11 +92,23 @@ async function accountExistForCreate(username, email){
 
 
 function checkPrice(prix){
+
+    /*
+        pre condition: prix is a string
+        post condition: return true if the string is a number, false otherwise
+    */
+
     let isnum = /^\d+$/.test(prix);
     return isnum;
 }
 
 function checkEmail(email){
+
+    /*
+        pre condition: email is a string
+        post condition: return true if the string is in an email format, false otherwise
+    */
+
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
@@ -102,6 +126,12 @@ function validate(email){
 */
 
 function passwordConfirm(password1, password2){
+
+    /*
+        pre condition: password1 and password2 are strings
+        post condition: return true if the two strings are the same, false otherwise
+    */
+
     if(password1 === password2){
         return true;
     } else {
@@ -122,6 +152,12 @@ function setupSession(array,session){
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 async function fiveLastInstances(table){
+
+    /*
+        pre condition: table is a table
+        post condition: return an array of the 5 last products of the table
+    */
+
     let array = await table.findAll({
         order: [["createdAt","DESC"]],
         limit:5,
@@ -131,6 +167,11 @@ async function fiveLastInstances(table){
 }
 
 async function clothesByMe(table, username){
+
+    /*
+        pre condition: table is a table, username is a string
+        post condition: return an array of products that match the username
+    */
 
     let array = await table.findAll({
         order: [["createdAt","DESC"]],
@@ -142,8 +183,15 @@ async function clothesByMe(table, username){
 }
 
 async function rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilter, etatFilter) {
+    
+    /*
+        pre condition: sizeFilter, colorFilter, genreFilter, typeFilter, etatFilter are strings
+        post condition: return an array of products that match the filters
+    */
     //Permet de rechercher des produits en fonctions de plusieurs critères
     //Si le critère n'est pas renseigné, il n'est pas pris en compte dans la recherche
+
+
     const where = {sold : 0};
     if (sizeFilter) {
         where.taille = {
@@ -177,6 +225,12 @@ async function rechercherProduits(sizeFilter, colorFilter, genreFilter, typeFilt
 }
 
 async function displayClothes(filtre){
+
+    /*
+        pre condition: filtre is a string
+        post condition: return an array of products that match the filter
+    */
+
     let array = await Clothes.findAll({
         order: [["createdAt","DESC"]],
         where: { genre: filtre, sold: 0 }
@@ -187,6 +241,11 @@ async function displayClothes(filtre){
 
 async function getUserLocation(username){
 
+    /*
+        pre condition: username is a string
+        post condition: return the location of the user
+    */
+
     let location = await User.findOne({
         where:{username: username}
     })
@@ -194,6 +253,12 @@ async function getUserLocation(username){
 }
 
 async function getLatestSells(username){
+
+    /*
+        pre condition: username is a string
+        post condition: return an array of the 5 last products sold by the user
+    */
+
     if(username){
         let result = await Clothes.findAll({
             where:{
@@ -209,6 +274,12 @@ async function getLatestSells(username){
 }
 
 async function changeCredit(credit, username){
+
+    /*
+        pre condition: credit is a string, username is a string
+        post condition: add the credit to the user
+    */
+
     let name = await User.findOne({where: {username: username}});
     name.set({
         credits: name.credits + parseInt(credit)
@@ -217,6 +288,12 @@ async function changeCredit(credit, username){
 }
 
 async function changePP(newPP, username){
+    
+    /*
+        pre condition: newPP is a string of a image PATH, username is a string 
+        post condition: change the profile picture of the user
+    */
+
     let name = await User.findOne({where: {username: username}});
     name.set({
         image: "static/IMAGES/" + newPP
@@ -227,7 +304,7 @@ async function changePP(newPP, username){
 }
 
 async function changeVetement(listModif, id){
-    
+
     let name = await Clothes.findOne({where: {id: id}});
     let listActuel = [name.image, name.type, name.marque, name.prix, name.couleur, name.taille, name.genre, name.etat];
     for(let i = 0; i < listModif.length; i++){
@@ -250,6 +327,12 @@ async function changeVetement(listModif, id){
 }
 
 function getPanierTotal(array){
+
+    /*
+        pre condition: array is an array of objects
+        post condition: return the sum of the prices of the objects in the array
+    */
+
     let sum = 0;
     for(let i = 0 ; i < array.length; i++){
         sum += array[i].Prix;
@@ -259,8 +342,13 @@ function getPanierTotal(array){
 
 
 async function removeArticles(array){
+    
+    /*
+        pre condition:
+        post condition:
+    */
+    
     for(let i = 0 ; i < array.length;i++){
-
         let name = await Clothes.findOne({where: {image: array[i].Image}});
     name.set({
         sold:true
