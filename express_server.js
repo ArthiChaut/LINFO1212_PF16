@@ -77,7 +77,6 @@ app.post('/login', function(req,res) {
           }
           */
         } else {
-          console.log("Mot de passe incorrect");
           res.render("pages/login", {error_message_password: "Mot de passe incorrect", error_message_email: "", username: "Se connecter", credits: ""});
         }
       })
@@ -392,13 +391,6 @@ app.get('/info', function(req,res) {
   
 });
 
-
-
-
-
-
-
-
 app.get('/modifArticle', function(req, res) {
   const {id,image,marque,prix,type,couleur,taille,genre,etat} = req.query;
   req.session.idClothes = id;
@@ -408,20 +400,14 @@ app.get('/modifArticle', function(req, res) {
 
 
 
-app.post("/testing",(req, res) => {
-  res.sendStatus(201);
-  return;
-})
 
-
-
-/*https.createServer({
+https.createServer({
   key: fs.readFileSync('./key.pem'),
   cert: fs.readFileSync('./cert.pem'),
   passphrase: 'pf16'
 }, app).listen(PORT, () => {
   console.log(`Site lancé sur le port ${PORT}!`)
 });
-*/
+
 module.exports = app;
 
